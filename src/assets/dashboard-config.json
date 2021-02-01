@@ -1,0 +1,22 @@
+{
+    "config": {
+        "column-config": [
+                  {
+                  "label": "PROCESS NAME",
+                  "attribute": "process-name"	
+                  },
+                  {
+                  "label": "START TIME",
+                  "attribute": "start-time"	
+                  },
+                  {
+                  "label": "RECORDS PROCESSED",
+                  "attribute": "records-processed"	
+                  },
+                  {
+                  "label": "DETAILS",
+                  "attribute": "details"	
+                  }
+                ]
+            }
+}

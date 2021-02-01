@@ -1,0 +1,37 @@
+.card-container {
+    margin: 20px;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+    background-color: #112d4e;
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #112d4e;
+}
+
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-trigger {
+    color: #112d4e;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #112d4e; 
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #112d4e;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #112d4e;
+}
+
+button, .mat-raised-button {
+    background-color:#112d4e;
+    color: #f9f7f7;
+    height: 38px;
+    border: 1px solid #979797;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px 0 rgba(183, 183, 183, 0.5);
+  }

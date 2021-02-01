@@ -1,0 +1,52 @@
+  <div class="form-region" *ngIf="enableFilter">
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <!-- <button mat-raised-button (click)="applyFilter()">Search</button> -->
+   </div>
+  <table *ngIf="resultSet && config" mat-table class="full-width-table"  [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef >SELECT</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit"  justify="start">
+      <th mat-header-cell  *matHeaderCellDef >
+      <span *ngIf="!config['config']['extra-config']['row-add']">EDIT</span>
+      <a *ngIf="config['config']['extra-config']['row-add']" (click)="openAddDialog()" title="Add Row" style="font-size: 18px; padding-right: 24px;"><i class="fa fa-plus"></i></a>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <a (click)="openUpdateDialog(row)" title="Edit Row" style="font-size: 18px;"><i class="fa fa-edit"></i></a>
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let config of config['config']['column-config']" [matColumnDef]="config['attribute']" justify="end">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{config.label}}</th>
+      <td mat-cell *matCellDef="let row">{{row[config['attribute']]}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+    
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [attr.colspan]="displayedColumns.length">No Records Found</td>
+    </tr>
+  </table>
+
+  <mat-paginator #paginator
+      *ngIf="dataSource.filteredData.length > 0" 
+      [length]="dataSource.filteredData.length"
+      [pageIndex]="0"
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 25, 50]">
+  </mat-paginator>
+

@@ -1,0 +1,28 @@
+<mat-card class="card-container">
+   
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="FTP Server Setup">
+                <mat-card-content>
+                    <app-dso-dynamic-table 
+                    [resultSet]="ftpServerData | async"
+                    [config]="ftpServerConfig | async"
+                    [enableFilter]="'true'"
+                    (postData)="submitFtpDetails($event)"
+                    (putData)="updateFtpDetails($event)">
+                   </app-dso-dynamic-table>
+            </mat-card-content>
+            </mat-tab>
+            <mat-tab label="Cloud Instance Setup">
+                <mat-card-content>
+                    <app-dso-dynamic-table 
+                    [resultSet]="cloudServerData | async"
+                    [config]="cloudServerConfig | async"
+                    [enableFilter]="'true'"
+                    (postData)="submitCloudDetails($event)"
+                    (putData)="updateCloudDetails($event)">
+                   </app-dso-dynamic-table>
+            </mat-card-content>
+            </mat-tab>
+        </mat-tab-group>
+
+</mat-card>

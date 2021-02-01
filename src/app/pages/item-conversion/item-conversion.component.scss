@@ -1,0 +1,55 @@
+.form-region {
+    display:flex;
+    align-items: center;
+    margin: 30px;
+}
+
+.form-region button {
+    margin:10px!important;
+}
+
+.mat-form-field {
+    margin-right: 20px;
+}
+
+button, .mat-raised-button {
+    background-color:#112d4e;
+    color: #f9f7f7;
+    border: 1px solid #979797;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px 0 rgba(183, 183, 183, 0.5);
+    margin: 20px!important;
+}
+
+.table-title {
+    display: flex;
+    align-items: flex-start;
+}
+
+.table-title button {
+    margin: 0px 20px!important;
+}
+
+.result-set-region {
+    margin:20px;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+    background-color: #112d4e;
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #112d4e;
+}
+
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-trigger {
+    color: #112d4e;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #112d4e; 
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #112d4e;
+}

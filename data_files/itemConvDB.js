@@ -1,0 +1,6 @@
+{"_id":"DS01","run":"File_Name_Ts_0912202020310","fbdi":"Item_Import_1.zip","fbdi-status":"Success","process-to-cloud":"Ready","cloud-process-status":"Ready","total-records":"100","success":"100","error":"0","warning":"0"}
+{"_id":"DS02","run":"File_Name_Ts_0912202020312","fbdi":"Item_Import_1.zip","fbdi-status":"Success","process-to-cloud":"Ready","cloud-process-status":"Ready","total-records":"100","success":"95","error":"5","warning":"0"}
+{"_id":"DS03","run":"File_Name_Ts_0912202020315","fbdi":"Item_Import_1.zip","fbdi-status":"Success","process-to-cloud":"Ready","cloud-process-status":"Ready","total-records":"100","success":"90","error":"5","warning":"5"}
+{"_id":"DS04","run":"File_Name_Ts_0912202020320","fbdi":"Item_Import_1.zip","fbdi-status":"Success","process-to-cloud":"Ready","cloud-process-status":"Ready","total-records":"100","success":"50","error":"25","warning":"25"}
+{"_id":"DS05","run":"File_Name_Ts_0912202020325","fbdi":"Item_Import_1.zip","fbdi-status":"Success","process-to-cloud":"Ready","cloud-process-status":"Ready","total-records":"100","success":"50","error":"25","warning":"25"}
+{"_id":"DS06","run":"File_Name_Ts_0912202020330","fbdi":"Item_Import_1.zip","fbdi-status":"Success","process-to-cloud":"Ready","cloud-process-status":"Ready","total-records":"100","success":"50","error":"25","warning":"25"}

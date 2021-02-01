@@ -1,0 +1,13 @@
+<div class="result-set-region">
+    <mat-card>
+        <mat-card-content>
+            <!-- <h2>UDA Setup</h2> -->
+           <app-dso-dynamic-table
+            [resultSet]="(resultSet | async)?.data"
+            [config]="config | async"
+            [enableFilter]="'true'">
+            </app-dso-dynamic-table>
+        </mat-card-content>
+    </mat-card>
+    
+</div>

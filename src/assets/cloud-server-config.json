@@ -1,0 +1,90 @@
+{
+    "config": {
+        "column-config": [
+                  {
+                  "label": "CLOUD INSTANCE",
+                  "attribute": "cloudInstanceName"	
+                  },
+                  {
+                  "label": "USERNAME",
+                  "attribute": "userName"	
+                  },
+                  {
+                  "label": "PASSWORD",
+                  "attribute": "password"	
+                  },
+                  {
+                  "label": "CLOUD INSTANCE LINK",
+                  "attribute": "cloudInstanceLink"	
+                  }            
+                ],
+                "extra-config": {
+                    "row-edit": true,
+                    "row-edit-config": [
+                            {
+                            "name": "_id",
+                            "label": "ID"
+                            },
+                            {
+                            "name": "cloudInstanceName",
+                            "label": "CLOUD INSTANCE",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                            },
+                            {
+                            "name": "userName",
+                            "label": "USERNAME",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "password",
+                            "label": "PASSWORD",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "cloudInstanceLink",
+                            "label": "CLOUD INSTANCE LINK",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            }     
+                    ],
+                    "row-add": true,
+                    "row-add-config": [
+                        {
+                            "name": "cloudInstanceName",
+                            "label": "CLOUD INSTANCE",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                            },
+                            {
+                            "name": "userName",
+                            "label": "USERNAME",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "password",
+                            "label": "PASSWORD",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "cloudInstanceLink",
+                            "label": "CLOUD INSTANCE LINK",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            }    
+                    ]
+                }
+            }
+}

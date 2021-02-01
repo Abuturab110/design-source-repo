@@ -1,0 +1,40 @@
+<mat-card style="margin: 20px;">
+    <mat-card-content>
+<div class="form-region">
+<mat-form-field class="form-field" >
+<mat-label>Select Environment</mat-label>
+    <mat-select [(ngModel)]="selectedEnvironment">
+            <mat-option *ngFor="let environment of (environments | async)" [value]="environment.ftpName">{{environment.ftpName}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field class="form-field">
+    <mat-label>Select File</mat-label>
+    <mat-select>
+         <mat-option *ngFor="let file of (files | async)" [value]="file.name">{{file.name}}</mat-option>
+     </mat-select>
+</mat-form-field>
+<mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
+<button mat-raised-button (click)="refreshFiles()">Refresh Files
+</button>
+<button mat-raised-button>Generate FBDI</button>
+<!-- <button mat-raised-button>Publish to Cloud</button> -->
+</div>
+</mat-card-content>
+</mat-card>
+<div class="result-set-region">
+    <mat-card>
+        <mat-card-content>
+            <div class="table-title">
+                <h1>FBDI Details</h1>
+                <button mat-raised-button>Publish to Cloud</button>
+            </div>
+            <app-dso-dynamic-table 
+             [resultSet]="resultSet | async"
+             [config]="config | async">
+            </app-dso-dynamic-table>
+        </mat-card-content>
+
+    </mat-card>
+
+</div>
+

@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-toolbar.mat-primary {
+    background: hsl(212, 64%, 19%);
+    color: #f9f7f7;
+}
+
+mat-divider {
+    background-color: #112d4e;
+    border-top-width: 2px!important;
+}
+
+a {
+    text-decoration: none;
+    color: #3f72af;
+}
+
+a > i {
+    color: #112d4e;
+    cursor: pointer;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color: #112d4e; 
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #112d4e;
+}
+
+.mat-tab-label{
+    justify-content: flex-start!important;
+    text-align: none!important;
+    padding: 0 5px!important;
+}
+
+.mat-cell {
+    padding-right: 20px!important;
+}
+
+.mat-sort-header-arrow, [dir=rtl] .mat-sort-header-position-before .mat-sort-header-arrow {
+    margin: 0 8px 0 3px!important;
+}

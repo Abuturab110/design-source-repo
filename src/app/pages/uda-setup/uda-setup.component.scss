@@ -1,0 +1,25 @@
+.result-set-region {
+    margin:20px;
+}
+
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+    background-color: #112d4e;
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #112d4e;
+}
+
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-trigger {
+    color: #112d4e;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #112d4e; 
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #112d4e;
+}

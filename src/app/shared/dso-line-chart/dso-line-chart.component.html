@@ -1,0 +1,17 @@
+<div>
+  <mat-card>
+    <mat-card-content>
+      <h1>Run Performance</h1>
+      <canvas baseChart
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </mat-card-content>
+   </mat-card>
+</div>
+

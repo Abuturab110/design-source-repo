@@ -1,0 +1,49 @@
+{
+    "config": {
+        "column-config": [
+                    {
+                    "label": "ID",
+                    "attribute": "_id"	
+                    },
+                    {
+                    "label": "RUN",
+                    "attribute": "run"	
+                    },
+                    {
+                    "label": "FBDI",
+                    "attribute": "fbdi"	
+                    },
+                    {
+                    "label": "FBDI STATUS",
+                    "attribute": "fbdi-status"	
+                    },
+                    {
+                    "label": "PROCESS TO CLOUD",
+                    "attribute": "process-to-cloud"	
+                    },
+                    {
+                    "label": "CLOUD PROCESS STATUS",
+                    "attribute": "cloud-process-status"	
+                    },
+                    {
+                    "label": "TOTAL",
+                    "attribute": "total-records"	
+                    },
+                    {
+                    "label": "SUCCESS",
+                    "attribute": "success"	
+                    },
+                    {
+                    "label": "ERROR",
+                    "attribute": "error"	
+                    },
+                    {
+                    "label": "WARNING",
+                    "attribute": "warning"	
+                    }
+                  ],
+            "extra-config": {
+                    "table-select": true
+                    }
+            }
+}

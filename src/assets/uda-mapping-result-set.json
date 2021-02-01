@@ -1,0 +1,88 @@
+{
+    "data": [
+                {
+                "sk-id": "1",
+                "unspsc": "32121505",
+                "descriptive-name": "Pin_Count",
+                "mscw": "1",
+                "mscw-percent-tolerance": "0",
+                "column-name": "Pin Count",
+                "var-type": "Numeric_1",
+                "control-file-name": "",
+                "attribute-group-code": "",
+                "eff-column":""
+                },
+                {
+                "sk-id": "2",
+                "unspsc": "32121505",
+                "descriptive-name": "Nominal_Capacitance_pF",
+                "mscw": "1",
+                "mscw-percent-tolerance": "0",
+                "column-name": "Nominal_Capacitance_pico_Farad",
+                "var-type": "Numeric_2",
+                "control-file-name": "",
+                "attribute-group-code": "",
+                "eff-column":""
+                },
+                {
+                "sk-id": "3",
+                "unspsc": "32121505",
+                "descriptive-name": "Op_Voltage_V",
+                "mscw": "1",
+                "mscw-percent-tolerance": "0",
+                "column-name": "Operating_Voltage_Volts",
+                "var-type": "Numeric_3",
+                "control-file-name": "",
+                "attribute-group-code": "",
+                "eff-column":""
+                },
+                {
+                "sk-id": "4",
+                "unspsc": "32121505",
+                "descriptive-name": "Tolerance_pct",
+                "mscw": "0.4",
+                "mscw-percent-tolerance": "0",
+                "column-name": "Tolerance_Percentage",
+                "var-type": "Numeric_4",
+                "control-file-name": "",
+                "attribute-group-code": "",
+                "eff-column":""
+                },
+                {
+                "sk-id": "5",
+                "unspsc": "32121505",
+                "descriptive-name": "ESR_mOhm",
+                "mscw": "0.4",
+                "mscw-percent-tolerance": "0",
+                "column-name": "ESR_milli_ohm",
+                "var-type": "Numeric_5",
+                "control-file-name": "",
+                "attribute-group-code": "",
+                "eff-column":""
+                },
+                {
+                "sk-id": "6",
+                "unspsc": "32121505",
+                "descriptive-name": "Leakage_Current_uA",
+                "mscw": "0.4",
+                "mscw-percent-tolerance": "0",
+                "column-name": "Leakage_Current_micro_Amps",
+                "var-type": "Numeric_6",
+                "control-file-name": "",
+                "attribute-group-code": "",
+                "eff-column":""
+                },
+                {
+                "sk-id": "7",
+                "unspsc": "32121505",
+                "descriptive-name": "Lifetime_h",
+                "mscw": "0.08",
+                "mscw-percent-tolerance": "0",
+                "column-name": "Lifetime_hours",
+                "var-type": "Numeric_7",
+                "control-file-name": "",
+                "attribute-group-code": "",
+                "eff-column":""
+                }
+            ]
+}

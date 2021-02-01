@@ -1,0 +1,126 @@
+{
+    "config": {
+        "column-config": [
+                  {
+                  "label": "FTP NAME",
+                  "attribute": "ftpName"	
+                  },
+                  {
+                  "label": "FTP HOST",
+                  "attribute": "ftpHost"	
+                  },
+                  {
+                  "label": "FTP PORT",
+                  "attribute": "ftpPort"	
+                  },
+                  {
+                  "label": "USERNAME",
+                  "attribute": "userName"	
+                  },
+                  {
+                  "label": "PASSWORD",
+                  "attribute": "password"	
+                  },
+                  {
+                  "label": "PATH",
+                  "attribute": "path"	
+                  }            
+                ],
+                "extra-config": {
+                    "row-edit": true,
+                    "row-edit-config": [
+                            {
+                            "name": "_id",
+                            "label": "ID"
+                            },
+                            {
+                            "name": "ftpName",
+                            "label": "FTP NAME",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                            },
+                            {
+                            "name": "ftpHost",
+                            "label": "FTP HOST",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                            },
+                            {
+                            "name": "ftpPort",
+                            "label": "FTP PORT",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "userName",
+                            "label": "USERNAME",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "password",
+                            "label": "PASSWORD",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "path",
+                            "label": "PATH",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            }     
+                    ],
+                    "row-add": true,
+                    "row-add-config": [
+                        {
+                            "name": "ftpName",
+                            "label": "FTP NAME",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                            },
+                            {
+                            "name": "ftpHost",
+                            "label": "FTP HOST",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                            },
+                            {
+                            "name": "ftpPort",
+                            "label": "FTP PORT",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "userName",
+                            "label": "USERNAME",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "password",
+                            "label": "PASSWORD",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            },
+                            {
+                            "name": "path",
+                            "label": "PATH",
+                            "type": "text",
+                            "display": true,
+                            "required": true				  
+                            }     
+                    ]
+                }
+            }
+}
