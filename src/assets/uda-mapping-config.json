@@ -2,19 +2,15 @@
     "config": {
         "column-config": [
                   {
-                  "label": "SK ID",
-                  "attribute": "sk-id"	
-                  },
-                  {
-                  "label": "UNSPSC CODE",
+                  "label": "UNSPSC",
                   "attribute": "unspsc"	
                   },
                   {
-                  "label": "DESCRIPTIVE NAME",
+                  "label": "DESC NME",
                   "attribute": "descriptive-name"	
                   },
                   {
-                  "label": "COLUMN NAME",
+                  "label": "COLUMN NME",
                   "attribute": "column-name"	
                   },
                   {
@@ -22,11 +18,11 @@
                   "attribute": "var-type"	
                   },
                   {
-                  "label": "CONTROL FILE NAME",
+                  "label": "CNTL FILE NME",
                   "attribute": "control-file-name"	
                   },
                   {
-                  "label": "ATTRIBUTE GROUP CODE",
+                  "label": "ATTR GRP CD",
                   "attribute": "attribute-group-code"	
                   },  
                   {
@@ -37,10 +33,6 @@
                 "extra-config": {
                     "row-edit": true,
                     "row-edit-config": [
-                        {
-                            "name": "sd_ik",
-                            "type": "text"
-                        },
                         {
                             "name": "unspsc",
                             "label": "UNSPSC CODE",
@@ -94,10 +86,6 @@
                     "row-add": true,
                     "row-add-config": [
                         {
-                            "name": "sd_ik",
-                            "type": "text"
-                        },
-                        {
                             "name": "unspsc",
                             "label": "UNSPSC CODE",
                             "type": "text",
@@ -146,7 +134,8 @@
                             "display": true,
                             "required": false
                         }
-                    ]
+                    ],
+                    "row-delete": true
                 }
             }
 }

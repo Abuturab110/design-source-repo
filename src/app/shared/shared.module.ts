@@ -21,12 +21,13 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { DsoCustomDeleteDialogComponent } from './dso-custom-delete-dialog/dso-custom-delete-dialog.component';
 
 
 
 @NgModule({
   declarations: [DsoInfoCardComponent, DsoPieChartComponent, DsoLineChartComponent,
-     DsoDynamicTableComponent, DsoAssetCardComponent, DsoCustomDialogComponent],
+     DsoDynamicTableComponent, DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -47,7 +48,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule,
   ],
   exports: [DsoInfoCardComponent, DsoPieChartComponent,DsoLineChartComponent, DsoDynamicTableComponent,
-     DsoAssetCardComponent, DsoCustomDialogComponent],
+     DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }

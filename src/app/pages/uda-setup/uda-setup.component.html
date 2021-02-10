@@ -3,9 +3,12 @@
         <mat-card-content>
             <!-- <h2>UDA Setup</h2> -->
            <app-dso-dynamic-table
-            [resultSet]="(resultSet | async)?.data"
+            [resultSet]="resultSet | async"
             [config]="config | async"
-            [enableFilter]="'true'">
+            [enableFilter]="'true'"
+            (postData)="submitUdaConvDetails($event)"
+            (putData)="updateUdaConvDetails($event)"
+            (deleteData)="deleteUdaConvDetails($event)">
             </app-dso-dynamic-table>
         </mat-card-content>
     </mat-card>

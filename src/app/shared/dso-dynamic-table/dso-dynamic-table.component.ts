@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import { DsoCustomDialogComponent } from '../dso-custom-dialog/dso-custom-dialog.component';
+import { DsoCustomDeleteDialogComponent } from '../dso-custom-delete-dialog/dso-custom-delete-dialog.component';
 
 @Component({
   selector: 'app-dso-dynamic-table',
@@ -22,6 +23,8 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
   postData = new EventEmitter();
   @Output()
   putData = new EventEmitter();
+  @Output()
+  deleteData = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<any>;
@@ -94,6 +97,24 @@ openUpdateDialog(row) {
   dialogRef.afterClosed().subscribe(res => {
     if (res && Object.keys(res).length > 0)
     this.putData.emit(res);
+  });
+}
+
+openDeleteDialog(row) {
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+
+  dialogConfig.data = {
+    title: 'Delete UDA Mappings',
+    rowData: row
+ };
+  const dialogRef = this.dialog.open(DsoCustomDeleteDialogComponent, dialogConfig);
+  
+  dialogRef.afterClosed().subscribe(res => {
+    if (res && Object.keys(res).length > 0)
+    this.deleteData.emit(res);
   });
 }
 

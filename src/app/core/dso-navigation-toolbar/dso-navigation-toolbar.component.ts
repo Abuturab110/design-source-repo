@@ -27,7 +27,7 @@ export class DsoNavigationToolbarComponent implements OnInit {
       icon: 'fa-list-ol'
     },
     {
-      label: 'UDA Setup',
+      label: 'UDA Conversion',
       link: 'udaSetup',
       icon: 'fa-map'
     },

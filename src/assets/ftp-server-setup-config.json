@@ -120,7 +120,8 @@
                             "display": true,
                             "required": true				  
                             }     
-                    ]
+                    ],
+                    "row-delete": true
                 }
             }
 }
