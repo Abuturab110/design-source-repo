@@ -6,6 +6,7 @@
                     <app-dso-dynamic-table 
                     [resultSet]="ftpServerData | async"
                     [config]="ftpServerConfig | async"
+                    [title]="'FTP Server Setup'"
                     [enableFilter]="'true'"
                     (postData)="submitFtpDetails($event)"
                     (putData)="updateFtpDetails($event)"
@@ -18,6 +19,7 @@
                     <app-dso-dynamic-table 
                     [resultSet]="cloudServerData | async"
                     [config]="cloudServerConfig | async"
+                    [title]="'Cloud Server Setup'"
                     [enableFilter]="'true'"
                     (postData)="submitCloudDetails($event)"
                     (putData)="updateCloudDetails($event)"

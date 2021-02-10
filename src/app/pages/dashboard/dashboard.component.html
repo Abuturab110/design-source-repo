@@ -12,7 +12,8 @@
             <h1>Recent Runs</h1>
             <app-dso-dynamic-table
             [resultSet]="(resultSet | async)?.data"
-            [config]="config | async">
+            [config]="config | async"
+            [title]="''">
             </app-dso-dynamic-table>
         </mat-card-content>   
     </mat-card>

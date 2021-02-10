@@ -18,6 +18,8 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
   @Input()
   config;
   @Input()
+  title;
+  @Input()
   enableFilter = false;
   @Output()
   postData = new EventEmitter();
@@ -88,7 +90,7 @@ openUpdateDialog(row) {
   dialogConfig.autoFocus = true;
 
   dialogConfig.data = {
-    title: 'Update UDA Mappings',
+    title: `Update ${this.title}`,
     config: this.config['config']['extra-config']['row-edit-config'],
     rowData: row
  };
@@ -107,7 +109,7 @@ openDeleteDialog(row) {
   dialogConfig.autoFocus = true;
 
   dialogConfig.data = {
-    title: 'Delete UDA Mappings',
+    title: `Delete ${this.title}`,
     rowData: row
  };
   const dialogRef = this.dialog.open(DsoCustomDeleteDialogComponent, dialogConfig);
@@ -126,7 +128,7 @@ openAddDialog() {
   dialogConfig.autoFocus = true;
 
   dialogConfig.data = {
-    title: 'Add UDA Mappings',
+    title: `Add ${this.title}`,
     config: this.config['config']['extra-config']['row-add-config'],
     rowData: {}
  };
