@@ -18,6 +18,8 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
   @Input()
   config;
   @Input()
+  title;
+  @Input()
   enableFilter = false;
   @Output()
   postData = new EventEmitter();
@@ -56,6 +58,7 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
   setTimeout(() => {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.generateTable();
   }, 400)
   }
  }
@@ -88,7 +91,7 @@ openUpdateDialog(row) {
   dialogConfig.autoFocus = true;
 
   dialogConfig.data = {
-    title: 'Update UDA Mappings',
+    title: `Update ${this.title}`,
     config: this.config['config']['extra-config']['row-edit-config'],
     rowData: row
  };
@@ -107,7 +110,7 @@ openDeleteDialog(row) {
   dialogConfig.autoFocus = true;
 
   dialogConfig.data = {
-    title: 'Delete UDA Mappings',
+    title: `Delete ${this.title}`,
     rowData: row
  };
   const dialogRef = this.dialog.open(DsoCustomDeleteDialogComponent, dialogConfig);
@@ -126,7 +129,7 @@ openAddDialog() {
   dialogConfig.autoFocus = true;
 
   dialogConfig.data = {
-    title: 'Add UDA Mappings',
+    title: `Add ${this.title}`,
     config: this.config['config']['extra-config']['row-add-config'],
     rowData: {}
  };
@@ -148,6 +151,20 @@ applyFilter(event: Event) {
   }
 
   console.log(this.dataSource);
+}
+
+generateTable() {
+  this.dataSource.filterPredicate = (data: any, filter: string) => {
+    let matchFound = false;
+    for (let column of this.displayedColumns) {
+      if(column in data) {
+        if(data[column]) {
+          matchFound = (matchFound || data[column].toString().trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1)
+        }
+      }
+    }
+    return matchFound;
+  }
 }
 
 }

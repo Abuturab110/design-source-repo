@@ -5,6 +5,7 @@
            <app-dso-dynamic-table
             [resultSet]="resultSet | async"
             [config]="config | async"
+            [title]="'UDA Mapping'"
             [enableFilter]="'true'"
             (postData)="submitUdaConvDetails($event)"
             (putData)="updateUdaConvDetails($event)"
