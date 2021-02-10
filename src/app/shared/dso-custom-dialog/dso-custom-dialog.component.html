@@ -11,6 +11,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-button"(click)="close()">Close</button>
     <button class="mat-raised-button" [mat-dialog-close]="form.value" cdkFocusInitial style="margin-left: 5px;" [disabled]="!form.valid">Save</button>
 </mat-dialog-actions>

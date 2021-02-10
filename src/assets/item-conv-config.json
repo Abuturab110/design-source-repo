@@ -2,10 +2,6 @@
     "config": {
         "column-config": [
                     {
-                    "label": "ID",
-                    "attribute": "_id"	
-                    },
-                    {
                     "label": "RUN",
                     "attribute": "run"	
                     },
@@ -14,15 +10,15 @@
                     "attribute": "fbdi"	
                     },
                     {
-                    "label": "FBDI STATUS",
+                    "label": "FBDI STS",
                     "attribute": "fbdi-status"	
                     },
                     {
-                    "label": "PROCESS TO CLOUD",
+                    "label": "PRC TO CLD",
                     "attribute": "process-to-cloud"	
                     },
                     {
-                    "label": "CLOUD PROCESS STATUS",
+                    "label": "CLD PRC STS",
                     "attribute": "cloud-process-status"	
                     },
                     {
@@ -43,7 +39,10 @@
                     }
                   ],
             "extra-config": {
-                    "table-select": true
+                    "table-select": true,
+                    "row-edit": false,
+                    "row-add": false,
+                    "row-delete": false
                     }
             }
 }

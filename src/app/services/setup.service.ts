@@ -40,12 +40,20 @@ requeryCloudServerDataObs = this.requeryCloudServerData.asObservable();
     return this._http.put('/api/setup/putFtpServerDetails', event);
   }
 
+  deleteFtpServerData(event) {
+    return this._http.delete('/api/setup/deleteFtpServerDetails/' + event['_id']);
+  }
+
   postCloudServerData(event) {
     return this._http.post('/api/setup/postCloudServerDetails', event);
   }
 
   putCloudServerData(event) {
-    return this._http.post('/api/setup/putCloudServerDetails', event);
+    return this._http.put('/api/setup/putCloudServerDetails', event);
+  }
+
+  deleteCloudServerData(event) {
+    return this._http.delete('/api/setup/deleteCloudServerDetails/'  + event['_id']);
   }
 
   requeryCloudServerDetails() {

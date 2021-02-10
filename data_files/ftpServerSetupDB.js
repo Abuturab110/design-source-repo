@@ -1,3 +1,1 @@
-{"ftpName":"dev","ftpHost":"129.213.113.127","ftpPort":"22","userName":"ftpscmo","password":"Or@cle#12345","path":"/home/ftpscmo/DesignSource/Data","_id":"nnW6ty2wLyTY50Ea"}
-{"ftpName":"dev","ftpHost":"129.213.113.127","ftpPort":"22","userName":"ftpscmo","password":"Or@cle#12345","path":"/home/ftpscmo/DesignSource/Data1","_id":"nnW6ty2wLyTY50Ea"}
-{"ftpName":"dev","ftpHost":"129.213.113.127","ftpPort":"22","userName":"ftpscmo","password":"Or@cle#12345","path":"/home/ftpscmo/DesignSource/Data","_id":"nnW6ty2wLyTY50Ea"}
+{"ftpName":"dev","ftpHost":"129.213.113.127","ftpPort":"22","userName":"ftpscmo","password":"Or@cle#12345","path":"/home/ftpscmo/DesignSource/Data","creation-date":"Wed Feb 10 2021 12:34:19 GMT+0530 (India Standard Time)","last-update-date":"Wed Feb 10 2021 12:34:19 GMT+0530 (India Standard Time)","_id":"HruK1nk37J8SxmZp"}

@@ -41,6 +41,14 @@ export class SetupComponent implements OnInit {
 
   }
 
+  deleteFtpDetails(event) {
+    console.log(event);
+    this.setupService.deleteFtpServerData(event).subscribe(res => {
+      this.setupService.requeryFTPServerDetails();
+    });
+
+  }
+
   submitCloudDetails(event) {
      this.setupService.postCloudServerData(event).subscribe(res => {
       this.setupService.requeryCloudServerDetails();
@@ -49,6 +57,12 @@ export class SetupComponent implements OnInit {
 
   updateCloudDetails(event) {
     this.setupService.putCloudServerData(event).subscribe(res => {
+      this.setupService.requeryCloudServerDetails();
+    });
+  }
+
+  deleteCloudDetails(event) {
+    this.setupService.deleteCloudServerData(event).subscribe(res => {
       this.setupService.requeryCloudServerDetails();
     });
   }

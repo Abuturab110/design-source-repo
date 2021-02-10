@@ -8,7 +8,8 @@
                     [config]="ftpServerConfig | async"
                     [enableFilter]="'true'"
                     (postData)="submitFtpDetails($event)"
-                    (putData)="updateFtpDetails($event)">
+                    (putData)="updateFtpDetails($event)"
+                    (deleteData)="deleteFtpDetails($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
             </mat-tab>
@@ -19,7 +20,8 @@
                     [config]="cloudServerConfig | async"
                     [enableFilter]="'true'"
                     (postData)="submitCloudDetails($event)"
-                    (putData)="updateCloudDetails($event)">
+                    (putData)="updateCloudDetails($event)"
+                    (deleteData)="deleteCloudDetails($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
             </mat-tab>

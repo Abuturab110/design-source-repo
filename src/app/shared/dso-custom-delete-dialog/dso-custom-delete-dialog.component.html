@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{description}}</h2>
+
+<mat-dialog-content>
+<p>Are you sure you want to delete this record?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-button"(click)="close()">Close</button>
+    <button class="mat-raised-button" [mat-dialog-close]="rowData" cdkFocusInitial style="margin-left: 5px;">Delete</button>
+</mat-dialog-actions>

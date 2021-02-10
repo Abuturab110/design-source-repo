@@ -5,22 +5,24 @@ var Datastore = require('nedb')
 , ftpServerSetupDB = new Datastore({ filename: './data_files/ftpServerSetupDB.js', autoload: true });
 
 router.put('/putFtpServerDetails', function (req, res, next) {
-     ftpServerSetupDB.update({_id:req.body._id},{ $set: req.body },{}, function (err, docs) {
+  let putData = {...req.body, "last-update-date": new Date().toString()};
+     ftpServerSetupDB.update({_id:req.body._id},{ $set: putData },{}, function (err, docs) {
      if (err) 
         return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
   });
 });
 
-router.delete('/deleteFtpServerDetails', function (req, res, next) {
-  ftpServerSetupDB.remove({_id:req.body._id},{}, function (err, docs) {
+router.delete('/deleteFtpServerDetails/:id', function (req, res, next) {
+  ftpServerSetupDB.remove({_id:req.params.id},{}, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
   });
 });
 
 router.post('/postFtpServerDetails', function (req, res, next) {
-  ftpServerSetupDB.insert(req.body, function (err, docs) {
+  let postData = {...req.body, "creation-date": new Date().toString(), "last-update-date": new Date().toString()};
+  ftpServerSetupDB.insert(postData, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
   });
@@ -41,21 +43,23 @@ router.get('/getCloudServerDetails', function(req, res, next) {
 });
 
 router.post('/postCloudServerDetails', function(req, res, next) {
-  cloudServerSetupDB.insert(req.body, function (err, docs) {
+  let postData = {...req.body, "creation-date": new Date().toString(), "last-update-date": new Date().toString()};
+  cloudServerSetupDB.insert(postData, function (err, docs) {
     if (err) return next(err);
        res.send('{"MSG":"SUCCESS"}');
   });
 });
 
-router.put('/putCloudDetails', function (req, res, next) {
-  cloudServerSetupDB.update({_id:req.body._id},{ $set: req.body},{}, function (err, docs) {
+router.put('/putCloudServerDetails', function (req, res, next) {
+  let putData = {...req.body, "last-update-date": new Date().toString()};
+  cloudServerSetupDB.update({_id:req.body._id},{ $set: putData},{}, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
   });
 });
 
-router.delete('/deleteCloudServerDetails', function (req, res, next) {
-  cloudServerSetupDB.remove({_id:req.body._id},{}, function (err, docs) {
+router.delete('/deleteCloudServerDetails/:id', function (req, res, next) {
+  cloudServerSetupDB.remove({_id:req.params.id},{}, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
   });

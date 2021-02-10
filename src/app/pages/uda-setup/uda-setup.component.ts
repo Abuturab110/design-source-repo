@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from 'src/app/services/dashboard.service';
+import { debounceTime, switchMap} from 'rxjs/operators';
+import { UdaConvService } from 'src/app/services/uda-conv.service';
 
 @Component({
   selector: 'app-uda-setup',
@@ -9,14 +10,33 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 export class UdaSetupComponent implements OnInit {
   resultSet;
   config;
-  files;
   filterValue: string = '';
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private udaConvService: UdaConvService) { }
 
   ngOnInit(): void {
-    this.resultSet = this.dashboardService.getUdaMappingResultSet();
-    this.files = [];
-    this.config = this.dashboardService.getUdaMappingConfig();
+    this.resultSet = this.udaConvService.requeryUdaConvDataObs.pipe(
+      debounceTime(200),
+      switchMap(res => this.udaConvService.getUdaMappingResultSet())
+    );
+    this.config = this.udaConvService.getUdaMappingConfig();
   }
 
+
+  submitUdaConvDetails(event) {
+    this.udaConvService.postUdaMappingData(event).subscribe(res => {
+      this.udaConvService.requeryUdaConvDetails();
+    });
+  }
+
+  updateUdaConvDetails(event) {
+    this.udaConvService.putUdaMappingData(event).subscribe(res => {
+      this.udaConvService.requeryUdaConvDetails();
+    });
+  }
+
+  deleteUdaConvDetails(event) {
+    this.udaConvService.deleteUdaMappingData(event).subscribe(res => {
+      this.udaConvService.requeryUdaConvDetails();
+    });
+  }
 }
