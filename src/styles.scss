@@ -44,9 +44,6 @@ h1,h2,h3,h4,h5,h6 {
 .mat-sort-header-arrow, [dir=rtl] .mat-sort-header-position-before .mat-sort-header-arrow {
     margin: 0 8px 0 3px!important;
 }
-.mat-drawer-content {
-    overflow: hidden!important;
-}
 @media screen and (max-width: 1300px) {
 
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {

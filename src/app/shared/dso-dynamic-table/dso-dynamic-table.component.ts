@@ -58,6 +58,7 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
   setTimeout(() => {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.generateTable();
   }, 400)
   }
  }
@@ -150,6 +151,20 @@ applyFilter(event: Event) {
   }
 
   console.log(this.dataSource);
+}
+
+generateTable() {
+  this.dataSource.filterPredicate = (data: any, filter: string) => {
+    let matchFound = false;
+    for (let column of this.displayedColumns) {
+      if(column in data) {
+        if(data[column]) {
+          matchFound = (matchFound || data[column].toString().trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1)
+        }
+      }
+    }
+    return matchFound;
+  }
 }
 
 }

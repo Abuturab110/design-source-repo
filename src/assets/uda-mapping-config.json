@@ -34,6 +34,10 @@
                     "row-edit": true,
                     "row-edit-config": [
                         {
+                            "name": "_id",
+                            "type": "text"
+                        },
+                        {
                             "name": "unspsc",
                             "label": "UNSPSC CODE",
                             "type": "text",
