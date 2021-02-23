@@ -42,4 +42,8 @@ export class DashboardService {
     return this._http.get('/api/dashboard/getFtpDetails');
   }
 
+  getGenerateFBDI(filename: string): Observable<any> {    
+    return this._http.get('/api/itemConv/generatefbdi/'+filename);
+  }
+
 }

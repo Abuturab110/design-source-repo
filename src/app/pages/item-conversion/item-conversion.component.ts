@@ -14,6 +14,7 @@ export class ItemConversionComponent implements OnInit {
   environments;
   selectedEnvironment;
   showSpinner = false;
+  fileSelect:any;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
@@ -21,6 +22,12 @@ export class ItemConversionComponent implements OnInit {
     this.environments = this.dashboardService.getEnvironments();
     this.config = this.dashboardService.getItemConvConfig();
   }
+
+  // async selected(event) {
+  //   console.log(event);
+
+  //   console.log('dscds'+this.fileSelect);
+  // }
 
   refreshFiles() {
    
@@ -31,5 +38,11 @@ export class ItemConversionComponent implements OnInit {
     );
 
     }
+  }
+
+  async generateFBDI(){
+    console.log('selected file is : '+this.fileSelect);
+
+    await this.dashboardService.getGenerateFBDI(this.fileSelect).subscribe();
   }
 }

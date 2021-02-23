@@ -9,14 +9,14 @@
 </mat-form-field>
 <mat-form-field class="form-field">
     <mat-label>Select File</mat-label>
-    <mat-select>
+    <mat-select [(ngModel)]="fileSelect">
          <mat-option *ngFor="let file of (files | async)" [value]="file.name">{{file.name}}</mat-option>
      </mat-select>
 </mat-form-field>
 <mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
 <button mat-raised-button (click)="refreshFiles()">Refresh Files
 </button>
-<button mat-raised-button>Generate FBDI</button>
+<button mat-raised-button (click)="generateFBDI()">Generate FBDI</button>
 <!-- <button mat-raised-button>Publish to Cloud</button> -->
 </div>
 </mat-card-content>
