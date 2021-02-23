@@ -167,4 +167,14 @@ generateTable() {
   }
 }
 
+getMaskedData(field, data) {
+  let returnData = '';
+  if (field === 'password') {
+    returnData = '.....'
+  } else {
+    returnData = data
+  }
+  return returnData;
+}
+
 }

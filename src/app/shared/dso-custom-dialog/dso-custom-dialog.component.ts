@@ -12,6 +12,7 @@ export class DsoCustomDialogComponent implements OnInit{
   description: string = '';
   config: any;
   row: any;
+  hide = true;
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DsoCustomDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data) { 

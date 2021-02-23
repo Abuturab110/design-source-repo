@@ -2,11 +2,18 @@
 
 <mat-dialog-content *ngIf="config" [formGroup]="form" class="dialog-content">
     <ng-container *ngFor="let singleConfig of config">
-    <mat-form-field *ngIf="singleConfig['display']" [ngSwitch]="singleConfig['type']">
-             <input *ngSwitchCase ="'text'"  matInput 
-                [placeholder]="singleConfig['label']"
-                [formControlName]="singleConfig['name']" [required]="singleConfig['required']">
-        </mat-form-field>
+        <mat-form-field *ngIf="singleConfig['display']" [ngSwitch]="singleConfig['type']">
+                <input *ngSwitchCase ="'text'"  matInput 
+                    [placeholder]="singleConfig['label']"
+                    [formControlName]="singleConfig['name']" [required]="singleConfig['required']">
+                <input *ngSwitchCase ="'password'" matInput 
+                    [type]="hide ? 'password' : 'text'"
+                    [placeholder]="singleConfig['label']"
+                    [formControlName]="singleConfig['name']" [required]="singleConfig['required']">
+                <button *ngSwitchCase ="'password'" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+         </mat-form-field>
     </ng-container>
 </mat-dialog-content>
 
@@ -14,3 +21,4 @@
     <button class="mat-button"(click)="close()">Close</button>
     <button class="mat-raised-button" [mat-dialog-close]="form.value" cdkFocusInitial style="margin-left: 5px;" [disabled]="!form.valid">Save</button>
 </mat-dialog-actions>
+

@@ -42,7 +42,7 @@
                             {
                             "name": "password",
                             "label": "PASSWORD",
-                            "type": "text",
+                            "type": "password",
                             "display": true,
                             "required": true				  
                             },
