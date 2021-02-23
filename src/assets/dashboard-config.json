@@ -3,19 +3,23 @@
         "column-config": [
                   {
                   "label": "PROCESS NAME",
-                  "attribute": "process-name"	
+                  "attribute": "process-name",
+                  "type": "text"	
                   },
                   {
                   "label": "START TIME",
-                  "attribute": "start-time"	
+                  "attribute": "start-time",
+                  "type": "text"	
                   },
                   {
                   "label": "RECORDS PROCESSED",
-                  "attribute": "records-processed"	
+                  "attribute": "records-processed",
+                  "type": "text"	
                   },
                   {
                   "label": "DETAILS",
-                  "attribute": "details"	
+                  "attribute": "details",
+                  "type": "text"	
                   }
                 ]
             }

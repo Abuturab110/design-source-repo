@@ -3,39 +3,48 @@
         "column-config": [
                     {
                     "label": "RUN",
-                    "attribute": "run"	
+                    "attribute": "run",
+                    "type": "text"	
                     },
                     {
                     "label": "FBDI",
-                    "attribute": "fbdi"	
+                    "attribute": "fbdi",
+                    "type": "text"	
                     },
                     {
                     "label": "FBDI STS",
-                    "attribute": "fbdi-status"	
+                    "attribute": "fbdi-status",
+                    "type": "text"	
                     },
                     {
                     "label": "PRC TO CLD",
-                    "attribute": "process-to-cloud"	
+                    "attribute": "process-to-cloud",
+                    "type": "text"	
                     },
                     {
                     "label": "CLD PRC STS",
-                    "attribute": "cloud-process-status"	
+                    "attribute": "cloud-process-status",
+                    "type": "text"	
                     },
                     {
                     "label": "TOTAL",
-                    "attribute": "total-records"	
+                    "attribute": "total-records",
+                    "type": "text"	
                     },
                     {
                     "label": "SUCCESS",
-                    "attribute": "success"	
+                    "attribute": "success",
+                    "type": "text"	
                     },
                     {
                     "label": "ERROR",
-                    "attribute": "error"	
+                    "attribute": "error",
+                    "type": "text"	
                     },
                     {
                     "label": "WARNING",
-                    "attribute": "warning"	
+                    "attribute": "warning",
+                    "type": "text"	
                     }
                   ],
             "extra-config": {

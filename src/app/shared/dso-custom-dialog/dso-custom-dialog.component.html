@@ -7,11 +7,11 @@
                     [placeholder]="singleConfig['label']"
                     [formControlName]="singleConfig['name']" [required]="singleConfig['required']">
                 <input *ngSwitchCase ="'password'" matInput 
-                    [type]="hide ? 'password' : 'text'"
+                    [type]="hideFields[singleConfig['name']] ? 'password' : 'text'"
                     [placeholder]="singleConfig['label']"
                     [formControlName]="singleConfig['name']" [required]="singleConfig['required']">
-                <button *ngSwitchCase ="'password'" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <button *ngSwitchCase ="'password'" mat-icon-button matSuffix (click)="hideFields[singleConfig['name']] = !hideFields[singleConfig['name']]" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideFields[singleConfig['name']]">
+                <mat-icon>{{hideFields[singleConfig['name']] ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
          </mat-form-field>
     </ng-container>

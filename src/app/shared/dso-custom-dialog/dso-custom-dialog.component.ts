@@ -12,7 +12,7 @@ export class DsoCustomDialogComponent implements OnInit{
   description: string = '';
   config: any;
   row: any;
-  hide = true;
+  hideFields = {};
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DsoCustomDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data) { 
@@ -34,6 +34,11 @@ export class DsoCustomDialogComponent implements OnInit{
       if (field['required']) {
         validationArray.push(Validators.required);
       }
+
+      if (field['type'] === 'password') {
+        this.hideFields[field['name']] = true;
+      }
+      
       const formControl = new FormControl(this.row[field['name']] ? this.row[field['name']] : '', validationArray);
       this.form.addControl(field['name'], formControl);
     });
