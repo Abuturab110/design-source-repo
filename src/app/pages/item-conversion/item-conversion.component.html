@@ -9,15 +9,14 @@
 </mat-form-field>
 <mat-form-field class="form-field">
     <mat-label>Select File</mat-label>
-    <mat-select>
+    <mat-select [(ngModel)]="selectedFile">
          <mat-option *ngFor="let file of (files | async)" [value]="file.name">{{file.name}}</mat-option>
      </mat-select>
 </mat-form-field>
 <mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
-<button mat-raised-button (click)="refreshFiles()">Refresh Files
-</button>
-<button mat-raised-button>Generate FBDI</button>
-<!-- <button mat-raised-button>Publish to Cloud</button> -->
+<button mat-raised-button (click)="refreshFiles()">Refresh Files</button>
+<mat-spinner *ngIf="showFBDISpinner" diameter="20"></mat-spinner>
+<button mat-raised-button (click)="generateFBDI()">Generate FBDI</button>
 </div>
 </mat-card-content>
 </mat-card>
@@ -26,12 +25,14 @@
         <mat-card-content>
             <div class="table-title">
                 <h1>FBDI Details</h1>
-                <button mat-raised-button>Publish to Cloud</button>
+                <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner>
+                <button mat-raised-button (click)="publishToCloud()">Publish to Cloud</button>
             </div>
             <app-dso-dynamic-table 
              [resultSet]="resultSet | async"
              [config]="config | async"
-             [title]="''">
+             [title]="''"
+             (selectedRowData)="setRowData($event)">
             </app-dso-dynamic-table>
         </mat-card-content>
 

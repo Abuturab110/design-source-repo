@@ -3,27 +3,33 @@
         "column-config": [
                   {
                   "label": "FTP NAME",
-                  "attribute": "ftpName"	
+                  "attribute": "ftpName",
+                  "type": "text"	
                   },
                   {
                   "label": "FTP HOST",
-                  "attribute": "ftpHost"	
+                  "attribute": "ftpHost",
+                  "type": "text"	
                   },
                   {
                   "label": "FTP PORT",
-                  "attribute": "ftpPort"	
+                  "attribute": "ftpPort",
+                  "type": "text"	
                   },
                   {
                   "label": "USERNAME",
-                  "attribute": "userName"	
+                  "attribute": "userName",
+                  "type": "text"	
                   },
                   {
                   "label": "PASSWORD",
-                  "attribute": "password"	
+                  "attribute": "password",
+                  "type": "password"	
                   },
                   {
                   "label": "PATH",
-                  "attribute": "path"	
+                  "attribute": "path",
+                  "type": "text"	
                   }            
                 ],
                 "extra-config": {
@@ -109,7 +115,7 @@
                             {
                             "name": "password",
                             "label": "PASSWORD",
-                            "type": "text",
+                            "type": "password",
                             "display": true,
                             "required": true				  
                             },

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Datastore = require('nedb')
-, cloudServerSetupDB = new Datastore({ filename: './data_files/cloudServerSetupDB.js', autoload: true })
-, ftpServerSetupDB = new Datastore({ filename: './data_files/ftpServerSetupDB.js', autoload: true });
+const db = require('../utils/db')
+, cloudServerSetupDB = db.cloudServerSetupDB
+, ftpServerSetupDB = db.ftpServerSetupDB;
 
 router.put('/putFtpServerDetails', function (req, res, next) {
   let putData = {...req.body, "last-update-date": new Date().toString()};

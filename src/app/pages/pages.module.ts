@@ -16,6 +16,7 @@ import { SetupComponent } from './setup/setup.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -33,6 +34,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatIconModule,
     MatTabsModule,
+    MatSnackBarModule,
   ],
   exports: [ DashboardComponent, HomeComponent, ItemConversionComponent, UdaSetupComponent, ItemClassConversionComponent, SetupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

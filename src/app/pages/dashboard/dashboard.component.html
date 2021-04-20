@@ -1,17 +1,17 @@
 
 <div class="info-card-bar">
-    <app-dso-info-card *ngFor="let card of cards" [cardData]="card" class="info-card"></app-dso-info-card>
+    <app-dso-info-card *ngFor="let card of (cards | async)" [cardData]="card" class="info-card"></app-dso-info-card>
 </div>
 <div class="statistical-bar">
-        <app-dso-line-chart class="line-chart-card"></app-dso-line-chart>
-        <app-dso-pie-chart class="pie-chart-card"></app-dso-pie-chart>
+        <app-dso-line-chart class="line-chart-card" [lineDetails] ="(lineDetails | async)"></app-dso-line-chart>
+        <app-dso-pie-chart class="pie-chart-card" [pieDetails]="(pieDetails | async)"></app-dso-pie-chart>
 </div>
 <div class="result-set-bar">
     <mat-card>
         <mat-card-content>
             <h1>Recent Runs</h1>
             <app-dso-dynamic-table
-            [resultSet]="(resultSet | async)?.data"
+            [resultSet]="(resultSet | async)"
             [config]="config | async"
             [title]="''">
             </app-dso-dynamic-table>

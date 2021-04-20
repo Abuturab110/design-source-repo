@@ -3,34 +3,42 @@
         "column-config": [
                   {
                   "label": "UNSPSC",
-                  "attribute": "unspsc"	
+                  "attribute": "unspsc",
+                  "type": "text"
                   },
                   {
                   "label": "DESC NME",
-                  "attribute": "descriptive-name"	
+                  "attribute": "descriptive-name",
+                  "type": "text"	
                   },
                   {
                   "label": "COLUMN NME",
-                  "attribute": "column-name"	
+                  "attribute": "column-name",
+                  "type": "text"
                   },
                   {
                   "label": "VAR TYPE",
-                  "attribute": "var-type"	
+                  "attribute": "var-type",
+                  "type": "text"
                   },
                   {
                   "label": "CNTL FILE NME",
-                  "attribute": "control-file-name"	
+                  "attribute": "control-file-name",
+                  "type": "text"	
                   },
                   {
                   "label": "ATTR GRP CD",
-                  "attribute": "attribute-group-code"	
+                  "attribute": "attribute-group-code",
+                  "type": "text"	
                   },  
                   {
                   "label": "EFF COLUMN",
-                  "attribute": "eff-column"	
+                  "attribute": "eff-column",
+                  "type": "text"
                  }              
                 ],
                 "extra-config": {
+                    "upload": true,
                     "row-edit": true,
                     "row-edit-config": [
                         {

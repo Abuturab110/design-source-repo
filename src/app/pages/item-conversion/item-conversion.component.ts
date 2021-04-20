@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { tap } from 'rxjs/operators';
-
+import { ItemConversionService } from '../../services/item-conversion.service';
+import {switchMap, debounceTime} from 'rxjs/operators';
 @Component({
   selector: 'app-item-conversion',
   templateUrl: './item-conversion.component.html',
@@ -14,11 +15,19 @@ export class ItemConversionComponent implements OnInit {
   environments;
   selectedEnvironment;
   showSpinner = false;
-  constructor(private dashboardService: DashboardService) { }
+  showFBDISpinner = false;
+  showPublishToCloudSpinner = false;
+  selectedFile;
+  selectedRowData;
+  constructor(private dashboardService: DashboardService,
+              private itemConversionService: ItemConversionService) { }
 
   ngOnInit(): void {
-    this.resultSet = this.dashboardService.getItemConvResultSet();
-    this.environments = this.dashboardService.getEnvironments();
+    this.resultSet = this.itemConversionService.requeryItemConvDataObs.pipe(
+      debounceTime(200),
+      switchMap(res => this.itemConversionService.getItemConvResultSet())
+    );
+    this.environments = this.itemConversionService.getEnvironments();
     this.config = this.dashboardService.getItemConvConfig();
   }
 
@@ -26,10 +35,31 @@ export class ItemConversionComponent implements OnInit {
    
     if(this.selectedEnvironment) {
       this.showSpinner = true;
-      this.files=this.dashboardService.getFiles(this.selectedEnvironment).pipe(
+      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(
       tap(() => this.showSpinner = false)
     );
 
     }
+  }
+
+  generateFBDI() {
+        this.showFBDISpinner = true;
+        this.itemConversionService.generateFBDI(this.selectedEnvironment, this.selectedFile).subscribe(res => {
+        this.itemConversionService.requeryItemConvDetails();
+        this.showFBDISpinner = false;
+        });
+  }
+
+  setRowData(event) {
+    this.selectedRowData = event;
+  }
+
+
+  publishToCloud() {
+    this.showPublishToCloudSpinner = true;
+    this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
+      this.itemConversionService.requeryItemConvDetails();
+      this.showPublishToCloudSpinner = false;
+    })
   }
 }

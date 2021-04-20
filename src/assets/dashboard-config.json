@@ -3,19 +3,28 @@
         "column-config": [
                   {
                   "label": "PROCESS NAME",
-                  "attribute": "process-name"	
+                  "attribute": "process-name",
+                  "type": "text"	
+                  },
+                  {
+                  "label": "FBDI",
+                  "attribute": "fbdi",
+                  "type": "text"	
+                  },
+                  {
+                  "label": "REQUEST ID",
+                  "attribute": "request-id",
+                  "type": "text"	
                   },
                   {
                   "label": "START TIME",
-                  "attribute": "start-time"	
+                  "attribute": "start-time",
+                  "type": "text"	
                   },
                   {
                   "label": "RECORDS PROCESSED",
-                  "attribute": "records-processed"	
-                  },
-                  {
-                  "label": "DETAILS",
-                  "attribute": "details"	
+                  "attribute": "records-processed",
+                  "type": "text"	
                   }
                 ]
             }

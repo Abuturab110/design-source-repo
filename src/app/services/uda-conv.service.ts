@@ -34,5 +34,10 @@ requeryUdaConvDataObs = this.requeryUdaConvData.asObservable();
     this.requeryUdaConvData.next('');
   }
 
-
-}
+  postFile(fileToUpload: File) {
+    const endpoint = '/api/udaConv/uploadUdaMappings';
+    const formData: FormData = new FormData();
+    formData.append('upload', fileToUpload, fileToUpload.name);
+    return this._http.post(endpoint, formData);
+  }
+ }

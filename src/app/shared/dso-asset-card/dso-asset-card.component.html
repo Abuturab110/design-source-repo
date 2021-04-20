@@ -1,18 +1,13 @@
 <mat-card class="card-layout">
-    <mat-card-content class="card-front">
+    <mat-card-content>
             <div class="content-layout">
                 <h1 class="category">{{data.category}}</h1>
                 <a  class="subcategory" [routerLink]="'/' + data.link">{{data.subcategory}}</a>
                 <mat-divider inset="true"></mat-divider>
                 <div class="action-region">
-                    <a style="color: #888888;"><i class="fas fa-download"></i></a>
-                    <a style="color: #888888;"><i class="fas fa-user"></i></a>
+                    <a style="color: #888888;" title="Conversion Configuration" [href]="'assets/' + data['conversion-configuration']" download><i class="fas fa-download"></i></a>
+                    <a style="color: #888888;" title="User Guide" [href]="'assets/' + data['user-guide']" download><i class="fas fa-user"></i></a>
                 </div>
             </div>
-    </mat-card-content>
-    <mat-card-content class="card-back">
-        <div class="back-content-layout">
-             <span>{{data.card_detail}}</span>
-        </div>
     </mat-card-content>
 </mat-card>
