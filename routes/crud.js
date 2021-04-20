@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Datastore = require('nedb')
-, db = new Datastore({ filename: './data_files/dashboard.js', autoload: true });
+let dbSet = require('../utils/db')
+, db = dbSet.dashboardDB;
 
 router.get('/getFiles', function(req, res, next) {
     /*db.find({}, function (err, docs) {

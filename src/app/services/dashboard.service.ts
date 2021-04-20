@@ -10,16 +10,12 @@ export class DashboardService {
   constructor(private _http: HttpClient) { }
 
   getDashboardResultSet() {
-  return this._http.get('assets/dashboard-result-set.json');
+  return this._http.get('/api/dashboardDetails/getRecentRuns');
   }
 
   getDashboardConfig() {
     return this._http.get('assets/dashboard-config.json');
     }
-
-  getItemConvResultSet() {
-    return this._http.get('/api/itemConv/getItemConvDetails');
-  }
 
   getItemConvConfig() {
     return this._http.get('assets/item-conv-config.json');
@@ -33,13 +29,15 @@ export class DashboardService {
     return this._http.get('assets/uda-mapping-config.json');
   }
 
-  getFiles(ftpName: string): Observable<any> {
-    
-    return this._http.get('/api/dashboard/itemConvRefreshFiles/'+ftpName);
+  getCardDetails() {
+    return this._http.get('/api/dashboardDetails/getCardDetails');
   }
 
-  getEnvironments(): Observable<any> {
-    return this._http.get('/api/dashboard/getFtpDetails');
+  getPieDetails() {
+    return this._http.get('/api/dashboardDetails/pieDetails');
   }
 
+  getLineDetails() {
+    return this._http.get('/api/dashboardDetails/lineDetails');
+  }
 }

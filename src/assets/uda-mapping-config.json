@@ -38,6 +38,7 @@
                  }              
                 ],
                 "extra-config": {
+                    "upload": true,
                     "row-edit": true,
                     "row-edit-config": [
                         {

@@ -17,12 +17,12 @@
                     "type": "text"	
                     },
                     {
-                    "label": "PRC TO CLD",
-                    "attribute": "process-to-cloud",
+                    "label": "REQUEST ID",
+                    "attribute": "request-id",
                     "type": "text"	
                     },
                     {
-                    "label": "CLD PRC STS",
+                    "label": "CLOUD STATUS",
                     "attribute": "cloud-process-status",
                     "type": "text"	
                     },
@@ -40,12 +40,7 @@
                     "label": "ERROR",
                     "attribute": "error",
                     "type": "text"	
-                    },
-                    {
-                    "label": "WARNING",
-                    "attribute": "warning",
-                    "type": "text"	
-                    }
+                    }   
                   ],
             "extra-config": {
                     "table-select": true,

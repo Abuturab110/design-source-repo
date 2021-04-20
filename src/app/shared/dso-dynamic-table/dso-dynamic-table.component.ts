@@ -6,6 +6,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import { DsoCustomDialogComponent } from '../dso-custom-dialog/dso-custom-dialog.component';
 import { DsoCustomDeleteDialogComponent } from '../dso-custom-delete-dialog/dso-custom-delete-dialog.component';
+import { DsoUploadDialogComponent } from '../dso-upload-dialog/dso-upload-dialog.component';
 
 @Component({
   selector: 'app-dso-dynamic-table',
@@ -27,12 +28,16 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
   putData = new EventEmitter();
   @Output()
   deleteData = new EventEmitter();
+  @Output()
+  selectedRowData = new EventEmitter();
+  @Output()
+  uploadData = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<any>;
   displayedColumns = [];
   filterValue = '';
-  selection = new SelectionModel<any>(true, []);
+  selection = new SelectionModel<any>(false, []);
   constructor(private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource();
   }
@@ -142,6 +147,23 @@ openAddDialog() {
   });
 }
 
+openUploadDialog() {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+
+  dialogConfig.data = {
+    title: `Upload ${this.title}`,
+ };
+
+ const dialogRef =this.dialog.open(DsoUploadDialogComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(res => {
+    if (res)
+    this.uploadData.emit(res);
+  });
+}
+
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -176,5 +198,13 @@ getMaskedData(field, data) {
   }
   return returnData;
 }
+
+setRowValue(row) {
+  console.log(row)
+  console.log(this.selection.isSelected(row));
+   if (this.selection.isSelected(row)) this.selectedRowData.emit(row);
+   else this.selectedRowData.emit(null);
+}
+
 
 }

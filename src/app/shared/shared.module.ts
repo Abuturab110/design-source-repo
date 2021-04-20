@@ -22,12 +22,13 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { DsoCustomDeleteDialogComponent } from './dso-custom-delete-dialog/dso-custom-delete-dialog.component';
+import { DsoUploadDialogComponent } from './dso-upload-dialog/dso-upload-dialog.component';
 
 
 
 @NgModule({
   declarations: [DsoInfoCardComponent, DsoPieChartComponent, DsoLineChartComponent,
-     DsoDynamicTableComponent, DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent],
+     DsoDynamicTableComponent, DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent, DsoUploadDialogComponent],
   imports: [
     CommonModule,
     MatCardModule,
