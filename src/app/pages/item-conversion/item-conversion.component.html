@@ -7,24 +7,34 @@
             <mat-option *ngFor="let environment of (environments | async)" [value]="environment.ftpName">{{environment.ftpName}}</mat-option>
     </mat-select>
 </mat-form-field>
-<mat-form-field class="form-field">
-    <mat-label>Select File</mat-label>
-    <mat-select [(ngModel)]="selectedFile">
-         <mat-option *ngFor="let file of (files | async)" [value]="file.name">{{file.name}}</mat-option>
-     </mat-select>
-</mat-form-field>
 <mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
 <button mat-raised-button (click)="refreshFiles()">Refresh Files</button>
 <mat-spinner *ngIf="showFBDISpinner" diameter="20"></mat-spinner>
 <button mat-raised-button (click)="generateFBDI()">Generate FBDI</button>
 </div>
+<div class="files-scroll" *ngIf="files?.length>0">
+    <mat-selection-list [multiple]="false" [(ngModel)]="selectedFile">
+        <!-- <mat-list-option *ngFor="let file of (files | async)" [value]="file.name"> -->
+            <mat-list-option *ngFor="let file of files" [value]="file.name">
+            {{file.name}}
+        </mat-list-option>
+      </mat-selection-list> 
+    </div>
 </mat-card-content>
 </mat-card>
 <div class="result-set-region">
     <mat-card>
         <mat-card-content>
             <div class="table-title">
-                <h1>FBDI Details</h1>
+                <h1 class="fbdi-margin">FBDI Details</h1>
+                <div class="cloud-setup-dropdown">
+                    <mat-form-field class="form-field">
+                        <mat-label>Cloud Setup</mat-label> 
+                         <mat-select [(ngModel)]="selectedRowData" >
+                             <mat-option *ngFor="let cloudData of (cloudSetupData | async)"   [value]="cloudData">{{cloudData.cloudInstanceName}} </mat-option>
+                         </mat-select> 
+                     </mat-form-field> 
+                </div>
                 <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner>
                 <button mat-raised-button (click)="publishToCloud()">Publish to Cloud</button>
             </div>

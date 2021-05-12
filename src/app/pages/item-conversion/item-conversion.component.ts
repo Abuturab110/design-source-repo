@@ -3,6 +3,7 @@ import { DashboardService } from '../../services/dashboard.service';
 import { tap } from 'rxjs/operators';
 import { ItemConversionService } from '../../services/item-conversion.service';
 import {switchMap, debounceTime} from 'rxjs/operators';
+import { SetupService } from '../../services/setup.service';
 @Component({
   selector: 'app-item-conversion',
   templateUrl: './item-conversion.component.html',
@@ -19,7 +20,8 @@ export class ItemConversionComponent implements OnInit {
   showPublishToCloudSpinner = false;
   selectedFile;
   selectedRowData;
-  constructor(private dashboardService: DashboardService,
+  cloudSetupData;
+  constructor(private dashboardService: DashboardService, private setupService: SetupService,
               private itemConversionService: ItemConversionService) { }
 
   ngOnInit(): void {
@@ -29,16 +31,18 @@ export class ItemConversionComponent implements OnInit {
     );
     this.environments = this.itemConversionService.getEnvironments();
     this.config = this.dashboardService.getItemConvConfig();
+    this.cloudSetupData =  this.setupService.getCloudServerData();
   }
 
   refreshFiles() {
    
     if(this.selectedEnvironment) {
-      this.showSpinner = true;
-      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(
-      tap(() => this.showSpinner = false)
-    );
-
+    //   this.showSpinner = true;
+    //   this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(
+    //   tap(() => this.showSpinner = false)
+    // );
+    this.files = [{name:"aa" } ,{name:"bb" },{name:"cc" },{name:"dd" }     ]
+    //this.files = []
     }
   }
 

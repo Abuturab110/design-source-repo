@@ -27,7 +27,7 @@ button, .mat-raised-button {
 }
 
 .table-title button {
-    margin: 0px 20px!important;
+    margin: 10px 0px 30px!important;
 }
 
 .result-set-region {
@@ -52,4 +52,16 @@ button, .mat-raised-button {
 
 ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
     color: #112d4e;
+}
+.files-scroll{
+    width: 260px;
+    height: 140px;
+    overflow: auto;
+    margin-left: 30px;
+}
+.cloud-setup-dropdown{
+margin-left:18px;
+}
+.fbdi-margin{
+    margin: 10px 0px 0px 0px
 }
