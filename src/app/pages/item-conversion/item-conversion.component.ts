@@ -37,12 +37,10 @@ export class ItemConversionComponent implements OnInit {
   refreshFiles() {
    
     if(this.selectedEnvironment) {
-    //   this.showSpinner = true;
-    //   this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(
-    //   tap(() => this.showSpinner = false)
-    // );
-    this.files = [{name:"aa" } ,{name:"bb" },{name:"cc" },{name:"dd" }     ]
-    //this.files = []
+      this.showSpinner = true;
+      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(
+      tap(() => this.showSpinner = false)
+    );
     }
   }
 
