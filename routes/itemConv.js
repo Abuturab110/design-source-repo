@@ -114,10 +114,10 @@ router.get('/publishToCloud', function (req, res, next) {
   base64.encode(filePath, function(err, base64String) {
   console.log('base64String' + base64String);
       
-    username =  req.query.userName,
+    username =  req.query.username,
     password = req.query.password,
-    url = req.query.cloudInstanceLink, 
-  
+    url = req.query.cloudInstanceLink,
+          
   auth = "Basic " + Buffer.from(username + ":" + password).toString("base64");
   var bodyinput={
      "OperationName":"importBulkData",	
