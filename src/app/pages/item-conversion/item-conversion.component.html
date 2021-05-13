@@ -12,6 +12,7 @@
 <mat-spinner *ngIf="showFBDISpinner" diameter="20"></mat-spinner>
 <button mat-raised-button (click)="generateFBDI()">Generate FBDI</button>
 </div>
+<div *ngIf="showErrorMessage==true" style="color: crimson;">{{errorMessage}} </div>
 <div class="files-scroll" *ngIf="files?.length>0">
     <mat-selection-list [multiple]="false" [(ngModel)]="selectedFile">
         <mat-list-option *ngFor="let file of (files | async)" [value]="file.name">

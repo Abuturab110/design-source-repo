@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
-import { tap } from 'rxjs/operators';
+import { catchError, tap, timeout } from 'rxjs/operators';
 import { ItemConversionService } from '../../services/item-conversion.service';
 import {switchMap, debounceTime} from 'rxjs/operators';
 import { SetupService } from '../../services/setup.service';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-item-conversion',
   templateUrl: './item-conversion.component.html',
@@ -21,6 +22,8 @@ export class ItemConversionComponent implements OnInit {
   selectedFile;
   selectedRowData;
   cloudSetupData;
+  errorMessage;
+  showErrorMessage = false;
   constructor(private dashboardService: DashboardService, private setupService: SetupService,
               private itemConversionService: ItemConversionService) { }
 
@@ -38,12 +41,17 @@ export class ItemConversionComponent implements OnInit {
    
     if(this.selectedEnvironment) {
       this.showSpinner = true;
-      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(
-      tap(() => this.showSpinner = false)
+      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(timeout(10000),
+      tap(() => this.showSpinner = false),
+      catchError((error):any =>  {
+        this.showErrorMessage = true; 
+        this.showSpinner = false; 
+        this.errorMessage = 'Timed out while connect with ftp server';
+      })
     );
     }
   }
-
+ 
   generateFBDI() {
         this.showFBDISpinner = true;
         this.itemConversionService.generateFBDI(this.selectedEnvironment, this.selectedFile).subscribe(res => {
