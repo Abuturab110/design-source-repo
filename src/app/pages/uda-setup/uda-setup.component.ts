@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { debounceTime, switchMap} from 'rxjs/operators';
 import { UdaConvService } from 'src/app/services/uda-conv.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Constants } from 'src/app/shared/constant.component';
 
 @Component({
   selector: 'app-uda-setup',
@@ -27,25 +28,34 @@ export class UdaSetupComponent implements OnInit {
   submitUdaConvDetails(event) {
     this.udaConvService.postUdaMappingData(event).subscribe(res => {
       this.udaConvService.requeryUdaConvDetails();
+      this._snackBar.open(Constants.udaSave,null, {
+        duration: 2000
+      });
     });
   }
 
   updateUdaConvDetails(event) {
     this.udaConvService.putUdaMappingData(event).subscribe(res => {
       this.udaConvService.requeryUdaConvDetails();
+      this._snackBar.open(Constants.udaUpdate,null, {
+        duration: 2000
+      });
     });
   }
 
   deleteUdaConvDetails(event) {
     this.udaConvService.deleteUdaMappingData(event).subscribe(res => {
       this.udaConvService.requeryUdaConvDetails();
+      this._snackBar.open(Constants.udaDelete,null, {
+        duration: 2000
+      });
     });
   }
 
   uploadUdaConvDetails(event) {
     this.udaConvService.postFile(event).subscribe(res => {
       this.udaConvService.requeryUdaConvDetails();
-     this._snackBar.open('UDA Mappings successfully uploaded',null, {
+     this._snackBar.open(Constants.udaUpload,null, {
        duration: 2000
      });
     });
