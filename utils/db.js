@@ -7,6 +7,11 @@ let db = {
     itemConvDB: new Datastore({ filename: './data_files/itemConvDB.js', autoload: true }),
     dashboardDB: new Datastore({ filename: './data_files/dashboardDB.js', autoload: true }),
     sequenceDB: new Datastore({ filename: './data_files/sequenceDB.js', autoload: true }),
+    unspscSetupDB: new Datastore({ filename: './data_files/unsPscSetupDB.js', autoload: true }),
+    unsPscSegmentDB: new Datastore({ filename: './data_files/unsPscSegmentDB.js', autoload: true }),
+    unsPscFamilyDB: new Datastore({ filename: './data_files/unsPscFamilyDB.js', autoload: true }),
+    unsPscClassDB: new Datastore({ filename: './data_files/unsPscClassDB.js', autoload: true }),
+    unsPscCommodityDB: new Datastore({ filename: './data_files/unsPscCommodityDB.js', autoload: true }),
 }
 
 
