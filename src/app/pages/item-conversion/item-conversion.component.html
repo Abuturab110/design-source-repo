@@ -1,6 +1,6 @@
 <mat-card style="margin: 20px;">
     <mat-card-content>
-<div class="form-region">
+<div class="form-region fbdi-margin">
 <mat-form-field class="form-field" >
 <mat-label>Select Environment</mat-label>
     <mat-select [(ngModel)]="selectedEnvironment">
@@ -12,9 +12,8 @@
 <mat-spinner *ngIf="showFBDISpinner" diameter="20"></mat-spinner>
 <button mat-raised-button (click)="generateFBDI()">Generate FBDI</button>
 </div>
-<div *ngIf="showErrorMessage==true" style="color: crimson;">{{errorMessage}} </div>
-<div class="files-scroll" *ngIf="files?.length>0">
-    <mat-selection-list [multiple]="false" [(ngModel)]="selectedFile">
+<div  [ngClass]="{'files-scroll': showFileList}" > 
+   <mat-selection-list [multiple]="false" [(ngModel)]="selectedFile" > 
         <mat-list-option *ngFor="let file of (files | async)" [value]="file.name">
             {{file.name}}
         </mat-list-option>
@@ -28,12 +27,12 @@
             <div class="table-title">
                 <h1 class="fbdi-margin">FBDI Details</h1>
                 <div class="cloud-setup-dropdown">
-                    <mat-form-field class="form-field">
+                     <mat-form-field class="form-field">
                         <mat-label>Cloud Setup</mat-label> 
                          <mat-select [(ngModel)]="selectedRowData" >
                              <mat-option *ngFor="let cloudData of (cloudSetupData | async)"   [value]="cloudData">{{cloudData.cloudInstanceName}} </mat-option>
                          </mat-select> 
-                     </mat-form-field> 
+                     </mat-form-field>
                 </div>
                 <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner>
                 <button mat-raised-button (click)="publishToCloud()">Publish to Cloud</button>

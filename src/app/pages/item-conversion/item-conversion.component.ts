@@ -5,6 +5,8 @@ import { ItemConversionService } from '../../services/item-conversion.service';
 import {switchMap, debounceTime} from 'rxjs/operators';
 import { SetupService } from '../../services/setup.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-item-conversion',
   templateUrl: './item-conversion.component.html',
@@ -23,9 +25,9 @@ export class ItemConversionComponent implements OnInit {
   selectedRowData;
   cloudSetupData;
   errorMessage;
-  showErrorMessage = false;
+  showFileList = false;
   constructor(private dashboardService: DashboardService, private setupService: SetupService,
-              private itemConversionService: ItemConversionService) { }
+              private itemConversionService: ItemConversionService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.resultSet = this.itemConversionService.requeryItemConvDataObs.pipe(
@@ -38,18 +40,21 @@ export class ItemConversionComponent implements OnInit {
   }
 
   refreshFiles() {
-   
+
     if(this.selectedEnvironment) {
       this.showSpinner = true;
-      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(timeout(10000),
-      tap(() => this.showSpinner = false),
+      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(timeout(20000),
+      tap(() => {this.showSpinner = false; this.showFileList = true}),
       catchError((error):any =>  {
-        this.showErrorMessage = true; 
+        this.showFileList = false; 
         this.showSpinner = false; 
-        this.errorMessage = 'Timed out while connect with ftp server';
+        this._snackBar.open('Timed out while connect with ftp server',null, {
+          duration: 4000
+        });
       })
     );
     }
+
   }
  
   generateFBDI() {
