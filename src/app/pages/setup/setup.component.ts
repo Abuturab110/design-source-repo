@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { SetupService } from '../../services/setup.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Constants } from 'src/app/shared/constant.component';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { DsoUploadDialogComponent } from 'src/app/shared/dso-upload-dialog/dso-upload-dialog.component';
 
 @Component({
   selector: 'app-setup',
@@ -23,8 +25,11 @@ export class SetupComponent implements OnInit {
   unspscFamilyData:any;
   unspscClassData:any;
   unspscCommoditytData:any;
+  title ="UNSPSC Upload";
+  @Output()
+  uploadData = new EventEmitter();
   constructor(private setupService: SetupService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.ftpServerConfig = this.setupService.getFtpServerConfig();
@@ -82,7 +87,6 @@ export class SetupComponent implements OnInit {
   }
 
   deleteFtpDetails(event) {
-    console.log(event);
     this.setupService.deleteFtpServerData(event).subscribe(res => {
       this.setupService.requeryFTPServerDetails();
       this._snackBar.open(Constants.ftpSetupDelete,null, {
@@ -121,7 +125,7 @@ export class SetupComponent implements OnInit {
   submitUnspscSegment(event) {
     this.setupService.postUnspscSegment(event).subscribe(res => {
     this.setupService.requeryUnspscDetails();
-    this._snackBar.open(Constants.cloudInstanceSave,null, {
+    this._snackBar.open(Constants.unspscSegmentSave,null, {
       duration: 2000
     });
     });
@@ -130,7 +134,7 @@ export class SetupComponent implements OnInit {
   updateUnspscSegment(event) {
     this.setupService.putUnspscSegment(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-      this._snackBar.open(Constants.cloudInstanceUpdate,null, {
+      this._snackBar.open(Constants.unspscSegmentUpdate,null, {
         duration: 2000
       });
     });
@@ -139,7 +143,7 @@ export class SetupComponent implements OnInit {
   deleteUnspscSegment(event) {
     this.setupService.deleteUnspscSegment(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-      this._snackBar.open(Constants.cloudInstanceDelete,null, {
+      this._snackBar.open(Constants.unspscSegmentDelete,null, {
         duration: 2000
       });
     });
@@ -147,7 +151,7 @@ export class SetupComponent implements OnInit {
   submitUnspscFamily(event) {
     this.setupService.postUnspscFamily(event).subscribe(res => {
     this.setupService.requeryUnspscDetails();
-    this._snackBar.open(Constants.cloudInstanceSave,null, {
+    this._snackBar.open(Constants.unspscFamilySave,null, {
       duration: 2000
     });
     });
@@ -155,7 +159,7 @@ export class SetupComponent implements OnInit {
   updateUnspscFamily(event) {
     this.setupService.putUnspscFamily(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-      this._snackBar.open(Constants.cloudInstanceUpdate,null, {
+      this._snackBar.open(Constants.unspscFamilyUpdate,null, {
         duration: 2000
       });
     });
@@ -164,7 +168,7 @@ export class SetupComponent implements OnInit {
   deleteUnspscFamily(event) {
     this.setupService.deleteUnspscFamily(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-      this._snackBar.open(Constants.cloudInstanceDelete,null, {
+      this._snackBar.open(Constants.unspscFamilyDelete,null, {
         duration: 2000
       });
     });
@@ -173,7 +177,7 @@ export class SetupComponent implements OnInit {
   submitUnspscClass(event) {
     this.setupService.postUnspscClass(event).subscribe(res => {
     this.setupService.requeryUnspscDetails();
-    this._snackBar.open(Constants.cloudInstanceSave,null, {
+    this._snackBar.open(Constants.unspscClassSave,null, {
       duration: 2000
     });
     });
@@ -182,7 +186,7 @@ export class SetupComponent implements OnInit {
   updateUnspscClass(event) {
     this.setupService.putUnspscClass(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-      this._snackBar.open(Constants.cloudInstanceUpdate,null, {
+      this._snackBar.open(Constants.unspscClassUpdate,null, {
         duration: 2000
       });
     });
@@ -191,7 +195,7 @@ export class SetupComponent implements OnInit {
   deleteUnspscClass(event) {
     this.setupService.deleteUnspscClass(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-      this._snackBar.open(Constants.cloudInstanceDelete,null, {
+      this._snackBar.open(Constants.unspscClassDelete,null, {
         duration: 2000
       });
     });
@@ -201,7 +205,7 @@ export class SetupComponent implements OnInit {
   submitUnspscCommodity(event) {
     this.setupService.postUnspscCommodity(event).subscribe(res => {
     this.setupService.requeryUnspscDetails();
-    this._snackBar.open(Constants.cloudInstanceSave,null, {
+    this._snackBar.open(Constants.unspscCommoditySave,null, {
       duration: 2000
     });
     });
@@ -210,7 +214,7 @@ export class SetupComponent implements OnInit {
   updateUnspscCommodity(event) {
     this.setupService.putUnspscCommodity(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-      this._snackBar.open(Constants.cloudInstanceUpdate,null, {
+      this._snackBar.open(Constants.unspscCommodityUpdate,null, {
         duration: 2000
       });
     });
@@ -219,7 +223,7 @@ export class SetupComponent implements OnInit {
   deleteUnspscCommodity(event) {
     this.setupService.deleteUnspscCommodity(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-      this._snackBar.open(Constants.cloudInstanceDelete,null, {
+      this._snackBar.open(Constants.unspscCommodityDelete,null, {
         duration: 2000
       });
     });
@@ -229,9 +233,24 @@ export class SetupComponent implements OnInit {
   uploadUnspscDetails(event) {
     this.setupService.postFile(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
-     this._snackBar.open(Constants.udaUpload,null, {
+     this._snackBar.open(Constants.unspscUpload,null, {
        duration: 2000
      });
     });
   }
+   openUploadDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+  
+    dialogConfig.data = {
+      title: `Upload ${this.title}`,
+   };
+   const dialogRef =this.dialog.open(DsoUploadDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(res => {
+       if (res)
+       this.uploadUnspscDetails(res)
+    });
+  }
+
 }

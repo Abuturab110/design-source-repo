@@ -1,8 +1,5 @@
   <div class="form-region" *ngIf="enableFilter"> 
-    <div style="margin-right: 720px;" > 
-      <button *ngIf="enableUploadButton" mat-raised-button (click)="openUploadDialog()">Upload</button>
-    </div>
-  <mat-form-field>
+    <mat-form-field>
     <mat-label>Search</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input>
     <mat-icon matSuffix>search</mat-icon> 

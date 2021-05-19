@@ -28,6 +28,9 @@
             </mat-card-content>
             </mat-tab>
             <mat-tab label="UNSPSC Setup">
+                <div style="margin-top: 20px;" > 
+                    <button mat-raised-button (click) ="openUploadDialog()" >Upload File</button>
+                  </div>
                 <mat-tab-group mat-align-tabs="start">
                     <mat-tab label="Segment">
                 <mat-card-content>
@@ -39,8 +42,7 @@
                     [enableFilter]="'true'"
                     (postData)="submitUnspscSegment($event)"
                     (putData)="updateUnspscSegment($event)"
-                    (deleteData)="deleteUnspscSegment($event)"
-                    [enableUploadButton] = "'true'">
+                    (deleteData)="deleteUnspscSegment($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
         </mat-tab>
@@ -53,8 +55,7 @@
                     [enableFilter]="'true'"
                     (postData)="submitUnspscFamily($event)"
                     (putData)="updateUnspscFamily($event)"
-                    (deleteData)="deleteUnspscFamily($event)"
-                    >
+                    (deleteData)="deleteUnspscFamily($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
         </mat-tab>

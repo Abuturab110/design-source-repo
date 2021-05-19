@@ -22,8 +22,6 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
   title;
   @Input()
   enableFilter = false;
-  @Input()
-  enableUploadButton;
   @Output()
   postData = new EventEmitter();
   @Output()
