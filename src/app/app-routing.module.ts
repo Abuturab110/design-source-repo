@@ -4,7 +4,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ItemClassConversionComponent } from './pages/item-class-conversion/item-class-conversion.component';
 import { ItemConversionComponent } from './pages/item-conversion/item-conversion.component';
+import { ProductCatalogComponent } from './pages/product-catalog/product-catalog.component';
 import { SetupComponent } from './pages/setup/setup.component';
+import { UdaConfigurationComponent } from './pages/uda-configuration/uda-configuration.component';
 import { UdaSetupComponent } from './pages/uda-setup/uda-setup.component';
 
 
@@ -34,6 +36,19 @@ const routes: Routes = [
   component: ItemClassConversionComponent,
   data: {title: 'Item Class Conversion'}
 },
+
+{
+  path: 'productCatalog',
+  component: ProductCatalogComponent,
+  data: {title: 'Product Catalog'}
+},
+
+{
+  path: 'udaConfiguration',
+  component: UdaConfigurationComponent,
+  data: {title: 'UDA Configuration'}
+},
+
 {
   path: 'setup',
   component: SetupComponent,

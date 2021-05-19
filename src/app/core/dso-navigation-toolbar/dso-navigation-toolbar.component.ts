@@ -37,6 +37,16 @@ export class DsoNavigationToolbarComponent implements OnInit {
       icon: 'fa-sitemap'
     },
     {
+      label: 'Product Catalog',
+      link: 'productCatalog',
+      icon: 'fa-sitemap'
+    },
+    {
+      label: 'UDA Configuration',
+      link: 'udaConfiguration',
+      icon: 'fa-sitemap'
+    },
+    {
       label: 'Setup',
       link: 'setup',
       icon: 'fa-layer-group'
