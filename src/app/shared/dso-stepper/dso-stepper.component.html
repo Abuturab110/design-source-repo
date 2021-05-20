@@ -1,0 +1,44 @@
+<mat-horizontal-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Item Class Config</ng-template>
+         <div class="table-title">
+           <div class="table-content"> 
+          <mat-label><b>Download Segment</b><a style="margin-left: 15px;" href="assets/Sample Template File for UDA Mappings.xlsx" download> File</a></mat-label>
+        </div> 
+         <div class="table-content">
+          <button mat-raised-button (click)="openUploadDialog()">Confirm Upload</button>
+          <button mat-raised-button matStepperNext> Next</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>UDA Configuration</ng-template>
+         <div class="table-title"> 
+          <div class="table-content">
+            <mat-label><b>Download UDA Config</b><a style="margin-left: 15px;" href="assets/Sample Template File for UDA Mappings.xlsx" download> File</a></mat-label>
+        </div>
+        <div class="table-content">
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button (click)="openUploadDialog()">Confirm Upload</button>
+          <button mat-raised-button matStepperNext> Next</button>
+        </div>
+         </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Purchasing Catalog & Categories</ng-template>
+       <div class="table-title"> 
+        <div class="table-content">
+          <mat-label><b>Publish Configuration to Cloud</b><a style="margin-left: 15px;" href="assets/Sample Template File for UDA Mappings.xlsx" download> File</a></mat-label>
+      </div>
+       <div class="table-content">
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button (click)="openUploadDialog()">Confirm Upload</button>
+        <button mat-raised-button (click)="closeSpets()">Close</button>
+      </div>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

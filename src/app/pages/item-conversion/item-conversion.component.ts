@@ -19,6 +19,7 @@ export class ItemConversionComponent implements OnInit {
   showPublishToCloudSpinner = false;
   selectedFile;
   selectedRowData;
+  showConfigSteps = false;
   constructor(private dashboardService: DashboardService,
               private itemConversionService: ItemConversionService) { }
 
@@ -56,10 +57,15 @@ export class ItemConversionComponent implements OnInit {
 
 
   publishToCloud() {
-    this.showPublishToCloudSpinner = true;
-    this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
-      this.itemConversionService.requeryItemConvDetails();
-      this.showPublishToCloudSpinner = false;
-    })
+    this.showConfigSteps =  true;
+    //this.showPublishToCloudSpinner = true;
+    // this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
+    // this.itemConversionService.requeryItemConvDetails();
+    // this.showPublishToCloudSpinner = false;
+    // })
   }
+
+  closeChangedHandler(close: boolean) {
+    this.showConfigSteps =  close;
+   }
 }

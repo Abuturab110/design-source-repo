@@ -25,9 +25,12 @@
         <mat-card-content>
             <div class="table-title">
                 <h1>FBDI Details</h1>
-                <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner>
-                <button mat-raised-button (click)="publishToCloud()">Publish to Cloud</button>
+                <!-- <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner> -->
+                <button mat-raised-button  (click)="publishToCloud()">Publish to Cloud</button>
             </div>
+            <div *ngIf="showConfigSteps">
+            <app-dso-stepper [close] = showConfigSteps (closeChanged)="closeChangedHandler($event)"></app-dso-stepper>
+        </div>
             <app-dso-dynamic-table 
              [resultSet]="resultSet | async"
              [config]="config | async"
