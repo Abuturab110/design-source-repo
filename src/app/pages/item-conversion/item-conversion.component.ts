@@ -3,6 +3,8 @@ import { DashboardService } from '../../services/dashboard.service';
 import { tap } from 'rxjs/operators';
 import { ItemConversionService } from '../../services/item-conversion.service';
 import {switchMap, debounceTime} from 'rxjs/operators';
+import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
+import { DsoCustomDialogStepperComponent } from 'src/app/shared/dso-custom-dialog-stepper/dso-custom-dialog-stepper.component';
 @Component({
   selector: 'app-item-conversion',
   templateUrl: './item-conversion.component.html',
@@ -19,9 +21,9 @@ export class ItemConversionComponent implements OnInit {
   showPublishToCloudSpinner = false;
   selectedFile;
   selectedRowData;
-  showConfigSteps = false;
-  constructor(private dashboardService: DashboardService,
-              private itemConversionService: ItemConversionService) { }
+    constructor(private dashboardService: DashboardService,
+              private itemConversionService: ItemConversionService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.resultSet = this.itemConversionService.requeryItemConvDataObs.pipe(
@@ -39,8 +41,7 @@ export class ItemConversionComponent implements OnInit {
       this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(
       tap(() => this.showSpinner = false)
     );
-
-    }
+  }
   }
 
   generateFBDI() {
@@ -57,15 +58,20 @@ export class ItemConversionComponent implements OnInit {
 
 
   publishToCloud() {
-    this.showConfigSteps =  true;
-    //this.showPublishToCloudSpinner = true;
-    // this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
-    // this.itemConversionService.requeryItemConvDetails();
-    // this.showPublishToCloudSpinner = false;
-    // })
+    
+    this.showPublishToCloudSpinner = true;
+    this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
+    this.itemConversionService.requeryItemConvDetails();
+    this.showPublishToCloudSpinner = false;
+    })
   }
 
-  closeChangedHandler(close: boolean) {
-    this.showConfigSteps =  close;
-   }
-}
+  openDialog() {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      const dialogRef = this.dialog.open(DsoCustomDialogStepperComponent,dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+       });
+  }
+ }

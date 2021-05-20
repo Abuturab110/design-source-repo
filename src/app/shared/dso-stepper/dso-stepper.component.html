@@ -13,7 +13,7 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Name is required.">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>UDA Configuration</ng-template>
          <div class="table-title"> 
@@ -28,7 +28,8 @@
          </div>
     </form>
   </mat-step>
-  <mat-step>
+  <mat-step  [stepControl]="secondFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="secondFormGroup">
     <ng-template matStepLabel>Purchasing Catalog & Categories</ng-template>
        <div class="table-title"> 
         <div class="table-content">
@@ -40,5 +41,6 @@
         <button mat-raised-button (click)="closeSpets()">Close</button>
       </div>
     </div>
+  </form>
   </mat-step>
 </mat-horizontal-stepper>
