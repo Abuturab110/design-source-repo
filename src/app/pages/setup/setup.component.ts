@@ -25,6 +25,7 @@ export class SetupComponent implements OnInit {
   unspscFamilyData:any;
   unspscClassData:any;
   unspscCommoditytData:any;
+  showSpinner = false;
   title ="UNSPSC Upload";
   @Output()
   uploadData = new EventEmitter();
@@ -231,8 +232,10 @@ export class SetupComponent implements OnInit {
 
 
   uploadUnspscDetails(event) {
+    this.showSpinner = true;
     this.setupService.postFile(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
+      this.showSpinner = false;
      this._snackBar.open(Constants.unspscUpload,null, {
        duration: 2000
      });
