@@ -2,7 +2,9 @@ const utils = require('../utils/general-utilities')
 var express = require('express');
 var router = express.Router();
 const dbSet = require('../utils/db')
-, db = dbSet.itemConvDB;
+, db = dbSet.itemConvDB
+,itemConvHomeDB = dbSet.itemConvHomeDB
+,itemClassConversionHomeDB = dbSet.itemClassConversionHomeDB;
 const base64 = require('file-base64');
 const request = require('request');
 const Client = require('ssh2-sftp-client');
@@ -12,6 +14,20 @@ router.get('/getItemConvDetails', function(req, res, next) {
         if (err) return next(err);
         res.json(docs);
     });
+});
+
+router.get('/getItemConvHomeDetails', function(req, res, next) {
+  itemConvHomeDB.find({}, function (err, docs) {
+      if (err) return next(err);
+      res.json(docs);
+  });
+});
+
+router.get('/getItemClassConvHome', function(req, res, next) {
+  itemClassConversionHomeDB.find({}, function (err, docs) {
+      if (err) return next(err);
+      res.json(docs);
+  });
 });
 
 router.post('/postItemConvDetails', function(req, res, next) {

@@ -23,7 +23,7 @@ import { MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { DsoCustomDeleteDialogComponent } from './dso-custom-delete-dialog/dso-custom-delete-dialog.component';
 import { DsoUploadDialogComponent } from './dso-upload-dialog/dso-upload-dialog.component';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -47,6 +47,7 @@ import { DsoUploadDialogComponent } from './dso-upload-dialog/dso-upload-dialog.
     MatInputModule,
     FormsModule,
     MatIconModule,
+    MatExpansionModule
   ],
   exports: [DsoInfoCardComponent, DsoPieChartComponent,DsoLineChartComponent, DsoDynamicTableComponent,
      DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent],

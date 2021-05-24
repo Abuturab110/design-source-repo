@@ -8,6 +8,18 @@
                     <a style="color: #888888;" title="Conversion Configuration" [href]="'assets/' + data['conversion-configuration']" download><i class="fas fa-download"></i></a>
                     <a style="color: #888888;" title="User Guide" [href]="'assets/' + data['user-guide']" download><i class="fas fa-user"></i></a>
                 </div>
-            </div>
+              </div>
+              <mat-accordion class="content-layout">
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header class="expansion">
+                  </mat-expansion-panel-header>
+                  <ul>
+                    <li *ngFor="let result of (resultSet | async)">
+                      {{result.descriptive}}
+                    </li>
+                  </ul>
+                </mat-expansion-panel>
+              </mat-accordion>
     </mat-card-content>
 </mat-card>

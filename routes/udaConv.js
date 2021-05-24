@@ -3,7 +3,8 @@ var router = express.Router();
 const multer = require('multer');
 const readXlsxFile = require('read-excel-file/node');
 const db = require('../utils/db')
-, udaConversionDB = db.udaConversionDB;
+, udaConversionDB = db.udaConversionDB
+  itemUdaHomeDB = db.itemUdaHomeDB;
 const  fileFilter = (req, file, cb) => {
         if (!file.originalname.match(/\.(xlsx)$/)) {
             return cb(new Error('Invalid file format'))
@@ -53,6 +54,14 @@ router.get('/getUdaConvDetails', function (req, res, next) {
       res.send(docs);
      });
  }); 
+
+ router.get('/getUdaSetupHome', function (req, res, next) {
+    itemUdaHomeDB.find({ }, function (err, docs) {
+    if (err) return next(err);
+      res.send(docs);
+     });
+ });
+
 
  router.post('/uploadUdaMappings', upload.single('upload'), (req, res) => {
     let udaEntries = readFileToUpload(req.file.filename, (error, udaEntries) => {

@@ -40,4 +40,8 @@ requeryUdaConvDataObs = this.requeryUdaConvData.asObservable();
     formData.append('upload', fileToUpload, fileToUpload.name);
     return this._http.post(endpoint, formData);
   }
- }
+
+  getItemConvHomeConfig() {
+    return this._http.get('/api/udaConv/getUdaSetupHome');
+}
+}

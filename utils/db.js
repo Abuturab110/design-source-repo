@@ -7,6 +7,9 @@ let db = {
     itemConvDB: new Datastore({ filename: './data_files/itemConvDB.js', autoload: true }),
     dashboardDB: new Datastore({ filename: './data_files/dashboardDB.js', autoload: true }),
     sequenceDB: new Datastore({ filename: './data_files/sequenceDB.js', autoload: true }),
+    itemConvHomeDB: new Datastore({ filename: './data_files/itemConvHomeDB.js', autoload: true }),
+    itemUdaHomeDB: new Datastore({ filename: './data_files/itemUdaHomeDB.js', autoload: true }),
+    itemClassConversionHomeDB: new Datastore({ filename: './data_files/itemClassConversionHomeDB.js', autoload: true }),
 }
 
 
