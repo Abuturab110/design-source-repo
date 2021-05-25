@@ -49,9 +49,10 @@
 
   <mat-paginator #paginator
       *ngIf="dataSource.filteredData.length > 0" 
-      [length]="dataSource.filteredData.length"
+      [length]= "pageCount"
       [pageIndex]="0"
       [pageSize]="5"
+      (page)="pageChanged($event)"
       [pageSizeOptions]="[5, 10, 25, 50]">
   </mat-paginator>
 
