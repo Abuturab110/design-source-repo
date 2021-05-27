@@ -41,7 +41,10 @@ export class ItemConversionService {
 
   publishToCloud(row: any) {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('filename', row['fbdi']);
+    httpParams = httpParams.append('filename', row.cloudInstanceName);
+    httpParams = httpParams.append('username', row.userName);
+    httpParams = httpParams.append('password', row.password);
+    httpParams = httpParams.append('cloudInstanceLink', row.cloudInstanceLink);
     return this._http.get('/api/itemConv/publishToCloud', {
       params: httpParams
     }).pipe(

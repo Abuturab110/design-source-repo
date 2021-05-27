@@ -17,7 +17,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -35,6 +35,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatIconModule,
     MatTabsModule,
     MatSnackBarModule,
+    MatListModule,
   ],
   exports: [ DashboardComponent, HomeComponent, ItemConversionComponent, UdaSetupComponent, ItemClassConversionComponent, SetupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

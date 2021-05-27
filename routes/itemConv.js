@@ -113,9 +113,11 @@ router.get('/publishToCloud', function (req, res, next) {
 
   base64.encode(filePath, function(err, base64String) {
   console.log('base64String' + base64String);
-  username = "nnarayana@DELOITTE.com",
-  password = "Welcome@12345",
-  url = "https://eiiv-dev10.fa.us6.oraclecloud.com/fscmRestApi/resources/11.13.18.05/erpintegrations",
+      
+    username =  req.query.username,
+    password = req.query.password,
+    url = req.query.cloudInstanceLink,
+          
   auth = "Basic " + Buffer.from(username + ":" + password).toString("base64");
   var bodyinput={
      "OperationName":"importBulkData",	

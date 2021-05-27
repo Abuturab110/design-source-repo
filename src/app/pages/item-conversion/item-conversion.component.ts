@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
-import { tap } from 'rxjs/operators';
+import { catchError, tap, timeout } from 'rxjs/operators';
 import { ItemConversionService } from '../../services/item-conversion.service';
 import {switchMap, debounceTime} from 'rxjs/operators';
+import { SetupService } from '../../services/setup.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-item-conversion',
   templateUrl: './item-conversion.component.html',
@@ -19,8 +23,11 @@ export class ItemConversionComponent implements OnInit {
   showPublishToCloudSpinner = false;
   selectedFile;
   selectedRowData;
-  constructor(private dashboardService: DashboardService,
-              private itemConversionService: ItemConversionService) { }
+  cloudSetupData;
+  errorMessage;
+  showFileList = false;
+  constructor(private dashboardService: DashboardService, private setupService: SetupService,
+              private itemConversionService: ItemConversionService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.resultSet = this.itemConversionService.requeryItemConvDataObs.pipe(
@@ -29,19 +36,27 @@ export class ItemConversionComponent implements OnInit {
     );
     this.environments = this.itemConversionService.getEnvironments();
     this.config = this.dashboardService.getItemConvConfig();
+    this.cloudSetupData =  this.setupService.getCloudServerData();
   }
 
   refreshFiles() {
-   
+
     if(this.selectedEnvironment) {
       this.showSpinner = true;
-      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(
-      tap(() => this.showSpinner = false)
+      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(timeout(20000),
+      tap(() => {this.showSpinner = false; this.showFileList = true}),
+      catchError((error):any =>  {
+        this.showFileList = false; 
+        this.showSpinner = false; 
+        this._snackBar.open('Timed out while connect with ftp server',null, {
+          duration: 4000
+        });
+      })
     );
-
     }
-  }
 
+  }
+ 
   generateFBDI() {
         this.showFBDISpinner = true;
         this.itemConversionService.generateFBDI(this.selectedEnvironment, this.selectedFile).subscribe(res => {
