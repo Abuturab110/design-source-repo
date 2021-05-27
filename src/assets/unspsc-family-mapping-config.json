@@ -1,0 +1,62 @@
+{
+    "config": {
+        "column-config": [
+                  {
+                  "label": "Family",
+                  "attribute": "family",
+                  "type": "text"
+                  },
+                  {
+                  "label": "Descrption",
+                  "attribute": "description",
+                  "type": "text"	
+                  }
+                
+                ],
+                "extra-config": {
+                    "upload": false,
+                    "row-edit": true,
+                    "row-edit-config": [
+                        {
+                            "name": "_id",
+                            "type": "text"
+                        },
+                        {
+                            "name": "family",
+                            "label": "family",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                        },
+                        {
+                            "name": "description",
+                            "label": "description",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                        }
+                       
+                        
+                    ],
+                    "row-add": true,
+                    "row-add-config": [
+                        {
+                            "name": "family",
+                            "label": "family",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                        },
+                        {
+                            "name": "description",
+                            "label": "description",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                        }
+                        
+                    ],
+                    "row-delete": true
+                }
+            }
+}
