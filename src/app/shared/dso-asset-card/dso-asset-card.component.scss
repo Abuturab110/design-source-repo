@@ -23,8 +23,12 @@
     margin-left: 8px;
   }
   .expansion{
-  width: 282px;
+  width: 270px;
   border-style: none;
   outline: none;
   border: none;
+}
+
+::ng-deep .mat-expansion-panel-body{
+  padding: 0 12px 16px;
 }

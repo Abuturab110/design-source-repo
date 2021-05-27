@@ -60,13 +60,14 @@ export class UdaSetupComponent implements OnInit {
   }
   getUdaMappingResultSet(){
     this.resultSet = this.udaConvService.requeryUdaConvDataObs.pipe(
-      debounceTime(200),
+      debounceTime(100),
       switchMap(res => this.udaConvService.getUdaMappingResultSet(this.pageInfo))
     );
   }
   pageChanged(event){
     this.resultSet = [];
     this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageLength = event.pageSize;
     this.getUdaMappingResultSet();
   }
 }
