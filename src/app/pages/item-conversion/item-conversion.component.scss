@@ -27,7 +27,7 @@ button, .mat-raised-button {
 }
 
 .table-title button {
-    margin: 0px 20px!important;
+    margin: 10px 0px 30px!important;
 }
 
 .result-set-region {
@@ -53,3 +53,45 @@ button, .mat-raised-button {
 ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
     color: #112d4e;
 }
+
+.cloud-setup-dropdown{
+margin-left:18px;
+}
+.fbdi-margin{
+    margin: 10px 0px 0px 0px
+}
+
+.files-scroll{
+    width: 95%;
+    height: 250px;
+    overflow: auto;
+    margin: 10px 0px 0px 0px;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+::ng-deep .mat-list-single-selected-option, .mat-list-single-selected-option:hover, .mat-list-single-selected-option:focus {
+    color: white!important;
+    background-color: #112e4f;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 1px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #112e4f; 
+    border-radius: 1px;
+  }
+  
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #112e6e; 
+  }
+

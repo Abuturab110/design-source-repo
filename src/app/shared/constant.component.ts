@@ -12,4 +12,23 @@ export class Constants {
     public static udaDelete='UDA Mappings successfully deleted';
     public static udaUpload='UDA Mappings successfully uploaded';
 
+    public static unspscUpload='UNSPSC successfully uploaded';
+
+    public static unspscSegmentSave='UNSPSC Segment successfully saved';
+    public static unspscSegmentUpdate='UNSPSC Segment successfully updated';
+    public static unspscSegmentDelete='UNSPSC Segment successfully deleted';
+
+    public static unspscFamilySave='UNSPSC Family successfully saved';
+    public static unspscFamilyUpdate='UNSPSC Family successfully updated';
+    public static unspscFamilyDelete='UNSPSC Family successfully deleted';
+
+    public static unspscClassSave='UNSPSC Class successfully saved';
+    public static unspscClassUpdate='UNSPSC Class successfully updated';
+    public static unspscClassDelete='UNSPSC Class successfully deleted';
+
+    public static unspscCommoditySave='UNSPSC Commodity successfully saved';
+    public static unspscCommodityUpdate='UNSPSC Commodity successfully updated';
+    public static unspscCommodityDelete='UNSPSC Commodity successfully deleted';
+    
+
 }

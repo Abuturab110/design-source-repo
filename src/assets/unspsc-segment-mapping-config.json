@@ -1,0 +1,62 @@
+{
+    "config": {
+        "column-config": [
+                  {
+                  "label": "Segment",
+                  "attribute": "segment",
+                  "type": "text"
+                  },
+                  {
+                  "label": "Descrption",
+                  "attribute": "description",
+                  "type": "text"	
+                  }
+                
+                ],
+                "extra-config": {
+                    "upload": false,
+                    "row-edit": true,
+                    "row-edit-config": [
+                        {
+                            "name": "_id",
+                            "type": "text"
+                        },
+                        {
+                            "name": "segment",
+                            "label": "Segment",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                        },
+                        {
+                            "name": "description",
+                            "label": "description",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                        }
+                       
+                        
+                    ],
+                    "row-add": true,
+                    "row-add-config": [
+                        {
+                            "name": "segment",
+                            "label": "segment",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                        },
+                        {
+                            "name": "description",
+                            "label": "description",
+                            "type": "text",
+                            "display": true,
+                            "required": true
+                        }
+                        
+                    ],
+                    "row-delete": true
+                }
+            }
+}

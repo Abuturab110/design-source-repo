@@ -27,6 +27,67 @@
                    </app-dso-dynamic-table>
             </mat-card-content>
             </mat-tab>
+            <mat-tab label="UNSPSC Setup">
+                <mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
+                <div style="margin-top: 20px;" > 
+                    <button mat-raised-button (click) ="openUploadDialog()" >Upload File</button>
+                  </div>
+                <mat-tab-group mat-align-tabs="start">
+                    <mat-tab label="Segment">
+                <mat-card-content>
+                    <app-dso-dynamic-table 
+                    (uploadData)="uploadUnspscDetails($event)"
+                    [resultSet]="unspscSegmentData | async"
+                    [config]="unsPscSgmentConfig | async"
+                    [title]="'Segment'"
+                    [enableFilter]="'true'"
+                    (postData)="submitUnspscSegment($event)"
+                    (putData)="updateUnspscSegment($event)"
+                    (deleteData)="deleteUnspscSegment($event)">
+                   </app-dso-dynamic-table>
+            </mat-card-content>
+        </mat-tab>
+        <mat-tab label="Family">
+                <mat-card-content>
+                    <app-dso-dynamic-table 
+                    [resultSet]="unspscFamilyData | async"
+                    [config]="unsPscFamilyConfig | async"
+                    [title]="'Family'"
+                    [enableFilter]="'true'"
+                    (postData)="submitUnspscFamily($event)"
+                    (putData)="updateUnspscFamily($event)"
+                    (deleteData)="deleteUnspscFamily($event)">
+                   </app-dso-dynamic-table>
+            </mat-card-content>
+        </mat-tab>
+        <mat-tab label="Class">
+                <mat-card-content>
+                    <app-dso-dynamic-table 
+                    [resultSet]="unspscClassData | async"
+                    [config]="unsPscClassConfig | async"
+                    [title]="'Class'"
+                    [enableFilter]="'true'"
+                    (postData)="submitUnspscClass($event)"
+                    (putData)="updateUnspscClass($event)"
+                    (deleteData)="deleteUnspscClass($event)">
+                   </app-dso-dynamic-table>
+            </mat-card-content>
+        </mat-tab>
+        <mat-tab label="Commodity">
+            <mat-card-content>
+                <app-dso-dynamic-table 
+                [resultSet]="unspscCommoditytData | async"
+                [config]="unsPscCommodityConfig | async"
+                [title]="'Commodity'"
+                [enableFilter]="'true'"
+                (postData)="submitUnspscCommodity($event)"
+                (putData)="updateUnspscCommodity($event)"
+                (deleteData)="deleteUnspscCommodity($event)">
+               </app-dso-dynamic-table>
+        </mat-card-content>
+    </mat-tab>
+        </mat-tab-group>
+        </mat-tab>
         </mat-tab-group>
 
 </mat-card>
