@@ -1,49 +1,87 @@
 const db = require('../utils/db')
-const express = require('express')
+const express = require('express');
+const { Console } = require('console');
 const router = express.Router()
 
-
-router.get('/getRecentRuns', function (req, res, next) {
+router.get('/getRecentRuns', function (_req, _res, next) {
     let recentRunRecords = [];
-    db.itemConvDB.find({}, { action: 0 ,_id:0}, function (error, docs) {
+    let  processName = "";
+    db.itemConvDB.find({}, { action: 0 ,_id:0}, function (error, _docs) {
         if(error) return next(error)
-        docs.forEach(doc => {
+        processName = "Item Conversion";
+        mergeTableRecords(_docs,recentRunRecords,processName);
+    db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function (error, _docs) {
+        if(error) return next(error)
+      let  processName = "Item Class Conversion";
+        mergeTableRecords(_docs,recentRunRecords,processName);
+    db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function (error, _docs) {
+          if(error) return next(error)
+          processName = "UDA Configuration";
+          mergeTableRecords(_docs,recentRunRecords,processName);
+    db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function (error, _docs) {
+            if(error) return next(error)
+            processName = "Purchase Catalog";
+            let entries = mergeTableRecords(_docs,recentRunRecords,processName);
+            _res.json(entries);
+          })
+       })
+     })
+  })
+});
 
+  const mergeTableRecords = function(_docs,recentRunRecords,processName) {
+    _docs.forEach(doc => {
         recentRunRecords.push({
-            'process-name': 'Item Conversion',
+            'process-name': processName,
             'request-id': doc['request-id'],
             'fbdi': doc['fbdi'],
             'start-time': formatDate(doc['creation-date']),
             'records-processed': doc['total-records'],
-        })
+        });
+      });
+      return recentRunRecords;
+ }
 
-       });
-       res.json(recentRunRecords);
-     });
-  });
-
-  router.get('/pieDetails', function(req, res, next) {
+  router.get('/pieDetails', function(_req, res, next) {
       let label=[];
       let labelCount = []
-      let count = 0
       db.itemConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
           if ( error) return next(error)
-          docs.forEach(doc => {
-            count+=doc['total-records']
-          })
+      let itemCount = countPiaRecords(docs);
           label.push('Item Conversion')
-          labelCount.push(count)
-          res.json({label: label, 'label-count': labelCount})
-      })
+          labelCount.push(itemCount)
+      db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+      let itemCount = countPiaRecords(docs);
+          label.push('Item Class Conversion')
+          labelCount.push(itemCount)
+      db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+      let itemCount = countPiaRecords(docs);
+          label.push('UDA Configuration')
+          labelCount.push(itemCount)
+      db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+      let itemCount = countPiaRecords(docs);
+          label.push('Purchasing Catalog')
+          labelCount.push(itemCount)
+                res.json({label: label, 'label-count': labelCount})
+              })
+            })
+        })  
+      }) 
   })
+  const countPiaRecords = function(docs) {
+    let count = 0
+    docs.forEach(doc => {
+      count+=doc['total-records']
+    })
+      return count;
+ }
 
-  router.get('/lineDetails', function(req, res, next) {
+  router.get('/lineDetails', function(_req, res, next) {
     let label=[];
     let labelCount = []
-    let count = 0
     let chartData = [];
     db.itemConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-        let newDocs = docs.map((doc)=>{
+      let newDocs = docs.map((doc)=>{
             doc['creation-date'] = new Date(doc['creation-date']).valueOf();
             return doc;
           });
@@ -56,12 +94,60 @@ router.get('/getRecentRuns', function (req, res, next) {
             label.push(formatLineDate(newDocs[i]['creation-date']))
             labelCount.push(newDocs[i]['total-records'])
         }
-        chartData.push({ data: labelCount, label: 'Item Conversion'})
-        res.json({label: label, 'chart-data': chartData})
+         chartData.push({ data:labelCount, label: 'Item Conversion'})
+        db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+          let newDocs = docs.map((doc)=>{
+              doc['creation-date'] = new Date(doc['creation-date']).valueOf();
+              return doc;
+            });
+            newDocs.sort((a, b)=>{
+              return a['creation-date'] - b['creation-date'];
+            });
+          if ( error) return next(error)
+          for (let i=0; i<newDocs.length; i++) {
+              if (i==7) break
+              label.push(formatLineDate(newDocs[i]['creation-date']))
+              labelCount.push(newDocs[i]['total-records'])
+          }
+           chartData.push({ data:labelCount, label: 'Item Class Conversion'})
+            db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+            let newDocs = docs.map((doc)=>{
+                doc['creation-date'] = new Date(doc['creation-date']).valueOf();
+                return doc;
+              });
+              newDocs.sort((a, b)=>{
+                return a['creation-date'] - b['creation-date'];
+              });
+            if ( error) return next(error)
+            for (let i=0; i<newDocs.length; i++) {
+                if (i==7) break
+                label.push(formatLineDate(newDocs[i]['creation-date']))
+                labelCount.push(newDocs[i]['total-records'])
+            }
+             chartData.push({ data:labelCount, label: 'UDA Configuration'})
+             db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+              let newDocs = docs.map((doc)=>{
+                  doc['creation-date'] = new Date(doc['creation-date']).valueOf();
+                  return doc;
+                });
+                newDocs.sort((a, b)=>{
+                  return a['creation-date'] - b['creation-date'];
+                });
+              if ( error) return next(error)
+              for (let i=0; i<newDocs.length; i++) {
+                  if (i==7) break
+                  label.push(formatLineDate(newDocs[i]['creation-date']))
+                  labelCount.push(newDocs[i]['total-records'])
+              }
+               chartData.push({ data:labelCount, label: 'Purchasing Catalog'})
+               res.json({label: label, 'chart-data': chartData})
+          })
+        })
+      })
     })
 })
 
-  router.get('/getCardDetails', function (req, res, next) {
+  router.get('/getCardDetails', function (_req, res, next) {
     let totalRuns = 0
     let transactionTotal = 0
     let successTotal = 0
