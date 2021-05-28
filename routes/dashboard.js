@@ -3,34 +3,34 @@ const express = require('express');
 const { Console } = require('console');
 const router = express.Router()
 
-router.get('/getRecentRuns', function (_req, _res, next) {
+router.get('/getRecentRuns', function (req, res, next) {
     let recentRunRecords = [];
     let  processName = "";
-    db.itemConvDB.find({}, { action: 0 ,_id:0}, function (error, _docs) {
+    db.itemConvDB.find({}, { action: 0 ,_id:0}, function (error, docs) {
         if(error) return next(error)
         processName = "Item Conversion";
-        mergeTableRecords(_docs,recentRunRecords,processName);
-    db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function (error, _docs) {
+        mergeTableRecords(docs,recentRunRecords,processName);
+    db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function (error, docs) {
         if(error) return next(error)
       let  processName = "Item Class Conversion";
-        mergeTableRecords(_docs,recentRunRecords,processName);
-    db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function (error, _docs) {
+        mergeTableRecords(docs,recentRunRecords,processName);
+    db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function (error, docs) {
           if(error) return next(error)
           processName = "UDA Configuration";
-          mergeTableRecords(_docs,recentRunRecords,processName);
-    db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function (error, _docs) {
+          mergeTableRecords(docs,recentRunRecords,processName);
+    db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function (error, docs) {
             if(error) return next(error)
             processName = "Purchase Catalog";
-            let entries = mergeTableRecords(_docs,recentRunRecords,processName);
-            _res.json(entries);
+            let entries = mergeTableRecords(docs,recentRunRecords,processName);
+            res.json(entries);
           })
        })
      })
   })
 });
 
-  const mergeTableRecords = function(_docs,recentRunRecords,processName) {
-    _docs.forEach(doc => {
+  const mergeTableRecords = function(docs,recentRunRecords,processName) {
+    docs.forEach(doc => {
         recentRunRecords.push({
             'process-name': processName,
             'request-id': doc['request-id'],
@@ -42,7 +42,7 @@ router.get('/getRecentRuns', function (_req, _res, next) {
       return recentRunRecords;
  }
 
-  router.get('/pieDetails', function(_req, res, next) {
+  router.get('/pieDetails', function(req, res, next) {
       let label=[];
       let labelCount = []
       db.itemConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
