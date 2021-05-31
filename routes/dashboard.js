@@ -78,74 +78,41 @@ router.get('/getRecentRuns', function (req, res, next) {
 
   router.get('/lineDetails', function(_req, res, next) {
     let label=[];
-    let labelCount = []
     let chartData = [];
     db.itemConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-      let newDocs = docs.map((doc)=>{
-            doc['creation-date'] = new Date(doc['creation-date']).valueOf();
-            return doc;
-          });
-          newDocs.sort((a, b)=>{
-            return a['creation-date'] - b['creation-date'];
-          });
-        if ( error) return next(error)
-        for (let i=0; i<newDocs.length; i++) {
-            if (i==7) break
-            label.push(formatLineDate(newDocs[i]['creation-date']))
-            labelCount.push(newDocs[i]['total-records'])
-        }
-         chartData.push({ data:labelCount, label: 'Item Conversion'})
-        db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-          let newDocs = docs.map((doc)=>{
-              doc['creation-date'] = new Date(doc['creation-date']).valueOf();
-              return doc;
-            });
-            newDocs.sort((a, b)=>{
-              return a['creation-date'] - b['creation-date'];
-            });
-          if ( error) return next(error)
-          for (let i=0; i<newDocs.length; i++) {
-              if (i==7) break
-              label.push(formatLineDate(newDocs[i]['creation-date']))
-              labelCount.push(newDocs[i]['total-records'])
-          }
-           chartData.push({ data:labelCount, label: 'Item Class Conversion'})
-            db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-            let newDocs = docs.map((doc)=>{
-                doc['creation-date'] = new Date(doc['creation-date']).valueOf();
-                return doc;
-              });
-              newDocs.sort((a, b)=>{
-                return a['creation-date'] - b['creation-date'];
-              });
-            if ( error) return next(error)
-            for (let i=0; i<newDocs.length; i++) {
-                if (i==7) break
-                label.push(formatLineDate(newDocs[i]['creation-date']))
-                labelCount.push(newDocs[i]['total-records'])
-            }
-             chartData.push({ data:labelCount, label: 'UDA Configuration'})
-             db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-              let newDocs = docs.map((doc)=>{
-                  doc['creation-date'] = new Date(doc['creation-date']).valueOf();
+      let itemInfo =  counLineRecords(docs,label);
+         chartData.push({ data:itemInfo.labelCount, label: 'Item Conversion'})
+    db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+        let itemInfo =  counLineRecords(docs,label);
+            chartData.push({ data:itemInfo.labelCount, label: 'Item Class Conversion'})
+    db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+               let itemInfo =  counLineRecords(docs,label);
+              chartData.push({ data:itemInfo.labelCount, label: 'UDA Configuration'})
+    db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+              let itemInfo =  counLineRecords(docs,label);
+              chartData.push({data:itemInfo.labelCount, label: 'Purchasing Catalog'})
+               res.json({label: itemInfo.label, 'chart-data': chartData})
+          })
+        })
+       })
+})
+})
+const counLineRecords = function(docs ,label) {
+  let labelCount = []
+   let newDocs = docs.map((doc)=>{
+      doc['creation-date'] = new Date(doc['creation-date']).valueOf();
                   return doc;
                 });
-                newDocs.sort((a, b)=>{
-                  return a['creation-date'] - b['creation-date'];
+       newDocs.sort((a, b)=>{
+             return a['creation-date'] - b['creation-date'];
                 });
-              if ( error) return next(error)
               for (let i=0; i<newDocs.length; i++) {
                   if (i==7) break
                   label.push(formatLineDate(newDocs[i]['creation-date']))
                   labelCount.push(newDocs[i]['total-records'])
               }
-               chartData.push({ data:labelCount, label: 'Purchasing Catalog'})
-               res.json({label: label, 'chart-data': chartData})
-          })
-        })
-      })
-    })
-})
+    return ({label: label, 'labelCount': labelCount})
+}
 
   router.get('/getCardDetails', function (_req, res, next) {
     let totalRuns = 0
