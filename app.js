@@ -8,6 +8,8 @@ var setupRoute = require('./routes/setup.js');
 var udaConvRoute = require('./routes/udaConv.js');
 var dbSetupRoute = require('./routes/dbSetup.js');
 var itemClassConversionRoute = require('./routes/itemClassConv.js');
+var udaConfigurationRoute = require('./routes/udaConfiguration.js');
+var purchaseCatalogRoute = require('./routes/purchaseCatalog.js');
 
 var app = express();
 app.use(bodyParser.json());
@@ -21,5 +23,7 @@ app.use('/api/setup', setupRoute);
 app.use('/api/udaConv', udaConvRoute);
 app.use('/api/dbSetup', dbSetupRoute);
 app.use('/api/itemClassConversion', itemClassConversionRoute);
+app.use('/api/udaConfiguration', udaConfigurationRoute);
+app.use('/api/purchaseCatalog', purchaseCatalogRoute);
 
 module.exports = app;
