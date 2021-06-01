@@ -76,7 +76,7 @@ router.get('/getRecentRuns', function (req, res, next) {
       return count;
  }
 
-  router.get('/lineDetails', function(_req, res, next) {
+  router.get('/lineDetails', function(req, res, next) {
     let label=[];
     let chartData = [];
     db.itemConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
@@ -114,7 +114,7 @@ const counLineRecords = function(docs ,label) {
     return ({label: label, 'labelCount': labelCount})
 }
 
-  router.get('/getCardDetails', function (_req, res, next) {
+  router.get('/getCardDetails', function (req, res, next) {
     let totalRuns = 0
     let transactionTotal = 0
     let successTotal = 0
