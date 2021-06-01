@@ -13,14 +13,12 @@ export class UdaSetupComponent implements OnInit {
   resultSet;
   config;
   filterValue: string = '';
+  pageInfo = { "pageIndex": 0,"pageLength": 5 } ;
   constructor(private udaConvService: UdaConvService, 
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.resultSet = this.udaConvService.requeryUdaConvDataObs.pipe(
-      debounceTime(200),
-      switchMap(res => this.udaConvService.getUdaMappingResultSet())
-    );
+    this.getUdaMappingResultSet()
     this.config = this.udaConvService.getUdaMappingConfig();
   }
 
@@ -59,5 +57,17 @@ export class UdaSetupComponent implements OnInit {
        duration: 2000
      });
     });
+  }
+  getUdaMappingResultSet(){
+    this.resultSet = this.udaConvService.requeryUdaConvDataObs.pipe(
+      debounceTime(100),
+      switchMap(res => this.udaConvService.getUdaMappingResultSet(this.pageInfo))
+    );
+  }
+  pageChanged(event){
+    this.resultSet = [];
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageLength = event.pageSize;
+    this.getUdaMappingResultSet();
   }
 }

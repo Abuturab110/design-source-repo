@@ -9,6 +9,8 @@ import { debounce, debounceTime, switchMap } from 'rxjs/operators';
 export class ItemConversionService {
   requeryItemConvData = new BehaviorSubject('');
   requeryItemConvDataObs = this.requeryItemConvData.asObservable();
+  requeryItemConvHomeData = new BehaviorSubject('');
+  requeryItemConvHomeDataObs = this.requeryItemConvHomeData.asObservable();
   constructor(private _http: HttpClient) { }
 
   getEnvironments() {
@@ -39,9 +41,16 @@ export class ItemConversionService {
     this.requeryItemConvData.next('');
   }
 
+  requeryItemConvHomeDetails() {
+    this.requeryItemConvHomeData.next('');
+  }
+
   publishToCloud(row: any) {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('filename', row['fbdi']);
+    httpParams = httpParams.append('filename', row.cloudInstanceName);
+    httpParams = httpParams.append('username', row.userName);
+    httpParams = httpParams.append('password', row.password);
+    httpParams = httpParams.append('cloudInstanceLink', row.cloudInstanceLink);
     return this._http.get('/api/itemConv/publishToCloud', {
       params: httpParams
     }).pipe(
@@ -50,4 +59,7 @@ export class ItemConversionService {
     );
   }
 
+  getItemConvHomeConfig() {
+       return this._http.get('/api/itemConv/getItemConvHomeDetails');
+  }
 }

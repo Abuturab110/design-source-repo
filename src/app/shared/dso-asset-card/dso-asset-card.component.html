@@ -1,5 +1,6 @@
 <mat-card class="card-layout">
     <mat-card-content>
+      <mat-accordion class="content-layout"> 
             <div class="content-layout">
                 <h1 class="category">{{data.category}}</h1>
                 <a  class="subcategory" [routerLink]="'/' + data.link">{{data.subcategory}}</a>
@@ -8,6 +9,16 @@
                     <a style="color: #888888;" title="Conversion Configuration" [href]="'assets/' + data['conversion-configuration']" download><i class="fas fa-download"></i></a>
                     <a style="color: #888888;" title="User Guide" [href]="'assets/' + data['user-guide']" download><i class="fas fa-user"></i></a>
                 </div>
-            </div>
+              
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false" class="mat-elevation-z0">
+                  <mat-expansion-panel-header class="expansion mat-expansion-panel-body">
+                  </mat-expansion-panel-header>
+                    <label *ngFor="let result of (resultSet | async)" style="color: #3f72af;">
+                     {{result.descriptive}}
+                    </label>
+                       </mat-expansion-panel>
+                      </div>
+              </mat-accordion>
     </mat-card-content>
 </mat-card>
