@@ -106,9 +106,11 @@ const counLineRecords = function(docs ,label) {
        newDocs.sort((a, b)=>{
              return a['creation-date'] - b['creation-date'];
                 });
+                console.log(newDocs);
+                label.push(formatLineDate(newDocs[0]['creation-date']))
               for (let i=0; i<newDocs.length; i++) {
                   if (i==7) break
-                  label.push(formatLineDate(newDocs[i]['creation-date']))
+                  //label.push(formatLineDate(newDocs[i]['creation-date']))
                   labelCount.push(newDocs[i]['total-records'])
               }
     return ({label: label, 'labelCount': labelCount})
