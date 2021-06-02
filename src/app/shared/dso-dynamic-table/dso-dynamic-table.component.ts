@@ -60,17 +60,13 @@ export class DsoDynamicTableComponent implements OnInit,OnChanges {
         this.displayedColumns.unshift('edit');
       }
    }
-  this.dataSource = new MatTableDataSource(this.resultSet);
-  this.selection = new SelectionModel<any>(true, []);
-  setTimeout(() => {
-    if(this.paginator.pageIndex==0){
-      this.pageCount = this.resultSet.length;
-      this.dataSource.paginator = this.paginator;
-    }
-    this.dataSource.sort = this.sort;
-    this.generateTable();
-  })
-  }
+      this.dataSource = new MatTableDataSource(this.resultSet.slice(0,this.resultSet.length-1));
+      this.selection = new SelectionModel<any>(true, []);
+      var recordCount =   this.resultSet[this.resultSet.length-1];
+      this.pageCount = recordCount.Total;
+      this.dataSource.sort = this.sort;
+      this.generateTable();
+ }
  }
  
  isAllSelected() {
@@ -203,14 +199,11 @@ getMaskedData(field, data) {
 }
 
 setRowValue(row) {
-  console.log(row)
-  console.log(this.selection.isSelected(row));
-   if (this.selection.isSelected(row)) this.selectedRowData.emit(row);
+  if (this.selection.isSelected(row)) this.selectedRowData.emit(row);
    else this.selectedRowData.emit(null);
 }
 
 pageChanged(event) {
    this.pageChangeEvent.emit(event);
 }
-
 }
