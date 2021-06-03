@@ -97,29 +97,89 @@ function limit(c){
  }
 
   router.get('/lineDetails', function(req, res, next) {
-    let label=[];
     let chartData = [];
+    let itemsChartData = [];
+    let label1=[];
     db.itemConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-      let itemInfo =  counLineRecords(docs,label);
-         chartData.push({ data:itemInfo.labelCount, label: 'Item Conversion'})
-    db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-        let itemInfo =  counLineRecords(docs,label);
-            chartData.push({ data:itemInfo.labelCount, label: 'Item Class Conversion'})
-    db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-               let itemInfo =  counLineRecords(docs,label);
-              chartData.push({ data:itemInfo.labelCount, label: 'UDA Configuration'})
-    db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
-              let itemInfo =  counLineRecords(docs,label);
-              chartData.push({data:itemInfo.labelCount, label: 'Purchasing Catalog'})
-           let sortLabels = sortByDate(itemInfo.label);
-               res.json({label: sortLabels.slice(0, 7), 'chart-data': chartData})
-          })
+      let label =  'Item Conversion';
+      let items =  counLineRecords(docs,label);
+       items.forEach(item => {
+        itemsChartData.push(item);
         })
-    })
+      
+    db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+      let label = 'Item Class Conversion';
+        let items = counLineRecords(docs,label);
+          items.forEach(item => {
+            itemsChartData.push(item)
+         })
+       
+    db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+      let label =  'UDA Configuration';
+              let items =  counLineRecords(docs,label);
+               items.forEach(item => {
+                itemsChartData.push(item)
+             })
+              
+    db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+      let label =  'Purchasing Catalog';       
+      let items =  counLineRecords(docs,label);
+              items.forEach(item => {
+                itemsChartData.push(item)
+             })
+             let result = groupByRecords(itemsChartData);
+             filtereResult = result.slice(0,7);
+               let itemConversion = []
+               let itemClassConversion = []
+               let udaConfiguration = []
+               let purchaseCatalog = []
+               let dateLabel = [];
+               filtereResult.forEach(item => {
+                switch(item.label) {
+                  case 'Item Conversion':
+                    itemConversion.push(item.count);
+                    itemClassConversion.push(0);
+                    udaConfiguration.push(0);
+                    purchaseCatalog.push(0);
+                    dateLabel.push(item.date);
+                    break;
+                  case 'Item Class Conversion':
+                    itemConversion.push(0);  
+                    itemClassConversion.push(item.count);
+                    udaConfiguration.push(0);
+                    purchaseCatalog.push(0);
+                    dateLabel.push(item.date);
+                    break;
+                  case 'UDA Configuration':
+                      itemConversion.push(0);  
+                      itemClassConversion.push(0);
+                      udaConfiguration.push(item.count);
+                      purchaseCatalog.push(0);
+                      dateLabel.push(item.date);
+                    break;
+                  case 'Purchasing Catalog':
+                      itemConversion.push(0);  
+                      itemClassConversion.push(0);
+                      udaConfiguration.push(0);
+                      purchaseCatalog.push(item.count);
+                      dateLabel.push(item.date);
+                    break;
+                  }
+
+                });
+                let sortedDateLabel = sortByDate(dateLabel);
+             chartData.push({ data:itemConversion, label: 'Item Conversion'})
+             chartData.push({ data:itemClassConversion, label: 'Item Class Conversion'})
+             chartData.push({ data:udaConfiguration, label: 'UDA Configuration'})
+             chartData.push({ data:purchaseCatalog, label: 'Purchasing Catalog'})
+            res.json({label: sortedDateLabel, 'chart-data': chartData})
+          })
+         })
+     })
 })
 })
 const counLineRecords = function(docs ,label) {
-  let labelCount = []
+  let items = []
   let newDocs = docs.map((doc)=>{
   doc['creation-date'] = new Date(doc['creation-date']).valueOf();
                   return doc;
@@ -129,15 +189,27 @@ const counLineRecords = function(docs ,label) {
                 });
               for (let i=0; i<newDocs.length; i++) {
                   if (i==7) break
-                  label.push(formatLineDate(newDocs[i]['creation-date']))
-                  labelCount.push(newDocs[i]['total-records'])
+                  items.push({'date':formatLineDate(newDocs[i]['creation-date']), 'count':newDocs[i]['total-records'],'label' :label})
               }
-       return ({label: label, 'labelCount': labelCount})
+       return (items)
+}
+
+const groupByRecords = function (labelCount) {
+  var result = [];
+  labelCount.reduce(function(res, value) {
+    if (!res[value.date]) {
+      res[value.date] = { date: value.date, count: 0 ,label:value.label};
+      result.push(res[value.date])
+    }
+    res[value.date].count += value.count;
+    return res;
+  }, {});
+  return result;
 }
 
 const sortByDate = arr => {
   const sorter = (a, b) => {
-    return new Date(a).getTime() - new Date(b).getTime();
+    return new Date(a.date).getDay() - new Date(b.date).getDay();
   }
  return arr.sort(sorter);
  };
@@ -198,7 +270,8 @@ const sortByDate = arr => {
     let date = newDate.getDate() < 10 ? '0'+newDate.getDate() : newDate.getDate();
     let hours = newDate.getHours() < 10 ? '0'+newDate.getHours() : newDate.getHours()
     let minutes = newDate.getMinutes() < 10 ? '0'+newDate.getMinutes(): newDate.getMinutes()
-    return `${month}/${date} ${hours}:${minutes}`
+   // return `${month}/${date} ${hours}:${minutes}`
+    return `${month}/${date}`
 }
 
   module.exports = router;

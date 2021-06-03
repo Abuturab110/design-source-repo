@@ -206,4 +206,9 @@ setRowValue(row) {
 pageChanged(event) {
    this.pageChangeEvent.emit(event);
 }
+
+selectedRow(row) {
+  console.log(row)
+}
+
 }
