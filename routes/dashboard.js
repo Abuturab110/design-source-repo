@@ -127,21 +127,20 @@ function limit(c){
               items.forEach(item => {
                 itemsChartData.push(item)
              })
-             let result = groupByRecords(itemsChartData);
-             filtereResult = result.slice(0,7);
+             let sortedResults = sortByDate(itemsChartData).slice(0,7);
                let itemConversion = []
                let itemClassConversion = []
                let udaConfiguration = []
                let purchaseCatalog = []
                let dateLabel = [];
-               filtereResult.forEach(item => {
+               sortedResults.forEach(item => {
                 switch(item.label) {
                   case 'Item Conversion':
                     itemConversion.push(item.count);
                     itemClassConversion.push(0);
-                    udaConfiguration.push(0);
-                    purchaseCatalog.push(0);
-                    dateLabel.push(item.date);
+                     udaConfiguration.push(0);
+                     purchaseCatalog.push(0);
+                     dateLabel.push(item.date);
                     break;
                   case 'Item Class Conversion':
                     itemConversion.push(0);  
@@ -161,18 +160,16 @@ function limit(c){
                       itemConversion.push(0);  
                       itemClassConversion.push(0);
                       udaConfiguration.push(0);
-                      purchaseCatalog.push(item.count);
                       dateLabel.push(item.date);
+                      purchaseCatalog.push(item.count);
                     break;
                   }
-
                 });
-                let sortedDateLabel = sortByDate(dateLabel);
              chartData.push({ data:itemConversion, label: 'Item Conversion'})
              chartData.push({ data:itemClassConversion, label: 'Item Class Conversion'})
              chartData.push({ data:udaConfiguration, label: 'UDA Configuration'})
              chartData.push({ data:purchaseCatalog, label: 'Purchasing Catalog'})
-            res.json({label: sortedDateLabel, 'chart-data': chartData})
+             res.json({label: dateLabel, 'chart-data': chartData})
           })
          })
      })
@@ -191,7 +188,8 @@ const counLineRecords = function(docs ,label) {
                   if (i==7) break
                   items.push({'date':formatLineDate(newDocs[i]['creation-date']), 'count':newDocs[i]['total-records'],'label' :label})
               }
-       return (items)
+  let results = groupByRecords(items);
+       return (results)
 }
 
 const groupByRecords = function (labelCount) {
@@ -209,12 +207,12 @@ const groupByRecords = function (labelCount) {
 
 const sortByDate = arr => {
   const sorter = (a, b) => {
-    return new Date(a.date).getDay() - new Date(b.date).getDay();
+    return new Date(a.date) - new Date(b.date);
   }
  return arr.sort(sorter);
  };
 
-  router.get('/getCardDetails', function (req, res, next) {
+ router.get('/getCardDetails', function (req, res, next) {
     let totalRuns = 0
     let transactionTotal = 0
     let successTotal = 0
@@ -270,8 +268,19 @@ const sortByDate = arr => {
     let date = newDate.getDate() < 10 ? '0'+newDate.getDate() : newDate.getDate();
     let hours = newDate.getHours() < 10 ? '0'+newDate.getHours() : newDate.getHours()
     let minutes = newDate.getMinutes() < 10 ? '0'+newDate.getMinutes(): newDate.getMinutes()
-   // return `${month}/${date} ${hours}:${minutes}`
+    //return `${month}/${date} ${hours}:${minutes}`
     return `${month}/${date}`
+   
 }
+
+// function formatLineGraphDate(dateString) {
+//   let newDate = new Date(dateString)
+//   let month = (newDate.getMonth() + 1) < 10 ? '0'+(newDate.getMonth() + 1) : (newDate.getMonth() + 1)
+//   let date = newDate.getDate() < 10 ? '0'+newDate.getDate() : newDate.getDate();
+//   let hours = newDate.getHours() < 10 ? '0'+newDate.getHours() : newDate.getHours()
+//   let minutes = newDate.getMinutes() < 10 ? '0'+newDate.getMinutes(): newDate.getMinutes()
+//     return `${month}/${date}`
+// }
+
 
   module.exports = router;
