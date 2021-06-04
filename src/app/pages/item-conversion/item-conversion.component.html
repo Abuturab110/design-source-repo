@@ -14,10 +14,10 @@
 </div>
 <div  [ngClass]="{'files-scroll': showFileList}" > 
    <mat-selection-list [multiple]="false" [(ngModel)]="selectedFile" > 
-        <mat-list-option *ngFor="let file of (files | async)" [value]="file.name">
+        <mat-list-option *ngFor="let file of (files | async)" [value]="file.name" class="mat-divider">
             {{file.name}}
         </mat-list-option>
-      </mat-selection-list> 
+        </mat-selection-list> 
     </div>
 </mat-card-content>
 </mat-card>

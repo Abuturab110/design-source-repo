@@ -50,23 +50,19 @@ router.post('/postUdaConvDetails', function (req, res, next) {
 });
 
 router.get('/getUdaConvDetails', function (req, res, next) {
-  if(req.query.pageIndex ==0)
-  {
-    udaConversionDB.find({}).sort({ unspsc: 1}).skip().limit().exec(function (err, docs) {
-      if (err) return next(err);
-      pageCount = docs.length;
-      docs.total =pageCount;
-      res.send(docs);
-    });
-  }
-  else {
-    udaConversionDB.find({}).skip((req.query.pageIndex*req.query.pageLength)).limit(req.query.pageLength).exec(function (err, docs) {
+  udaConversionDB.find({}).sort({ unspsc: 1}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
     if (err) return next(err);
-    docs.total =pageCount;
-    res.send(docs);
-});
-}
- }); 
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    udaConversionDB.find({}).skip((req.query.pageIndex*req.query.pageLength)).limit(req.query.pageLength).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
+}); 
 
  router.get('/getUdaSetupHome', function (req, res, next) {
     itemUdaHomeDB.find({ }, function (err, docs) {
@@ -74,7 +70,6 @@ router.get('/getUdaConvDetails', function (req, res, next) {
       res.send(docs);
      });
  });
-
 
  router.post('/uploadUdaMappings', upload.single('upload'), (req, res) => {
     let udaEntries = readFileToUpload(req.file.filename, (error, udaEntries) => {
