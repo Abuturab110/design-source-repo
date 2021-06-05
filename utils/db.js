@@ -7,6 +7,20 @@ let db = {
     itemConvDB: new Datastore({ filename: './data_files/itemConvDB.js', autoload: true }),
     dashboardDB: new Datastore({ filename: './data_files/dashboardDB.js', autoload: true }),
     sequenceDB: new Datastore({ filename: './data_files/sequenceDB.js', autoload: true }),
+    itemClassConvDB: new Datastore({ filename: './data_files/itemClassConvDB.js', autoload: true }),
+    udaConfigurationDB: new Datastore({ filename: './data_files/udaConfigurationDB.js', autoload: true }),
+    purchasingCatalogDB: new Datastore({ filename: './data_files/purchasingCatalogDB.js', autoload: true }),
+
+    itemConvHomeDB: new Datastore({ filename: './data_files/itemConvHomeDB.js', autoload: true }),
+    itemUdaHomeDB: new Datastore({ filename: './data_files/itemUdaHomeDB.js', autoload: true }),
+    itemClassConversionHomeDB: new Datastore({ filename: './data_files/itemClassConversionHomeDB.js', autoload: true }),
+
+    unspscSetupDB: new Datastore({ filename: './data_files/unsPscSetupDB.js', autoload: true }),
+    unsPscSegmentDB: new Datastore({ filename: './data_files/unsPscSegmentDB.js', autoload: true }),
+    unsPscFamilyDB: new Datastore({ filename: './data_files/unsPscFamilyDB.js', autoload: true }),
+    unsPscClassDB: new Datastore({ filename: './data_files/unsPscClassDB.js', autoload: true }),
+    unsPscCommodityDB: new Datastore({ filename: './data_files/unsPscCommodityDB.js', autoload: true }),
+
 }
 
 

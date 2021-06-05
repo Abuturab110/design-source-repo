@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var pageCount= 0;
 const multer = require('multer');
 const readXlsxFile = require('read-excel-file/node');
 const db = require('../utils/db')
-, udaConversionDB = db.udaConversionDB;
+, udaConversionDB = db.udaConversionDB
+  itemUdaHomeDB = db.itemUdaHomeDB;
 const  fileFilter = (req, file, cb) => {
         if (!file.originalname.match(/\.(xlsx)$/)) {
             return cb(new Error('Invalid file format'))
@@ -48,11 +50,26 @@ router.post('/postUdaConvDetails', function (req, res, next) {
 });
 
 router.get('/getUdaConvDetails', function (req, res, next) {
-    udaConversionDB.find({ }, function (err, docs) {
+  udaConversionDB.find({}).sort({ unspsc: 1}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
+    if (err) return next(err);
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    udaConversionDB.find({}).skip((req.query.pageIndex*req.query.pageLength)).limit(req.query.pageLength).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
+}); 
+
+ router.get('/getUdaSetupHome', function (req, res, next) {
+    itemUdaHomeDB.find({ }, function (err, docs) {
     if (err) return next(err);
       res.send(docs);
      });
- }); 
+ });
 
  router.post('/uploadUdaMappings', upload.single('upload'), (req, res) => {
     let udaEntries = readFileToUpload(req.file.filename, (error, udaEntries) => {

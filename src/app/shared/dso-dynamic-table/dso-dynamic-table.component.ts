@@ -13,7 +13,7 @@ import { DsoUploadDialogComponent } from '../dso-upload-dialog/dso-upload-dialog
   templateUrl: './dso-dynamic-table.component.html',
   styleUrls: ['./dso-dynamic-table.component.scss']
 })
-export class DsoDynamicTableComponent implements OnInit, OnChanges {
+export class DsoDynamicTableComponent implements OnInit,OnChanges {
   @Input()
   resultSet;
   @Input()
@@ -38,6 +38,8 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
   displayedColumns = [];
   filterValue = '';
   selection = new SelectionModel<any>(false, []);
+  @Output() pageChangeEvent = new EventEmitter<string>();
+  pageCount;
   constructor(private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource();
   }
@@ -58,17 +60,15 @@ export class DsoDynamicTableComponent implements OnInit, OnChanges {
         this.displayedColumns.unshift('edit');
       }
    }
-  this.dataSource = new MatTableDataSource(this.resultSet);
-  this.selection = new SelectionModel<any>(true, []);
-  setTimeout(() => {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.generateTable();
-  }, 400)
-  }
+      this.dataSource = new MatTableDataSource(this.resultSet.slice(0,this.resultSet.length-1));
+      this.selection = new SelectionModel<any>(true, []);
+      var recordCount =   this.resultSet[this.resultSet.length-1];
+      this.pageCount = recordCount.Total;
+      this.dataSource.sort = this.sort;
+      this.generateTable();
+ }
  }
  
-
  isAllSelected() {
   const numSelected = this.selection.selected.length;
   const numRows = this.dataSource.data.length;
@@ -172,7 +172,6 @@ applyFilter(event: Event) {
     this.dataSource.paginator.firstPage();
   }
 
-  console.log(this.dataSource);
 }
 
 generateTable() {
@@ -200,11 +199,16 @@ getMaskedData(field, data) {
 }
 
 setRowValue(row) {
-  console.log(row)
-  console.log(this.selection.isSelected(row));
-   if (this.selection.isSelected(row)) this.selectedRowData.emit(row);
+  if (this.selection.isSelected(row)) this.selectedRowData.emit(row);
    else this.selectedRowData.emit(null);
 }
 
+pageChanged(event) {
+   this.pageChangeEvent.emit(event);
+}
+
+selectedRow(row) {
+  console.log(row)
+}
 
 }

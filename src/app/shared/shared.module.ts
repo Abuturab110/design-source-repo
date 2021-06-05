@@ -26,6 +26,8 @@ import { DsoUploadDialogComponent } from './dso-upload-dialog/dso-upload-dialog.
 import { DsoStepperComponent } from './dso-stepper/dso-stepper.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { DsoCustomDialogStepperComponent } from './dso-custom-dialog-stepper/dso-custom-dialog-stepper.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [DsoInfoCardComponent, DsoPieChartComponent, DsoLineChartComponent,
@@ -50,6 +52,7 @@ import { DsoCustomDialogStepperComponent } from './dso-custom-dialog-stepper/dso
     FormsModule,
     MatIconModule,
     MatStepperModule,
+    MatExpansionModule
   ],
   exports: [DsoInfoCardComponent, DsoPieChartComponent,DsoLineChartComponent, DsoDynamicTableComponent,
      DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent,DsoStepperComponent,DsoCustomDialogStepperComponent],

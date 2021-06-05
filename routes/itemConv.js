@@ -2,7 +2,9 @@ const utils = require('../utils/general-utilities')
 var express = require('express');
 var router = express.Router();
 const dbSet = require('../utils/db')
-, db = dbSet.itemConvDB;
+, db = dbSet.itemConvDB
+,itemConvHomeDB = dbSet.itemConvHomeDB
+,itemClassConversionHomeDB = dbSet.itemClassConversionHomeDB;
 const base64 = require('file-base64');
 const request = require('request');
 const Client = require('ssh2-sftp-client');
@@ -12,6 +14,20 @@ router.get('/getItemConvDetails', function(req, res, next) {
         if (err) return next(err);
         res.json(docs);
     });
+});
+
+router.get('/getItemConvHomeDetails', function(req, res, next) {
+  itemConvHomeDB.find({}, function (err, docs) {
+      if (err) return next(err);
+      res.json(docs);
+  });
+});
+
+router.get('/getItemClassConvHome', function(req, res, next) {
+  itemClassConversionHomeDB.find({}, function (err, docs) {
+      if (err) return next(err);
+      res.json(docs);
+  });
 });
 
 router.post('/postItemConvDetails', function(req, res, next) {
@@ -113,9 +129,11 @@ router.get('/publishToCloud', function (req, res, next) {
 
   base64.encode(filePath, function(err, base64String) {
   console.log('base64String' + base64String);
-  username = "nnarayana@DELOITTE.com",
-  password = "Welcome@12345",
-  url = "https://eiiv-dev10.fa.us6.oraclecloud.com/fscmRestApi/resources/11.13.18.05/erpintegrations",
+      
+    username =  req.query.username,
+    password = req.query.password,
+    url = req.query.cloudInstanceLink,
+          
   auth = "Basic " + Buffer.from(username + ":" + password).toString("base64");
   var bodyinput={
      "OperationName":"importBulkData",	

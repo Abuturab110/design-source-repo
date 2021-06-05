@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {  BehaviorSubject } from 'rxjs'
 
 @Injectable({
@@ -10,8 +10,12 @@ requeryUdaConvData = new BehaviorSubject('');
 requeryUdaConvDataObs = this.requeryUdaConvData.asObservable();
   constructor(private _http: HttpClient) { }
 
-  getUdaMappingResultSet() {
-    return this._http.get('/api/udaConv/getUdaConvDetails');
+  getUdaMappingResultSet(pageInfo :any) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
+    httpParams = httpParams.append('pageLength', pageInfo.pageLength);
+    return this._http.get('/api/udaConv/getUdaConvDetails', {
+      params: httpParams});
   }
 
   getUdaMappingConfig() {
@@ -40,4 +44,8 @@ requeryUdaConvDataObs = this.requeryUdaConvData.asObservable();
     formData.append('upload', fileToUpload, fileToUpload.name);
     return this._http.post(endpoint, formData);
   }
- }
+
+  getItemConvHomeConfig() {
+    return this._http.get('/api/udaConv/getUdaSetupHome');
+}
+}
