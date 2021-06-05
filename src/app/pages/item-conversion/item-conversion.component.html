@@ -25,6 +25,7 @@
     <mat-card>
         <mat-card-content>
             <div class="table-title">
+               
                 <h1 class="fbdi-margin">FBDI Details</h1>
                 <div class="cloud-setup-dropdown">
                      <mat-form-field class="form-field">
@@ -35,7 +36,8 @@
                      </mat-form-field>
                 </div>
                 <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner>
-                <button mat-raised-button (click)="publishToCloud()">Publish to Cloud</button>
+                <!-- <button mat-raised-button (click)="publishToCloud()">Publish to Cloud</button> -->
+                <button mat-raised-button (click)="openDialog()">Publish to Cloud</button>
             </div>
             <app-dso-dynamic-table 
              [resultSet]="resultSet | async"

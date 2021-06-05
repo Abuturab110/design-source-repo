@@ -23,12 +23,16 @@ import { MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { DsoCustomDeleteDialogComponent } from './dso-custom-delete-dialog/dso-custom-delete-dialog.component';
 import { DsoUploadDialogComponent } from './dso-upload-dialog/dso-upload-dialog.component';
+import { DsoStepperComponent } from './dso-stepper/dso-stepper.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { DsoCustomDialogStepperComponent } from './dso-custom-dialog-stepper/dso-custom-dialog-stepper.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
   declarations: [DsoInfoCardComponent, DsoPieChartComponent, DsoLineChartComponent,
-     DsoDynamicTableComponent, DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent, DsoUploadDialogComponent],
+     DsoDynamicTableComponent, DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent, DsoUploadDialogComponent,
+     DsoStepperComponent,DsoCustomDialogStepperComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -47,10 +51,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatInputModule,
     FormsModule,
     MatIconModule,
+    MatStepperModule,
     MatExpansionModule
   ],
   exports: [DsoInfoCardComponent, DsoPieChartComponent,DsoLineChartComponent, DsoDynamicTableComponent,
-     DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent],
+     DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent,DsoStepperComponent,DsoCustomDialogStepperComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }

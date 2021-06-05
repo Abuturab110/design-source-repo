@@ -3,9 +3,14 @@ import { DashboardService } from '../../services/dashboard.service';
 import { catchError, tap, timeout } from 'rxjs/operators';
 import { ItemConversionService } from '../../services/item-conversion.service';
 import {switchMap, debounceTime} from 'rxjs/operators';
+
+import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
+import { DsoCustomDialogStepperComponent } from 'src/app/shared/dso-custom-dialog-stepper/dso-custom-dialog-stepper.component';
+
 import { SetupService } from '../../services/setup.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-item-conversion',
@@ -27,7 +32,7 @@ export class ItemConversionComponent implements OnInit {
   errorMessage;
   showFileList = false;
   constructor(private dashboardService: DashboardService, private setupService: SetupService,
-              private itemConversionService: ItemConversionService,private _snackBar: MatSnackBar) { }
+              private itemConversionService: ItemConversionService,private _snackBar: MatSnackBar,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.resultSet = this.itemConversionService.requeryItemConvDataObs.pipe(
@@ -53,10 +58,9 @@ export class ItemConversionComponent implements OnInit {
         });
       })
     );
-    }
-
   }
- 
+  }
+   
   generateFBDI() {
         this.showFBDISpinner = true;
         this.itemConversionService.generateFBDI(this.selectedEnvironment, this.selectedFile).subscribe(res => {
@@ -71,10 +75,20 @@ export class ItemConversionComponent implements OnInit {
 
 
   publishToCloud() {
+    
     this.showPublishToCloudSpinner = true;
     this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
-      this.itemConversionService.requeryItemConvDetails();
-      this.showPublishToCloudSpinner = false;
+    this.itemConversionService.requeryItemConvDetails();
+    this.showPublishToCloudSpinner = false;
     })
   }
-}
+
+  openDialog() {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      const dialogRef = this.dialog.open(DsoCustomDialogStepperComponent,dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+       });
+  }
+ }
