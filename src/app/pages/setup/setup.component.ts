@@ -27,46 +27,21 @@ export class SetupComponent implements OnInit {
   unspscCommoditytData:any;
   showSpinner = false;
   title ="UNSPSC Upload";
+  pageInfo = { "pageIndex": 0,"pageSize": 5 } ;
   @Output()
   uploadData = new EventEmitter();
   constructor(private setupService: SetupService,
     private _snackBar: MatSnackBar,private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.pageInfo.pageIndex = 0;
+    this.pageInfo.pageSize = 5
     this.ftpServerConfig = this.setupService.getFtpServerConfig();
-    this.ftpServerData = this.setupService.requeryFtpServerDataObs.pipe(
-      debounceTime(200),
-      switchMap(res => this.setupService.getFtpServerData())
-    );
-
+    this.getFtpServerData();
     this.cloudServerConfig = this.setupService.getCloudServerConfig();
-    this.cloudServerData = this.setupService.requeryCloudServerDataObs.pipe(
-      debounceTime(200),
-      switchMap(res => this.setupService.getCloudServerData())
-    );
+    this.getCloudServerData();
     this.unsPscSgmentConfig = this.setupService.getUnspscSegmentMappingConfig();
-    
-    this.unspscSegmentData = this.setupService.requeryUnspscDataObs.pipe(
-      debounceTime(200),
-      switchMap(res => this.setupService.getUnspscSegmentData())
-    );
-    this.unsPscFamilyConfig = this.setupService.getUnspscFamilyMappingConfig();
-    this.unspscFamilyData = this.setupService.requeryUnspscDataObs.pipe(
-      debounceTime(200),
-      switchMap(res => this.setupService.getUnspscFamilyData())
-    );
-    this.unsPscClassConfig = this.setupService.getUnspscClassMappingConfig();
-    this.unspscClassData = this.setupService.requeryUnspscDataObs.pipe(
-      debounceTime(200),
-      switchMap(res => this.setupService.getUnspscClassData())
-    );
-
-    this.unsPscCommodityConfig = this.setupService.getUnspscCommodityMappingConfig();
-    this.unspscCommoditytData = this.setupService.requeryUnspscDataObs.pipe(
-      debounceTime(200),
-      switchMap(res => this.setupService.getUnspscCommodityData())
-    );
-
+    this.getUnspscSegmentData()
   }
 
   submitFtpDetails(event) {
@@ -183,7 +158,6 @@ export class SetupComponent implements OnInit {
     });
     });
   }
-
   updateUnspscClass(event) {
     this.setupService.putUnspscClass(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
@@ -202,7 +176,6 @@ export class SetupComponent implements OnInit {
     });
   }
 
-
   submitUnspscCommodity(event) {
     this.setupService.postUnspscCommodity(event).subscribe(res => {
     this.setupService.requeryUnspscDetails();
@@ -211,7 +184,6 @@ export class SetupComponent implements OnInit {
     });
     });
   }
-
   updateUnspscCommodity(event) {
     this.setupService.putUnspscCommodity(event).subscribe(res => {
       this.setupService.requeryUnspscDetails();
@@ -229,7 +201,6 @@ export class SetupComponent implements OnInit {
       });
     });
   }
-
 
   uploadUnspscDetails(event) {
     this.showSpinner = true;
@@ -256,4 +227,108 @@ export class SetupComponent implements OnInit {
     });
   }
 
+  getFtpServerData() {
+    this.ftpServerData = this.setupService.requeryFtpServerDataObs.pipe(
+      debounceTime(200),
+      switchMap(res => this.setupService.getFtpServerData(this.pageInfo))
+    );
+  }
+
+  getCloudServerData() {
+    this.cloudServerData = this.setupService.requeryCloudServerDataObs.pipe(
+      debounceTime(200),
+      switchMap(res => this.setupService.getCloudServerData(this.pageInfo))
+    );
+  }
+
+  getUnspscSegmentData() {
+    this.unspscSegmentData = this.setupService.requeryUnspscDataObs.pipe(
+      debounceTime(100),
+      switchMap(res => this.setupService.getUnspscSegmentData(this.pageInfo))
+    );
+  }
+
+  getUnspscFamilyData() {
+   this.unspscFamilyData = this.setupService.requeryUnspscDataObs.pipe(
+      debounceTime(200),
+      switchMap(res => this.setupService.getUnspscFamilyData(this.pageInfo))
+    );
+  }
+  getUnspscClassData() {
+    this.unspscClassData = this.setupService.requeryUnspscDataObs.pipe(
+      debounceTime(200),
+      switchMap(res => this.setupService.getUnspscClassData(this.pageInfo))
+    );
+   }
+
+   getUnspscCommodityData() {
+    this.unspscCommoditytData = this.setupService.requeryUnspscDataObs.pipe(
+      debounceTime(200),
+      switchMap(res => this.setupService.getUnspscCommodityData(this.pageInfo))
+      );
+      this.getFtpServerData();
+   }
+
+   ftpServerPageChanged(event){
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageSize = event.pageSize;
+    this.getFtpServerData();
+  }
+
+  cloudServerPageChanged(event){
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageSize = event.pageSize;
+    this.getCloudServerData();
+  }
+
+  segmentPageChanged(event){
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageSize = event.pageSize;
+    this.getUnspscSegmentData();
+  }
+
+  familyPageChanged(event){
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageSize = event.pageSize;
+    this.getUnspscFamilyData();
+  }
+  
+  classPageChanged(event){
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageSize = event.pageSize;
+    this.getUnspscClassData();
+  }
+
+  commodityPageChanged(event){
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageSize = event.pageSize;
+    this.getUnspscCommodityData();
+  }
+
+  pageChanged(event){
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageSize = event.pageSize;
+  }
+ 
+  tabClick(event) {
+    this.pageInfo.pageIndex = 0
+    this.pageInfo.pageSize = 5
+    switch (event.tab.textLabel) {
+      case 'Segment':
+        this.getUnspscSegmentData();
+        break;
+      case 'Family':
+          this.unsPscFamilyConfig = this.setupService.getUnspscFamilyMappingConfig();
+          this.getUnspscFamilyData();
+        break;
+        case 'Class':
+          this.unsPscClassConfig = this.setupService.getUnspscClassMappingConfig();
+          this.getUnspscClassData();
+        break;
+        case 'Commodity':
+          this.unsPscCommodityConfig = this.setupService.getUnspscCommodityMappingConfig();
+          this.getUnspscCommodityData();
+        break;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -19,31 +19,53 @@ requeryUnspscDataObs = this.requeryUnspscData.asObservable();
     return this._http.get('assets/ftp-server-setup-config.json');
   }
 
-  getFtpServerData() {
-    return this._http.get('/api/setup/getFtpServerDetails');
+  getFtpServerData(pageInfo :any) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
+    return this._http.get('/api/setup/getFtpServerDetails',{params: httpParams});
   }
 
   getCloudServerConfig() {
     return this._http.get('assets/cloud-server-config.json');
   }
 
-  getCloudServerData() {
-    return this._http.get('/api/setup/getCloudServerDetails');
+  getCloudServerData(pageInfo :any) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
+    return this._http.get('/api/setup/getCloudServerDetails',{params: httpParams});
+  }
+  getCloudServerForItemConversion() {
+  return this._http.get('/api/setup/getCloudServerForItemConversion');
   }
 
-  getUnspscSegmentData() {
-    return this._http.get('/api/setup/getUnspscSegmentDetails');
+
+  getUnspscSegmentData(pageInfo :any) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
+    return this._http.get('/api/setup/getUnspscSegmentDetails',{params: httpParams});
   }
-  getUnspscFamilyData() {
-    return this._http.get('/api/setup/getUnspscFamilyDetails');
+  getUnspscFamilyData(pageInfo :any) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
+    return this._http.get('/api/setup/getUnspscFamilyDetails',{params: httpParams});
   }
 
-  getUnspscClassData() {
-    return this._http.get('/api/setup/getUnspscClassDetails');
+  getUnspscClassData(pageInfo :any) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
+    return this._http.get('/api/setup/getUnspscClassDetails',{params: httpParams });
   }
 
-  getUnspscCommodityData() {
-    return this._http.get('/api/setup/getUnspscCommodityDetails');
+  getUnspscCommodityData(pageInfo :any) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
+    return this._http.get('/api/setup/getUnspscCommodityDetails',{params: httpParams });
   }
 
   requeryFTPServerDetails() {
@@ -155,3 +177,7 @@ requeryUnspscDataObs = this.requeryUnspscData.asObservable();
     return this._http.post(endpoint, formData);
   }
 }
+function params(arg0: string, params: any, httpParams: HttpParams) {
+  throw new Error('Function not implemented.');
+}
+

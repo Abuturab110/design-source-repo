@@ -5,7 +5,6 @@ const readXlsxFile = require('read-excel-file/node');
 const db = require('../utils/db')
 , cloudServerSetupDB = db.cloudServerSetupDB
 , ftpServerSetupDB = db.ftpServerSetupDB
-, unsPscSetupDB = db.unspscSetupDB
 , unsPscSegmentDB = db.unsPscSegmentDB
 , unsPscFamilyDB = db.unsPscFamilyDB
 , unsPscClassDB = db.unsPscClassDB
@@ -53,45 +52,102 @@ router.post('/postFtpServerDetails', function (req, res, next) {
 });
 
 router.get('/getFtpServerDetails', function (req, res, next) {
-  ftpServerSetupDB.find({ }, function (err, docs) {
-     if (err) return next(err);
-       res.send(docs);
-      });
-  }); 
+  ftpServerSetupDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
+    if (err) return next(err);
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    ftpServerSetupDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
+}); 
 
 router.get('/getCloudServerDetails', function(req, res, next) {
-  cloudServerSetupDB.find({}, function (err, docs) {
-        if (err) return next(err);
-        res.json(docs);
-    });
+  cloudServerSetupDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
+    if (err) return next(err);
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    cloudServerSetupDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
+ });
+
+ router.get('/getCloudServerForItemConversion', function(req, res, next) {
+     cloudServerSetupDB.find({}, function (err, docs) {
+      if (err) return next(err);
+      res.json(docs);
+});
 });
 
 router.get('/getUnspscSegmentDetails', function(req, res, next) {
-  unsPscSegmentDB.find({}, function (err, docs) {
-        if (err) return next(err);
-        res.json(docs);
-    });
-});
+  unsPscSegmentDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
+    if (err) return next(err);
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    unsPscSegmentDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
+ });
 
 router.get('/getUnspscFamilyDetails', function(req, res, next) {
-  unsPscFamilyDB.find({}, function (err, docs) {
-        if (err) return next(err);
-        res.json(docs);
-    });
+  
+  unsPscFamilyDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
+    if (err) return next(err);
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    unsPscFamilyDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
+    
 });
 
 router.get('/getUnspscClassDetails', function(req, res, next) {
-  unsPscClassDB.find({}, function (err, docs) {
-        if (err) return next(err);
-        res.json(docs);
-    });
+  unsPscClassDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
+    if (err) return next(err);
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    unsPscClassDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
 });
 
 router.get('/getUnspscCommodityDetails', function(req, res, next) {
-  unsPscCommodityDB.find({}, function (err, docs) {
-        if (err) return next(err);
-        res.json(docs);
-    });
+  unsPscCommodityDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
+    if (err) return next(err);
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    unsPscCommodityDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
 });
 
 router.post('/postCloudServerDetails', function(req, res, next) {

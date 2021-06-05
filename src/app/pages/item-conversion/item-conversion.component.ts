@@ -36,7 +36,7 @@ export class ItemConversionComponent implements OnInit {
     );
     this.environments = this.itemConversionService.getEnvironments();
     this.config = this.dashboardService.getItemConvConfig();
-    this.cloudSetupData =  this.setupService.getCloudServerData();
+    this.cloudSetupData =  this.setupService.getCloudServerForItemConversion();
   }
 
   refreshFiles() {
