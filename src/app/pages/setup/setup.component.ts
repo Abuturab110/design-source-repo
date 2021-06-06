@@ -243,7 +243,7 @@ export class SetupComponent implements OnInit {
 
   getUnspscSegmentData() {
     this.unspscSegmentData = this.setupService.requeryUnspscDataObs.pipe(
-      debounceTime(100),
+      debounceTime(200),
       switchMap(res => this.setupService.getUnspscSegmentData(this.pageInfo))
     );
   }
@@ -311,8 +311,8 @@ export class SetupComponent implements OnInit {
   }
  
   tabClick(event) {
-    this.pageInfo.pageIndex = 0
-    this.pageInfo.pageSize = 5
+    this.pageInfo.pageIndex = 0;
+    this.pageInfo.pageSize = 5;
     switch (event.tab.textLabel) {
       case 'Segment':
         this.getUnspscSegmentData();

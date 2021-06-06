@@ -13,7 +13,7 @@ export class UdaSetupComponent implements OnInit {
   resultSet;
   config;
   filterValue: string = '';
-  pageInfo = { "pageIndex": 0,"pageLength": 5 } ;
+  pageInfo = { "pageIndex": 0,"pageSize": 5 } ;
   constructor(private udaConvService: UdaConvService, 
     private _snackBar: MatSnackBar) { }
 
@@ -67,7 +67,7 @@ export class UdaSetupComponent implements OnInit {
   pageChanged(event){
     this.resultSet = [];
     this.pageInfo.pageIndex = event.pageIndex;
-    this.pageInfo.pageLength = event.pageSize;
+    this.pageInfo.pageSize = event.pageSize;
     this.getUdaMappingResultSet();
   }
 }

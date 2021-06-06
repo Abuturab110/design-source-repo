@@ -11,7 +11,8 @@
             (putData)="updateUdaConvDetails($event)"
             (deleteData)="deleteUdaConvDetails($event)"
             (uploadData)="uploadUdaConvDetails($event)"
-            (pageChangeEvent)="pageChanged($event)">
+            (pageChangeEvent)="pageChanged($event)"
+            [pageSize] = pageInfo.pageSize>
             </app-dso-dynamic-table>
         </mat-card-content>
     </mat-card>

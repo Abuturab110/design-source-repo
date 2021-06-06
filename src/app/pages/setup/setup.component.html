@@ -46,7 +46,8 @@
                     (postData)="submitUnspscSegment($event)"
                     (putData)="updateUnspscSegment($event)"
                     (deleteData)="deleteUnspscSegment($event)"
-                    (pageChangeEvent)="segmentPageChanged($event)">
+                    (pageChangeEvent)="segmentPageChanged($event)"
+                    [pageSize] = pageInfo.pageSize>
                    </app-dso-dynamic-table>
             </mat-card-content>
         </mat-tab>
@@ -60,7 +61,8 @@
                     (postData)="submitUnspscFamily($event)"
                     (putData)="updateUnspscFamily($event)"
                     (deleteData)="deleteUnspscFamily($event)"
-                    (pageChangeEvent)="familyPageChanged($event)">
+                    (pageChangeEvent)="familyPageChanged($event)"
+                    [pageSize] = pageInfo.pageSize>
                    </app-dso-dynamic-table>
             </mat-card-content>
         </mat-tab>
@@ -74,7 +76,8 @@
                     (postData)="submitUnspscClass($event)"
                     (putData)="updateUnspscClass($event)"
                     (deleteData)="deleteUnspscClass($event)"
-                    (pageChangeEvent)="classPageChanged($event)">
+                    (pageChangeEvent)="classPageChanged($event)"
+                    [pageSize] = pageInfo.pageSize>
                    </app-dso-dynamic-table>
             </mat-card-content>
         </mat-tab>
@@ -88,8 +91,9 @@
                 (postData)="submitUnspscCommodity($event)"
                 (putData)="updateUnspscCommodity($event)"
                 (deleteData)="deleteUnspscCommodity($event)"
-                (pageChangeEvent)="commodityPageChanged($event)">
-               </app-dso-dynamic-table>
+                (pageChangeEvent)="commodityPageChanged($event)"
+                [pageSize] = pageInfo.pageSize>
+                </app-dso-dynamic-table>
         </mat-card-content>
     </mat-tab>
         </mat-tab-group>

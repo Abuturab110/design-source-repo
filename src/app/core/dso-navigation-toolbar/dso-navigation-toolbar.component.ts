@@ -31,11 +31,11 @@ export class DsoNavigationToolbarComponent implements OnInit {
       link: 'udaSetup',
       icon: 'fa-map'
     },
-    {
-      label: 'Item Class Conversion',
-      link: 'itemClassConv',
-      icon: 'fa-sitemap'
-    },
+    // {
+    //   label: 'Item Class Conversion',
+    //   link: 'itemClassConv',
+    //   icon: 'fa-sitemap'
+    // },
     {
       label: 'Setup',
       link: 'setup',

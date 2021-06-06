@@ -21,6 +21,8 @@ export class DsoDynamicTableComponent implements OnInit,OnChanges {
   @Input()
   title;
   @Input()
+  pageSize;
+  @Input()
   enableFilter = false;
   @Output()
   postData = new EventEmitter();
@@ -205,10 +207,6 @@ setRowValue(row) {
 
 pageChanged(event) {
    this.pageChangeEvent.emit(event);
-}
+  }
 
-selectedRow(row) {
-  console.log(row)
-}
-
-}
+selectedRow(row) {}}
