@@ -20,7 +20,7 @@
     <ng-container matColumnDef="edit">
       <th mat-header-cell class="add-record" *matHeaderCellDef >
       <a *ngIf="config['config']['extra-config']['row-add']" (click)="openAddDialog()" title="Add Row" style="font-size: 18px;"><mat-icon>add</mat-icon></a>
-      <a *ngIf="config['config']['extra-config']['upload']" (click)="openUploadDialog()" title="Upload UDA Mappings" style="font-size: 18px; padding-right: 24px;"><mat-icon>upload</mat-icon></a>
+      <a *ngIf="config['config']['extra-config']['upload']" (click)="openUploadDialog()" title="Upload UDA Mappings" style="font-size: 18px"><mat-icon>upload</mat-icon></a>
       </th>
       <td mat-cell *matCellDef="let row" style="width:50px;">
         <a *ngIf="config['config']['extra-config']['row-edit']" (click)="openUpdateDialog(row)" title="Edit Row" style="font-size: 18px;"><mat-icon>edit</mat-icon></a>

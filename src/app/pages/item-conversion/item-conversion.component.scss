@@ -8,6 +8,10 @@
     margin:10px!important;
 }
 
+.list-presentation {
+    border-bottom: 1px solid #ccc!important;
+}
+
 .mat-form-field {
     margin-right: 20px;
 }
@@ -93,9 +97,4 @@ margin-left:18px;
 
   ::-webkit-scrollbar-thumb:hover {
     background: #112e6e; 
-  }
-  .mat-divider{
-    border-top-style: solid;
-    border-top-color:#112e4f; 
-    ;
   }
