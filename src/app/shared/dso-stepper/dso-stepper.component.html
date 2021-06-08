@@ -1,5 +1,5 @@
 <mat-horizontal-stepper #stepper>
-  <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+  <mat-step [stepControl]="firstFormGroup">
     <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner>
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Item Class Config</ng-template>
@@ -8,13 +8,13 @@
           <mat-label><b>Download Segment</b><a style="margin-left: 15px;" href="assets/Sample Template File for UDA Mappings.xlsx" download> File</a></mat-label>
         </div> 
          <div class="table-content">
-          <button mat-raised-button [disabled]='itemConfirmUpload' (click)="itemClassConfirmUpload()"  >Confirm Upload</button>
-          <button mat-raised-button matStepperNext> Next</button>
+          <button mat-raised-button [disabled]='itemConfirmUpload' (click)="itemClassConfirmUpload()">Confirm Upload</button>
+          <button mat-raised-button [disabled]='isItemConfigNext' matStepperNext> Next</button>
         </div>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" errorMessage="Name is required.">
+  <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>UDA Configuration</ng-template>
          <div class="table-title"> 
@@ -24,12 +24,12 @@
         <div class="table-content">
           <button mat-raised-button matStepperPrevious>Back</button>
           <button mat-raised-button [disabled]='udaConfigConfirmUpload'(click)="udaConfigConfirm()">Confirm Upload</button>
-          <button mat-raised-button matStepperNext> Next</button>
+          <button mat-raised-button [disabled]='isUdaConfigNext'   matStepperNext> Next</button>
         </div>
          </div>
     </form>
   </mat-step>
-  <mat-step  [stepControl]="secondFormGroup" errorMessage="Name is required.">
+  <mat-step  [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
     <ng-template matStepLabel>Purchasing Catalog & Categories</ng-template>
        <div class="table-title"> 
@@ -38,9 +38,8 @@
       </div>
        <div class="table-content">
           <button mat-raised-button matStepperPrevious>Back</button>
-        <!-- <button mat-raised-button>Confirm Upload</button> -->
-        <button mat-raised-button (click)= "publishToCloud()">Publish to Cloud</button>
-        <button mat-raised-button (click)="closeSpets()">Close</button>
+          <button mat-raised-button (click)= "publishToCloud()">Publish to Cloud</button>
+          <button mat-raised-button (click)="closeSpets()">Close</button>
       </div>
     </div>
   </form>

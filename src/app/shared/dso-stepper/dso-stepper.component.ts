@@ -14,15 +14,18 @@ secondFormGroup: FormGroup;
 showPublishToCloudSpinner = false;
 @Input() 
 selectedRowData;
-itemConfirmUpload = false;
-udaConfigConfirmUpload = false;
-isClose = false;
 @Input() 
 title;
 @Output()
-  uploadData = new EventEmitter();
+uploadData = new EventEmitter();
 @Output() closeChanged: EventEmitter<boolean> =   new EventEmitter();
-  constructor(private _formBuilder: FormBuilder,private dialog: MatDialog,
+itemConfirmUpload = false;
+udaConfigConfirmUpload = false;
+isClose = false;
+isItemConfigNext = true;
+isUdaConfigNext = true;
+
+constructor(private _formBuilder: FormBuilder,private dialog: MatDialog,
     private itemConversionService: ItemConversionService,) { }
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -34,19 +37,24 @@ title;
 }
 
 publishToCloud() {
+  if(this.selectedRowData!=null  )
+  {
   this.showPublishToCloudSpinner = true;
   this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
   this.itemConversionService.requeryItemConvDetails();
   this.showPublishToCloudSpinner = false;
   })
 }
+}
 
 itemClassConfirmUpload() {
   this.itemConfirmUpload = true;
+  this.isItemConfigNext = false;
 }
 
 udaConfigConfirm() {
   this.udaConfigConfirmUpload = true;
+  this.isUdaConfigNext = false;
 }
 
 closeSpets() {

@@ -68,9 +68,8 @@ export class ItemConversionComponent implements OnInit {
   }
 
   setRowData(event) {
-    this.selectedRowData = event;
+    //this.selectedRowData = event;
   }
-
 
   // publishToCloud() {
     

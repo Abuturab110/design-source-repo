@@ -217,40 +217,61 @@ const sortByDate = arr => {
     let transactionTotal = 0
     let successTotal = 0
     let errorTotal = 0
+    let transactionsData = [];
     db.itemConvDB.find({}, { action: 0 ,_id:0}, function (error, docs) {
         if(error) return next(error)
-
-        docs.forEach(doc => {
+        docs.forEach(item => {
+          transactionsData.push(item);
+         })
+         db.itemClassConvDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+          if(error) return next(error)
+          docs.forEach(item => {
+            transactionsData.push(item)
+        })
+        db.udaConfigurationDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+          if(error) return next(error)
+          docs.forEach(item => {
+            transactionsData.push(item)
+        })
+        db.purchasingCatalogDB.find({}, { action: 0 ,_id:0}, function(error, docs) {
+          if(error) return next(error)
+                 docs.forEach(item => {
+                  transactionsData.push(item)
+        })
+         transactionsData.forEach(doc => {
             totalRuns++;
             transactionTotal+= doc['total-records']
             successTotal+= doc['success']
             errorTotal+= doc['error']
         })
         const cardDetails = [
-            {
-            info: 'Total Runs',
-            value: totalRuns,
-            "img-src": 'transaction-runs.png' 
-            },
-            {
-            info: 'Transactions Total',
-            value: transactionTotal,
-            "img-src": 'transaction-count.png' 
-            },
-            {
-            info: 'Transactions Success',
-            value: successTotal,
-            "img-src": 'transaction-success.png' 
-            },
-            {
-            info: 'Transactions Errors',
-            value: errorTotal,
-            "img-src": 'transaction-error.png' 
-            }
-        ]
+          {
+          info: 'Total Runs',
+          value: totalRuns,
+          "img-src": 'transaction-runs.png' 
+          },
+          {
+          info: 'Transactions Total',
+          value: transactionTotal,
+          "img-src": 'transaction-count.png' 
+          },
+          {
+          info: 'Transactions Success',
+          value: successTotal,
+          "img-src": 'transaction-success.png' 
+          },
+          {
+          info: 'Transactions Errors',
+          value: errorTotal,
+          "img-src": 'transaction-error.png' 
+          }
+      ]
        res.json(cardDetails);
      });
+    });
   });
+});
+});
 
   function formatDate(dateString) {
       let newDate = new Date(dateString)

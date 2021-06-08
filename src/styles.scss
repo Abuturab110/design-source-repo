@@ -41,6 +41,11 @@ h1,h2,h3,h4,h5,h6 {
 //     padding-right: 20px!important;
 // }
 
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: #112e4f;
+    color: #fff;
+  }
+
 .mat-sort-header-arrow, [dir=rtl] .mat-sort-header-position-before .mat-sort-header-arrow {
     margin: 0 8px 0 3px!important;
 }
