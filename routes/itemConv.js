@@ -10,10 +10,26 @@ const request = require('request');
 const Client = require('ssh2-sftp-client');
 
 router.get('/getItemConvDetails', function(req, res, next) {
-    db.find({}, function (err, docs) {
-        if (err) return next(err);
-        res.json(docs);
-    });
+  db.find({}).sort({}).skip().limit().exec(function (err, docs) {
+    let totalCount = 0;
+    if (err) return next(err);
+    docs.forEach(doc => {
+      totalCount++;
+    })
+    db.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+      if (err) return next(err);
+      docs.push({Total:totalCount });
+      res.send(docs);
+  });
+ });
+
+
+
+
+    // db.find({}, function (err, docs) {
+    //     if (err) return next(err);
+    //     res.json(docs);
+    // });
 });
 
 router.get('/getItemConvHomeDetails', function(req, res, next) {

@@ -13,7 +13,7 @@ requeryUdaConvDataObs = this.requeryUdaConvData.asObservable();
   getUdaMappingResultSet(pageInfo :any) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageLength', pageInfo.pageSize);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
     return this._http.get('/api/udaConv/getUdaConvDetails', {
       params: httpParams});
   }

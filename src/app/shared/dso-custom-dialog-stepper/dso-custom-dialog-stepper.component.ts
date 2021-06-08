@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, Inject} from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dso-custom-dialog-stepper',
@@ -9,9 +9,11 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class DsoCustomDialogStepperComponent implements OnInit{
   form: FormGroup = this.formBuilder.group({});
-   
-  constructor(private formBuilder: FormBuilder,
+  itemConfirmUpload = false;
+  publishData :any;
+   constructor(@Inject(MAT_DIALOG_DATA) public data: any ,private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DsoCustomDialogStepperComponent>) { 
+      this.publishData = data;
       }
 
   ngOnInit(): void {}

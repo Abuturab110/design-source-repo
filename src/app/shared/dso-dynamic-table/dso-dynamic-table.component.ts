@@ -201,12 +201,12 @@ getMaskedData(field, data) {
 }
 
 setRowValue(row) {
-  if (this.selection.isSelected(row)) this.selectedRowData.emit(row);
-   else this.selectedRowData.emit(null);
+  this.selectedRowData.emit(row);
+  // if (this.selection.isSelected(row)) this.selectedRowData.emit(row);
+  //  else this.selectedRowData.emit(null);
 }
 
 pageChanged(event) {
    this.pageChangeEvent.emit(event);
   }
-
-selectedRow(row) {}}
+}

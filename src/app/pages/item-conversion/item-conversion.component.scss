@@ -80,6 +80,12 @@ margin-left:18px;
     background-color: #112e4f;
 }
 
+
+::ng-deep ,mat-cell cdk-cell cdk-column-run mat-column-run, ng-star-inserted
+{
+    background-color: #112e4f;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
   }

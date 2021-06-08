@@ -12,7 +12,7 @@ export class DashboardService {
   getDashboardResultSet(pageInfo :any) {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageLength', pageInfo.pageLength);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
     return this._http.get('/api/dashboardDetails/getRecentRuns', {params: httpParams});
   }
 

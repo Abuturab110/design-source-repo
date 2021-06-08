@@ -21,8 +21,11 @@ export class ItemConversionService {
     return this._http.get('/api/itemConv/itemConvRefreshFiles/'+ftpName);
   }
 
-  getItemConvResultSet() {
-    return this._http.get('/api/itemConv/getItemConvDetails');
+  getItemConvResultSet(pageInfo : any) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
+    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
+    return this._http.get('/api/itemConv/getItemConvDetails',{params: httpParams});
   }
 
   generateFBDI(environment, fileName) {
