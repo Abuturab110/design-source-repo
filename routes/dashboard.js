@@ -28,7 +28,7 @@ router.get('/getRecentRuns', function (req, res, next) {
             mergedRecords.forEach(doc => {
                 totalCount++
             })
-        let  pageRecords =  mergedRecords.skip(req.query.pageIndex*req.query.pageLength).limit(req.query.pageLength);
+        let  pageRecords =  mergedRecords.skip(req.query.pageIndex*req.query.pageSize).limit(req.query.pageSize);
         pageRecords.push({Total:totalCount});
             res.json(pageRecords);
           })

@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   cards: any = {};
   pieDetails: any = {};
   lineDetails: any = {};
-  pageInfo = { "pageIndex": 0,"pageLength": 5 } ;
+  pageInfo = { "pageIndex": 0,"pageSize": 5 } ;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
   pageChanged(event){
     this.pageInfo.pageIndex = event.pageIndex;
-    this.pageInfo.pageLength = event.pageSize;
+    this.pageInfo.pageSize = event.pageSize;
     this.resultSet = this.dashboardService.getDashboardResultSet(this.pageInfo);
   }
 }

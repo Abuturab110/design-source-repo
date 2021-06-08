@@ -1,5 +1,6 @@
 <mat-horizontal-stepper #stepper>
   <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+    <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner>
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Item Class Config</ng-template>
          <div class="table-title">
@@ -7,7 +8,7 @@
           <mat-label><b>Download Segment</b><a style="margin-left: 15px;" href="assets/Sample Template File for UDA Mappings.xlsx" download> File</a></mat-label>
         </div> 
          <div class="table-content">
-          <button mat-raised-button (click)="openUploadDialog()">Confirm Upload</button>
+          <button mat-raised-button [disabled]='itemConfirmUpload' (click)="itemClassConfirmUpload()"  >Confirm Upload</button>
           <button mat-raised-button matStepperNext> Next</button>
         </div>
       </div>
@@ -22,7 +23,7 @@
         </div>
         <div class="table-content">
           <button mat-raised-button matStepperPrevious>Back</button>
-          <button mat-raised-button (click)="openUploadDialog()">Confirm Upload</button>
+          <button mat-raised-button [disabled]='udaConfigConfirmUpload'(click)="udaConfigConfirm()">Confirm Upload</button>
           <button mat-raised-button matStepperNext> Next</button>
         </div>
          </div>
@@ -36,8 +37,9 @@
           <mat-label><b>Publish Configuration to Cloud</b><a style="margin-left: 15px;" href="assets/Sample Template File for UDA Mappings.xlsx" download> File</a></mat-label>
       </div>
        <div class="table-content">
-        <button mat-raised-button matStepperPrevious>Back</button>
-        <button mat-raised-button (click)="openUploadDialog()">Confirm Upload</button>
+          <button mat-raised-button matStepperPrevious>Back</button>
+        <!-- <button mat-raised-button>Confirm Upload</button> -->
+        <button mat-raised-button (click)= "publishToCloud()">Publish to Cloud</button>
         <button mat-raised-button (click)="closeSpets()">Close</button>
       </div>
     </div>

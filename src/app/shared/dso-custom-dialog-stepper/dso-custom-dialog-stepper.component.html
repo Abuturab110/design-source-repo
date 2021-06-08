@@ -1,1 +1,14 @@
-<app-dso-stepper  (closeChanged)="close()"></app-dso-stepper> 
+<div class=" dialog-close-button">
+    
+     <button mat-button class="close-button close-icon" [mat-dialog-close]="true">
+          <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  <div mat-dialog-content>
+
+    <app-dso-stepper  (closeChanged)="close()" [selectedRowData] = "publishData"></app-dso-stepper> 
+  </div>
+
+  
+
+

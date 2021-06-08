@@ -56,7 +56,7 @@ router.get('/getUdaConvDetails', function (req, res, next) {
     docs.forEach(doc => {
       totalCount++;
     })
-    udaConversionDB.find({}).skip((req.query.pageIndex*req.query.pageLength)).limit(req.query.pageLength).exec(function (err, docs) {
+    udaConversionDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
       if (err) return next(err);
       docs.push({Total:totalCount });
       res.send(docs);

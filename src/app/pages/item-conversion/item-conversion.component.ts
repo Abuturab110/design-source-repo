@@ -31,14 +31,12 @@ export class ItemConversionComponent implements OnInit {
   cloudSetupData;
   errorMessage;
   showFileList = false;
+  pageInfo = { "pageIndex": 0,"pageSize": 5 } ;
   constructor(private dashboardService: DashboardService, private setupService: SetupService,
               private itemConversionService: ItemConversionService,private _snackBar: MatSnackBar,public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.resultSet = this.itemConversionService.requeryItemConvDataObs.pipe(
-      debounceTime(200),
-      switchMap(res => this.itemConversionService.getItemConvResultSet())
-    );
+    this.getItemConvResultSet();
     this.environments = this.itemConversionService.getEnvironments();
     this.config = this.dashboardService.getItemConvConfig();
     this.cloudSetupData =  this.setupService.getCloudServerForItemConversion();
@@ -48,7 +46,7 @@ export class ItemConversionComponent implements OnInit {
 
     if(this.selectedEnvironment) {
       this.showSpinner = true;
-      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(timeout(20000),
+      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(timeout(99999),
       tap(() => {this.showSpinner = false; this.showFileList = true}),
       catchError((error):any =>  {
         this.showFileList = false; 
@@ -74,21 +72,37 @@ export class ItemConversionComponent implements OnInit {
   }
 
 
-  publishToCloud() {
+  // publishToCloud() {
     
-    this.showPublishToCloudSpinner = true;
-    this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
-    this.itemConversionService.requeryItemConvDetails();
-    this.showPublishToCloudSpinner = false;
-    })
-  }
+  //   this.showPublishToCloudSpinner = true;
+  //   this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
+  //   this.itemConversionService.requeryItemConvDetails();
+  //   this.showPublishToCloudSpinner = false;
+  //   })
+  // }
 
   openDialog() {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
+      dialogConfig.data = this.selectedRowData
       const dialogRef = this.dialog.open(DsoCustomDialogStepperComponent,dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
        });
   }
+
+  getItemConvResultSet(){
+      this.resultSet = this.itemConversionService.requeryItemConvDataObs.pipe(
+      debounceTime(200),
+      switchMap(res => this.itemConversionService.getItemConvResultSet(this.pageInfo))
+      );
+}
+
+  pageChanged(event){
+    this.pageInfo.pageIndex = event.pageIndex;
+    this.pageInfo.pageSize = event.pageSize;
+    this.getItemConvResultSet();
+  }
+
+
  }

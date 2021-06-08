@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import { DsoUploadDialogComponent } from '../dso-upload-dialog/dso-upload-dialog.component';
+import { ItemConversionService } from 'src/app/services/item-conversion.service';
 
 @Component({
   selector: 'app-dso-stepper',
@@ -11,13 +11,19 @@ import { DsoUploadDialogComponent } from '../dso-upload-dialog/dso-upload-dialog
 export class DsoStepperComponent implements OnInit {
 firstFormGroup: FormGroup;
 secondFormGroup: FormGroup;
+showPublishToCloudSpinner = false;
+@Input() 
+selectedRowData;
+itemConfirmUpload = false;
+udaConfigConfirmUpload = false;
 isClose = false;
 @Input() 
 title;
 @Output()
   uploadData = new EventEmitter();
 @Output() closeChanged: EventEmitter<boolean> =   new EventEmitter();
-  constructor(private _formBuilder: FormBuilder,private dialog: MatDialog) { }
+  constructor(private _formBuilder: FormBuilder,private dialog: MatDialog,
+    private itemConversionService: ItemConversionService,) { }
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -27,23 +33,21 @@ title;
     });
 }
 
-openUploadDialog() {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true;
-  dialogConfig.autoFocus = true;
-
-  dialogConfig.data = {
-    title: `Upload ${this.title}`,
- };
-
- const dialogRef =this.dialog.open(DsoUploadDialogComponent, dialogConfig);
-
-  dialogRef.afterClosed().subscribe(res => {
-    if (res)
-    this.uploadData.emit(res);
-  });
+publishToCloud() {
+  this.showPublishToCloudSpinner = true;
+  this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
+  this.itemConversionService.requeryItemConvDetails();
+  this.showPublishToCloudSpinner = false;
+  })
 }
 
+itemClassConfirmUpload() {
+  this.itemConfirmUpload = true;
+}
+
+udaConfigConfirm() {
+  this.udaConfigConfirmUpload = true;
+}
 
 closeSpets() {
   this.closeChanged.emit(this.isClose);
