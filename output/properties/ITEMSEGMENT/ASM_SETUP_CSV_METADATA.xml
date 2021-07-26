@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MigrationProcessCSVMetadataVO>
+  <MigrationProcessCSVMetadataVORow>
+    <ProcessId>-999</ProcessId>
+    <ProcessName>Manage Item Segment_2021712_173241</ProcessName>
+    <ProcessDescription>Manage Item Segment_2021712_173241</ProcessDescription>
+    <ProcessDate>2021-07-12T12:02:48.921Z</ProcessDate>
+    <ObjectShortName>EGO_MANAGE_ITEM_CLASSES</ObjectShortName>
+    <ObjectType>TASK</ObjectType>
+    <CreatedByFlow>TASK_CSV</CreatedByFlow>
+    <MigrationProcessBusinessObjectCSVMetadata1>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_IMPORT_FORMAT_DESTINATION_VO</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>ContextCode,DestinationColumn,DestinationTable,DisplayParameter,ExpressionId,MappingIdForHierarchy,Sequence</XmlAttributeList>
+        <XmlAttributeTypeList>string,string,string,string,long,long,long</XmlAttributeTypeList>
+        <XmlNodePath>/ImportFormatVO/ImportFormatVORow/ImportFormatDestination/ImportFormatDestinationVORow</XmlNodePath>
+        <NodeSequence>3</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_IMPORT_FORMAT_SUPPLIER_VO</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>ActiveFlag,SupplierNumber</XmlAttributeList>
+        <XmlAttributeTypeList>string,string</XmlAttributeTypeList>
+        <XmlNodePath>/ImportFormatVO/ImportFormatVORow/ImportFormatSupplier/ImportFormatSupplierVORow</XmlNodePath>
+        <NodeSequence>4</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_ITEM_CLASS_ATTACH_CATEGORY</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>ControlLevel,RequestId,ProgramAppName,ProgramName,AttachCategoryName</XmlAttributeList>
+        <XmlAttributeTypeList>string,long,string,string,string</XmlAttributeTypeList>
+        <XmlNodePath>/ItemClassVO/ItemClassVORow/ItemClassAttachmentCategory/ItemClassAttachmentCategoryVORow</XmlNodePath>
+        <NodeSequence>6</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_ITEM_CLASS_SUPP_ATTRI</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>ItemClassCode,AttrGroupCode,Sequence</XmlAttributeList>
+        <XmlAttributeTypeList>string,string,int</XmlAttributeTypeList>
+        <XmlNodePath>/ICSuppAttrGrpVO/ICSuppAttrGrpVORow</XmlNodePath>
+        <NodeSequence>1</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>EGP_ITEM_CLASS</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>ItemClassCode,ItemClassName,DefaultItemClassFlag,DisableDate,NirReqd,VersionEnabledFlag,ItemCreationAllowedFlag,ItemNumGenMethod,ItemDescGenMethod,CfgItemNumGenMethod,Description,RequestId,JobDefinitionName,JobDefinitionPackage,Attribute1,Attribute10,Attribute11,Attribute12,Attribute13,Attribute14,Attribute15,Attribute16,Attribute17,Attribute18,Attribute19,Attribute2,Attribute20,Attribute3,Attribute4,Attribute5,Attribute6,Attribute7,Attribute8,Attribute9,AttributeCategory,AttributeDate1,AttributeDate2,AttributeDate3,AttributeDate4,AttributeDate5,AttributeNumber1,AttributeNumber10,AttributeNumber2,AttributeNumber3,AttributeNumber4,AttributeNumber5,AttributeNumber6,AttributeNumber7,AttributeNumber8,AttributeNumber9,AttributeTimestamp1,AttributeTimestamp2,AttributeTimestamp3,AttributeTimestamp4,AttributeTimestamp5,EnabledFlag,UserVersionEnabledFlag,UserNirReqd,PublicFlag,ParentItemClassCode,BaseChangeMgmtTypeCode,ChangeOrderTypeInternalName</XmlAttributeList>
+        <XmlAttributeTypeList>string,string,string,dateTime,string,string,string,string,string,string,string,long,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,date,date,date,date,date,decimal,decimal,decimal,decimal,decimal,decimal,decimal,decimal,decimal,decimal,dateTime,dateTime,dateTime,dateTime,dateTime,string,string,string,string,string,string,string</XmlAttributeTypeList>
+        <XmlNodePath>/ItemClassVO/ItemClassVORow</XmlNodePath>
+        <NodeSequence>5</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_EGP_IMPORT_FORMAT</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>ActiveFlag,DataDelimeter,DateFormat,DefaultFlag,EncodingType,FileSelection,FileType,GenericMapFlag,IntExtFlag,MappingCode,MappingDescription,MappingName,ObjectName,TimestampFormat,Type,UploadFrom,ItemClassCode,ParentImportFormatCode</XmlAttributeList>
+        <XmlAttributeTypeList>string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string,string</XmlAttributeTypeList>
+        <XmlNodePath>/ImportFormatVO/ImportFormatVORow</XmlNodePath>
+        <NodeSequence>2</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_EGP_ITEM_CLASS_PHASE_ASSIGNMENT</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>PhaseCode,ItemClassCode</XmlAttributeList>
+        <XmlAttributeTypeList>string,string</XmlAttributeTypeList>
+        <XmlNodePath>/ItemClassVO/ItemClassVORow/ItemClassPhases/ItemClassPhasesVORow</XmlNodePath>
+        <NodeSequence>7</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_EGP_ITEM_CLASS_TRANSACTION</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>DataTypeCode,Description,DisplayName,InternalName,JobDefinitionName,JobDefinitionPackage,RequestId,NumberValue,DateValue,TimestampValue,VarcharValue,CharacterValueSet,NumberValueSet,DateValueSet,TimeValueSet,BaseValueSetCode</XmlAttributeList>
+        <XmlAttributeTypeList>string,string,string,string,string,string,long,long,date,dateTime,string,string,string,string,string,string</XmlAttributeTypeList>
+        <XmlNodePath>/TransAttrVO/TransAttrVORow</XmlNodePath>
+        <NodeSequence>8</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+      <MigrationProcessBusinessObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_EGP_ITEM_CLASS_TRANSACTION_ATTRIBUTE</BusinessObjectShortName>
+        <BatchName null="true"/>
+        <XmlAttributeList>DomainCode,ObjectName,StartDate,EndDate,HiddenFlag,InactiveFlag,JobDefinitionName,JobDefinitionPackage,Pk2Value,Pk3Value,Pk4Value,Pk5Value,ReadonlyFlag,RequestId,RequiredFlag,UomCode,TransAttrDomainId,InternalName,ItemClassCode,DefaultValueId,DateValue,NumberValue,TimestampValue,VarcharValue,NumberValueSet,DateValueSet,TimeValueSet,ValueSetCode</XmlAttributeList>
+        <XmlAttributeTypeList>string,string,dateTime,dateTime,string,string,string,string,long,long,long,long,string,long,string,string,long,string,string,long,date,string,dateTime,string,string,string,string,string</XmlAttributeTypeList>
+        <XmlNodePath>/TransAttrVO/TransAttrVORow/TransAttrMetaData/TransAttrMetaDataVORow</XmlNodePath>
+        <NodeSequence>9</NodeSequence>
+      </MigrationProcessBusinessObjectCSVMetadataVORow>
+    </MigrationProcessBusinessObjectCSVMetadata1>
+    <MigrationProcessBatchCSVMetadata null="true"/>
+    <MigrationProcessScopeValueCSVMetadata null="true"/>
+    <MigrationProcessMigrationObjectCSVMetadata>
+      <MigrationProcessMigrationObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>EGP_ITEM_CLASS</BusinessObjectShortName>
+        <MigrateFlag>Y</MigrateFlag>
+        <IncludeExternalDataFlag>Y</IncludeExternalDataFlag>
+      </MigrationProcessMigrationObjectCSVMetadataVORow>
+      <MigrationProcessMigrationObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_EGP_IMPORT_FORMAT</BusinessObjectShortName>
+        <MigrateFlag>Y</MigrateFlag>
+        <IncludeExternalDataFlag>Y</IncludeExternalDataFlag>
+      </MigrationProcessMigrationObjectCSVMetadataVORow>
+      <MigrationProcessMigrationObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_EGP_ITEM_CLASS_PHASE_ASSIGNMENT</BusinessObjectShortName>
+        <MigrateFlag>Y</MigrateFlag>
+        <IncludeExternalDataFlag>Y</IncludeExternalDataFlag>
+      </MigrationProcessMigrationObjectCSVMetadataVORow>
+      <MigrationProcessMigrationObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_EGP_ITEM_CLASS_TRANSACTION</BusinessObjectShortName>
+        <MigrateFlag>Y</MigrateFlag>
+        <IncludeExternalDataFlag>Y</IncludeExternalDataFlag>
+      </MigrationProcessMigrationObjectCSVMetadataVORow>
+      <MigrationProcessMigrationObjectCSVMetadataVORow>
+        <ProcessId>-999</ProcessId>
+        <BusinessObjectShortName>ORA_EGP_ITEM_CLASS_TRANSACTION_ATTRIBUTE</BusinessObjectShortName>
+        <MigrateFlag>Y</MigrateFlag>
+        <IncludeExternalDataFlag>Y</IncludeExternalDataFlag>
+      </MigrationProcessMigrationObjectCSVMetadataVORow>
+    </MigrationProcessMigrationObjectCSVMetadata>
+    <MigrationProcessTaskCSVMetadata null="true"/>
+  </MigrationProcessCSVMetadataVORow>
+</MigrationProcessCSVMetadataVO>

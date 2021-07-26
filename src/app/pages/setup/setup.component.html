@@ -10,8 +10,7 @@
                     [enableFilter]="'true'"
                     (postData)="submitFtpDetails($event)"
                     (putData)="updateFtpDetails($event)"
-                    (deleteData)="deleteFtpDetails($event)"
-                    (pageChangeEvent)="ftpServerPageChanged($event)">
+                    (deleteData)="deleteFtpDetails($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
             </mat-tab>
@@ -24,8 +23,7 @@
                     [enableFilter]="'true'"
                     (postData)="submitCloudDetails($event)"
                     (putData)="updateCloudDetails($event)"
-                    (deleteData)="deleteCloudDetails($event)"
-                    (pageChangeEvent)="cloudServerPageChanged($event)">
+                    (deleteData)="deleteCloudDetails($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
             </mat-tab>
@@ -34,7 +32,8 @@
                 <div style="margin-top: 20px;" > 
                     <button mat-raised-button (click) ="openUploadDialog()" >Upload File</button>
                   </div>
-                <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
+                <mat-tab-group [selectedIndex]="selected"
+                (selectedIndexChange)="selected = $event">
                     <mat-tab label="Segment">
                 <mat-card-content>
                     <app-dso-dynamic-table 
@@ -45,9 +44,7 @@
                     [enableFilter]="'true'"
                     (postData)="submitUnspscSegment($event)"
                     (putData)="updateUnspscSegment($event)"
-                    (deleteData)="deleteUnspscSegment($event)"
-                    (pageChangeEvent)="segmentPageChanged($event)"
-                    [pageSize] = pageInfo.pageSize>
+                    (deleteData)="deleteUnspscSegment($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
         </mat-tab>
@@ -60,9 +57,7 @@
                     [enableFilter]="'true'"
                     (postData)="submitUnspscFamily($event)"
                     (putData)="updateUnspscFamily($event)"
-                    (deleteData)="deleteUnspscFamily($event)"
-                    (pageChangeEvent)="familyPageChanged($event)"
-                    [pageSize] = pageInfo.pageSize>
+                    (deleteData)="deleteUnspscFamily($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
         </mat-tab>
@@ -75,9 +70,7 @@
                     [enableFilter]="'true'"
                     (postData)="submitUnspscClass($event)"
                     (putData)="updateUnspscClass($event)"
-                    (deleteData)="deleteUnspscClass($event)"
-                    (pageChangeEvent)="classPageChanged($event)"
-                    [pageSize] = pageInfo.pageSize>
+                    (deleteData)="deleteUnspscClass($event)">
                    </app-dso-dynamic-table>
             </mat-card-content>
         </mat-tab>
@@ -90,12 +83,10 @@
                 [enableFilter]="'true'"
                 (postData)="submitUnspscCommodity($event)"
                 (putData)="updateUnspscCommodity($event)"
-                (deleteData)="deleteUnspscCommodity($event)"
-                (pageChangeEvent)="commodityPageChanged($event)"
-                [pageSize] = pageInfo.pageSize>
+                (deleteData)="deleteUnspscCommodity($event)">
                 </app-dso-dynamic-table>
         </mat-card-content>
-    </mat-tab>
+        </mat-tab>
         </mat-tab-group>
         </mat-tab>
         </mat-tab-group>

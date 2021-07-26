@@ -21,8 +21,6 @@ export class DsoDynamicTableComponent implements OnInit,OnChanges {
   @Input()
   title;
   @Input()
-  pageSize;
-  @Input()
   enableFilter = false;
   @Output()
   postData = new EventEmitter();
@@ -39,9 +37,9 @@ export class DsoDynamicTableComponent implements OnInit,OnChanges {
   dataSource: MatTableDataSource<any>;
   displayedColumns = [];
   filterValue = '';
+  isTableSelectable = false;
+  selectedRow: any = {};
   selection = new SelectionModel<any>(false, []);
-  @Output() pageChangeEvent = new EventEmitter<string>();
-  pageCount;
   constructor(private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource();
   }
@@ -55,20 +53,21 @@ export class DsoDynamicTableComponent implements OnInit,OnChanges {
   this.displayedColumns = this.config['config']['column-config'].map(res => res.attribute);
   if (this.config['config']['extra-config']) {
       if ( this.config['config']['extra-config']['table-select'] ) {
-      this.displayedColumns.unshift('select');
+      this.isTableSelectable = true;
       
       }
       if ( this.config['config']['extra-config']['row-edit'] ) {
         this.displayedColumns.unshift('edit');
       }
    }
-      this.dataSource = new MatTableDataSource(this.resultSet.slice(0,this.resultSet.length-1));
-      this.selection = new SelectionModel<any>(true, []);
-      var recordCount =   this.resultSet[this.resultSet.length-1];
-      this.pageCount = recordCount.Total;
-      this.dataSource.sort = this.sort;
-      this.generateTable();
- }
+  this.dataSource = new MatTableDataSource(this.resultSet);
+  this.selection = new SelectionModel<any>(true, []);
+  setTimeout(() => {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.generateTable();
+  }, 400)
+  }
  }
  
  isAllSelected() {
@@ -201,12 +200,7 @@ getMaskedData(field, data) {
 }
 
 setRowValue(row) {
+  this.selectedRow = row;
   this.selectedRowData.emit(row);
-  // if (this.selection.isSelected(row)) this.selectedRowData.emit(row);
-  //  else this.selectedRowData.emit(null);
 }
-
-pageChanged(event) {
-   this.pageChangeEvent.emit(event);
-  }
 }

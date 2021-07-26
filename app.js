@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 
 app.use(express.static(path.join(__dirname, 'dist','design-source')));
+app.use(express.static(path.join(__dirname, 'output')))
 app.use('/api/dashboard', crudRoute);
 app.use('/api/dashboardDetails', dashboardRoute)
 app.use('/api/itemConv', itemConvRoute);

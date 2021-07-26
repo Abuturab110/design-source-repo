@@ -10,12 +10,8 @@ requeryUdaConvData = new BehaviorSubject('');
 requeryUdaConvDataObs = this.requeryUdaConvData.asObservable();
   constructor(private _http: HttpClient) { }
 
-  getUdaMappingResultSet(pageInfo :any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/udaConv/getUdaConvDetails', {
-      params: httpParams});
+  getUdaMappingResultSet() {
+    return this._http.get('/api/udaConv/getUdaConvDetails');
   }
 
   getUdaMappingConfig() {

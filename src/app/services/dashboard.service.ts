@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +8,8 @@ import { Observable } from 'rxjs';
 export class DashboardService {
   constructor(private _http: HttpClient) { }
 
-  getDashboardResultSet(pageInfo :any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/dashboardDetails/getRecentRuns', {params: httpParams});
+  getDashboardResultSet() {
+    return this._http.get('/api/dashboardDetails/getRecentRuns');
   }
 
   getDashboardConfig() {

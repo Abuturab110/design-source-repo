@@ -1,13 +1,10 @@
 const db = require('../utils/db')
 const express = require('express');
-const { Console } = require('console');
 const router = express.Router()
 
 router.get('/getRecentRuns', function (req, res, next) {
     let recentRunRecords = [];
     let  processName = "";
-    Array.prototype.skip=skip;
-    Array.prototype.limit=limit;
     db.itemConvDB.find({}, { action: 0 ,_id:0}, function (error, docs) {
         if(error) return next(error)
         processName = "Item Conversion";
@@ -28,7 +25,7 @@ router.get('/getRecentRuns', function (req, res, next) {
             mergedRecords.forEach(doc => {
                 totalCount++
             })
-        let  pageRecords =  mergedRecords.skip(req.query.pageIndex*req.query.pageSize).limit(req.query.pageSize);
+         let  pageRecords =  mergedRecords;
         pageRecords.push({Total:totalCount});
             res.json(pageRecords);
           })
@@ -36,18 +33,6 @@ router.get('/getRecentRuns', function (req, res, next) {
      })
   })
 });
-
-function limit(c){
-  return this.filter((x,i)=>{
-  if(i<=(c-1)){return true}
-  })
-}
-
-  function skip(c){
-    return this.filter((x,i)=>{
-    if(i>(c-1)){return true}
-    })
-  }
 
   const mergeTableRecords = function(docs,recentRunRecords,processName) {
     docs.forEach(doc => {
