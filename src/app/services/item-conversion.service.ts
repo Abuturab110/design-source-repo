@@ -21,11 +21,8 @@ export class ItemConversionService {
     return this._http.get('/api/itemConv/itemConvRefreshFiles/'+ftpName);
   }
 
-  getItemConvResultSet(pageInfo : any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/itemConv/getItemConvDetails',{params: httpParams});
+  getItemConvResultSet() {
+    return this._http.get('/api/itemConv/getItemConvDetails');
   }
 
   generateFBDI(environment, fileName) {
@@ -36,7 +33,18 @@ export class ItemConversionService {
       params: httpParams
     }).pipe(
       debounceTime(200),
-      switchMap(res => this._http.post('/api/itemConv/insertItemConvDetails', {run: res['run'], fbdi: res['fbdi'], count: res['count']}),)
+      switchMap(res => this._http.post('/api/itemConv/insertItemConvDetails', {run: res['run'],
+                                                                              fbdi: res['fbdi'],
+                                                                              'item-class': res['item-class'],
+                                                                              'item-family': res['item-family'],
+                                                                              'item-segment': res['item-segment'],
+                                                                              'uda-conv': res['uda-conv'],
+                                                                              'item-catalog': res['item-catalog'],
+                                                                              'item-batch-id': res['item-batch-id'],
+                                                                              'catalog-batch-id': res['catalog-batch-id'],
+                                                                              'total-records': res['total-records'],
+                                                                               success: res['success'],
+                                                                               error: res['error']}),)
     );
    }
 
@@ -48,12 +56,13 @@ export class ItemConversionService {
     this.requeryItemConvHomeData.next('');
   }
 
-  publishToCloud(row: any) {
+  publishToCloud(row, instance) {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('filename', row.cloudInstanceName);
-    httpParams = httpParams.append('username', row.userName);
-    httpParams = httpParams.append('password', row.password);
-    httpParams = httpParams.append('cloudInstanceLink', row.cloudInstanceLink);
+    httpParams = httpParams.append('filename', row.fbdi);
+    httpParams = httpParams.append('userName', instance.userName);
+    httpParams = httpParams.append('password', instance.password);
+    httpParams = httpParams.append('cloudInstanceLink', instance.cloudInstanceLink);
+    httpParams = httpParams.append('itemBatchId', row['item-batch-id']);
     return this._http.get('/api/itemConv/publishToCloud', {
       params: httpParams
     }).pipe(
@@ -62,7 +71,23 @@ export class ItemConversionService {
     );
   }
 
+  publishCatalog(row, instance) {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('filename', row['item-catalog']);
+    httpParams = httpParams.append('userName', instance.userName);
+    httpParams = httpParams.append('password', instance.password);
+    httpParams = httpParams.append('cloudInstanceLink', instance.cloudInstanceLink);
+    httpParams = httpParams.append('itemCatalogBatchId', row['catalog-batch-id']);
+    return this._http.get('/api/itemConv/publishItemCatalogToCloud', {
+      params: httpParams
+    })
+  }
+
   getItemConvHomeConfig() {
        return this._http.get('/api/itemConv/getItemConvHomeDetails');
+  }
+
+  downloadFileFromServer(filename) {
+    window.location.href = window.location.origin + '/' + filename;
   }
 }

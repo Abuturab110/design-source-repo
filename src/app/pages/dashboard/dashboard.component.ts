@@ -12,20 +12,14 @@ export class DashboardComponent implements OnInit {
   cards: any = {};
   pieDetails: any = {};
   lineDetails: any = {};
-  pageInfo = { "pageIndex": 0,"pageSize": 5 } ;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
     this.cards = this.dashboardService.getCardDetails();
-    this.resultSet = this.dashboardService.getDashboardResultSet(this.pageInfo);
+    this.resultSet = this.dashboardService.getDashboardResultSet();
     this.config = this.dashboardService.getDashboardConfig();
     this.pieDetails = this.dashboardService.getPieDetails();
     this.lineDetails = this.dashboardService.getLineDetails();
   }
 
-  pageChanged(event){
-    this.pageInfo.pageIndex = event.pageIndex;
-    this.pageInfo.pageSize = event.pageSize;
-    this.resultSet = this.dashboardService.getDashboardResultSet(this.pageInfo);
-  }
 }

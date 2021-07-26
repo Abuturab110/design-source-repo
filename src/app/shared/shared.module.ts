@@ -27,6 +27,7 @@ import { DsoStepperComponent } from './dso-stepper/dso-stepper.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { DsoCustomDialogStepperComponent } from './dso-custom-dialog-stepper/dso-custom-dialog-stepper.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     FormsModule,
     MatIconModule,
     MatStepperModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule,
   ],
   exports: [DsoInfoCardComponent, DsoPieChartComponent,DsoLineChartComponent, DsoDynamicTableComponent,
      DsoAssetCardComponent, DsoCustomDialogComponent, DsoCustomDeleteDialogComponent,DsoStepperComponent,DsoCustomDialogStepperComponent],

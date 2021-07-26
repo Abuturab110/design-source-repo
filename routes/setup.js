@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage, fileFilter });
 
 router.put('/putFtpServerDetails', function (req, res, next) {
-  let putData = {...req.body, "last-update-date": new Date().toString()};
+  let putData = {...req.body, "last-update-date": new Date().toISOString()};
      ftpServerSetupDB.update({_id:req.body._id},{ $set: putData },{}, function (err, docs) {
      if (err) 
         return res.json(err);
@@ -44,7 +44,7 @@ router.delete('/deleteFtpServerDetails/:id', function (req, res, next) {
 });
 
 router.post('/postFtpServerDetails', function (req, res, next) {
-  let postData = {...req.body, "creation-date": new Date().toString(), "last-update-date": new Date().toString()};
+  let postData = {...req.body, "creation-date": new Date().toISOString(), "last-update-date": new Date().toISOString()};
   ftpServerSetupDB.insert(postData, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
@@ -52,34 +52,18 @@ router.post('/postFtpServerDetails', function (req, res, next) {
 });
 
 router.get('/getFtpServerDetails', function (req, res, next) {
-  ftpServerSetupDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
-    let totalCount = 0;
-    if (err) return next(err);
-    docs.forEach(doc => {
-      totalCount++;
-    })
-    ftpServerSetupDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+    ftpServerSetupDB.find({}, function (err, docs) {
       if (err) return next(err);
-      docs.push({Total:totalCount });
-      res.send(docs);
-  });
- });
-}); 
+      res.send(docs)
+  })
+ })
 
 router.get('/getCloudServerDetails', function(req, res, next) {
-  cloudServerSetupDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
-    let totalCount = 0;
-    if (err) return next(err);
-    docs.forEach(doc => {
-      totalCount++;
-    })
-    cloudServerSetupDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+    cloudServerSetupDB.find({}, function (err, docs) {
       if (err) return next(err);
-      docs.push({Total:totalCount });
-      res.send(docs);
-  });
- });
- });
+      res.send(docs)
+  })
+ })
 
  router.get('/getCloudServerForItemConversion', function(req, res, next) {
      cloudServerSetupDB.find({}, function (err, docs) {
@@ -89,69 +73,37 @@ router.get('/getCloudServerDetails', function(req, res, next) {
 });
 
 router.get('/getUnspscSegmentDetails', function(req, res, next) {
-  unsPscSegmentDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
-    let totalCount = 0;
-    if (err) return next(err);
-    docs.forEach(doc => {
-      totalCount++;
-    })
-    unsPscSegmentDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
-      if (err) return next(err);
-      docs.push({Total:totalCount });
-      res.send(docs);
-  });
- });
- });
+    unsPscSegmentDB.find({}, function (err, docs) {
+      if (err) return next(err)
+      res.send(docs)
+  })
+ })
 
 router.get('/getUnspscFamilyDetails', function(req, res, next) {
-  
-  unsPscFamilyDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
-    let totalCount = 0;
-    if (err) return next(err);
-    docs.forEach(doc => {
-      totalCount++;
-    })
-    unsPscFamilyDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
-      if (err) return next(err);
-      docs.push({Total:totalCount });
-      res.send(docs);
-  });
- });
-    
-});
+    unsPscFamilyDB.find({}, function (err, docs) {
+      if (err) return next(err)
+      res.send(docs)
+  })
+ })
 
 router.get('/getUnspscClassDetails', function(req, res, next) {
-  unsPscClassDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
-    let totalCount = 0;
-    if (err) return next(err);
-    docs.forEach(doc => {
-      totalCount++;
-    })
-    unsPscClassDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
-      if (err) return next(err);
-      docs.push({Total:totalCount });
-      res.send(docs);
-  });
- });
-});
+    unsPscClassDB.find({}, function (err, docs) {
+      if (err) return next(err)
+      res.send(docs)
+  })
+ })
 
 router.get('/getUnspscCommodityDetails', function(req, res, next) {
-  unsPscCommodityDB.find({}).sort({}).skip().limit().exec(function (err, docs) {
-    let totalCount = 0;
-    if (err) return next(err);
-    docs.forEach(doc => {
-      totalCount++;
-    })
-    unsPscCommodityDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
-      if (err) return next(err);
-      docs.push({Total:totalCount });
-      res.send(docs);
-  });
- });
-});
+    unsPscCommodityDB.find({}, function (err, docs) {
+      if (err) return next(err)
+      res.send(docs)
+  })
+ })
+
+
 
 router.post('/postCloudServerDetails', function(req, res, next) {
-  let postData = {...req.body, "creation-date": new Date().toString(), "last-update-date": new Date().toString()};
+  let postData = {...req.body, "creation-date": new Date().toISOString(), "last-update-date": new Date().toISOString()};
   cloudServerSetupDB.insert(postData, function (err, docs) {
     if (err) return next(err);
        res.send('{"MSG":"SUCCESS"}');
@@ -159,7 +111,7 @@ router.post('/postCloudServerDetails', function(req, res, next) {
 });
 
 router.put('/putCloudServerDetails', function (req, res, next) {
-  let putData = {...req.body, "last-update-date": new Date().toString()};
+  let putData = {...req.body, "last-update-date": new Date().toISOString()};
   cloudServerSetupDB.update({_id:req.body._id},{ $set: putData},{}, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
@@ -174,7 +126,7 @@ router.delete('/deleteCloudServerDetails/:id', function (req, res, next) {
 });
 
 router.post('/postUnspscSegment', function(req, res, next) {
-  let postData = {...req.body, "creation-date": new Date().toString(), "last-update-date": new Date().toString()};
+  let postData = {...req.body, "creation-date": new Date().toISOString(), "last-update-date": new Date().toISOString()};
   unsPscSegmentDB.insert(postData, function (err, docs) {
     if (err) return next(err);
        res.send('{"MSG":"SUCCESS"}');
@@ -182,7 +134,7 @@ router.post('/postUnspscSegment', function(req, res, next) {
 });
 
 router.put('/putUnspscSegment', function (req, res, next) {
-  let putData = {...req.body, "last-update-date": new Date().toString()};
+  let putData = {...req.body, "last-update-date": new Date().toISOString()};
   unsPscSegmentDB.update({_id:req.body._id},{ $set: putData},{}, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
@@ -197,7 +149,7 @@ router.delete('/deleteUnspscSegment/:id', function (req, res, next) {
 });
 
 router.post('/postUnspscFamily', function(req, res, next) {
-  let postData = {...req.body, "creation-date": new Date().toString(), "last-update-date": new Date().toString()};
+  let postData = {...req.body, "creation-date": new Date().toISOString(), "last-update-date": new Date().toISOString()};
   unsPscFamilyDB.insert(postData, function (err, docs) {
     if (err) return next(err);
        res.send('{"MSG":"SUCCESS"}');
@@ -205,7 +157,7 @@ router.post('/postUnspscFamily', function(req, res, next) {
 });
 
 router.put('/putUnspscFamily', function (req, res, next) {
-  let putData = {...req.body, "last-update-date": new Date().toString()};
+  let putData = {...req.body, "last-update-date": new Date().toISOString()};
   unsPscFamilyDB.update({_id:req.body._id},{ $set: putData},{}, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
@@ -220,7 +172,7 @@ router.delete('/deleteUnspscFamily/:id', function (req, res, next) {
 });
 
 router.post('/postUnspscClass', function(req, res, next) {
-  let postData = {...req.body, "creation-date": new Date().toString(), "last-update-date": new Date().toString()};
+  let postData = {...req.body, "creation-date": new Date().toISOString(), "last-update-date": new Date().toISOString()};
   unsPscClassDB.insert(postData, function (err, docs) {
     if (err) return next(err);
        res.send('{"MSG":"SUCCESS"}');
@@ -228,7 +180,7 @@ router.post('/postUnspscClass', function(req, res, next) {
 });
 
 router.put('/putUnspscClass', function (req, res, next) {
-  let putData = {...req.body, "last-update-date": new Date().toString()};
+  let putData = {...req.body, "last-update-date": new Date().toISOString()};
   unsPscClassDB.update({_id:req.body._id},{ $set: putData},{}, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
@@ -243,7 +195,7 @@ router.delete('/deleteUnspscClass/:id', function (req, res, next) {
 });
 
 router.post('/postUnspscCommodity', function(req, res, next) {
-  let postData = {...req.body, "creation-date": new Date().toString(), "last-update-date": new Date().toString()};
+  let postData = {...req.body, "creation-date": new Date().toISOString(), "last-update-date": new Date().toISOString()};
   unsPscCommodityDB.insert(postData, function (err, docs) {
     if (err) return next(err);
        res.send('{"MSG":"SUCCESS"}');
@@ -251,7 +203,7 @@ router.post('/postUnspscCommodity', function(req, res, next) {
 });
 
 router.put('/putUnspscCommodity', function (req, res, next) {
-  let putData = {...req.body, "last-update-date": new Date().toString()};
+  let putData = {...req.body, "last-update-date": new Date().toISOString()};
   unsPscCommodityDB.update({_id:req.body._id},{ $set: putData},{}, function (err, docs) {
      if (err) return res.json(err);
      res.send('{"MSG":"SUCCESS"}');
@@ -266,68 +218,78 @@ router.delete('/deleteUnspscCommodity/:id', function (req, res, next) {
 });
 
 
-router.post('/uploadUnspscMappings', upload.single('upload'), function(req,res, next) {
-    readFileToUpload(req.file.filename, (error, udaEntries) => {
-    if(error) return res.status(500).send({error})
-      res.send({msg:'success'})
-  })
+router.post('/uploadUnspscMappings', upload.single('upload'), async function(req,res, next) {
+  try {
+    await readFileToUpload(req.file.filename)
+    res.send({msg:'success'})
+  } catch(error) {
+    res.status(500).send({error})
+  }
 })
 
-const readFileToUpload = (fileName, cb) => {
+const readFileToUpload = async (fileName) => {
   let path ='./resources/' + fileName;
-    readXlsxFile(path,{ getSheets: true }).then((sheets)=> {
-     sheets.forEach((obj)=>{
-  let udaEntries = [];
-    readXlsxFile(path,{sheet: obj.name}).then((rows)=> {
-      rows.shift();
-      let name =obj.name;
-      rows.forEach((row) => {
-          let udaEntry = {
-               name : '' + row[0],
-              "description":row[1]
+  let sheetArray = [];
+  
+  sheetArray = await readXlsxFile(path,{ getSheets: true})  
+  
+  if(!sheetArray) { throw new Error('No sheets in file') }
+
+  for (let sheet of sheetArray) {
+    let udaEntries = [];
+    let rows = []
+    rows = await readXlsxFile(path,{sheet: sheet.name}) 
+    
+    if(!rows) {  throw new Error('No rows in sheet ' + sheet.name) }
+
+    rows.shift();
+    rows.forEach((row) => {
+      let udaEntry = {
+            name : row[0],
+            description :row[1]
           };
           udaEntries.push(udaEntry);
       })
-      if(obj.name =='Segment'){
+      if(sheet.name === 'Segment') {
+
         udaEntries.forEach(udaEntry => {
-          let putData = {...udaEntry, "last-update-date": new Date().toString()};
-          unsPscSegmentDB.update({segment: udaEntry.name, 'description': udaEntry['description']},{ $set: putData },{upsert: true}, function (updateErr, docs) {
-           if (updateErr) return res.status(500).send({error:updateErr})
-      });
-})
-}
-if(obj.name =='Family'){
-  udaEntries.forEach(udaEntry => {
-    let putData = {...udaEntry, "last-update-date": new Date().toString()};
-    unsPscFamilyDB.update({family: udaEntry.name, 'description': udaEntry['description']},{ $set: putData },{upsert: true}, function (updateErr, docs) {
-     if (updateErr) return res.status(500).send({error:updateErr})
-     
-  });
-})
-}
-if(obj.name =='Class'){
-  udaEntries.forEach(udaEntry => {
-    let putData = {...udaEntry, "last-update-date": new Date().toString()};
-    unsPscClassDB.update({class: udaEntry.name, 'description': udaEntry['description']},{ $set: putData },{upsert: true}, function (updateErr, docs) {
-     if (updateErr) return res.status(500).send({error:updateErr})
-     });
-})
-}
-if(obj.name =='Commodity'){
-  udaEntries.forEach(udaEntry => {
-    let putData = {...udaEntry, "last-update-date": new Date().toString()};
-    unsPscCommodityDB.update({commodity: udaEntry.name, 'description': udaEntry['description']},{ $set: putData },{upsert: true}, function (updateErr, docs) {
-     if (updateErr) return res.status(500).send({error:updateErr})
-     
-  });
-})
-}
-  cb(undefined, udaEntries);
-  }).catch(error => { 
-    console.log(error);
-    cb(error, undefined)
-     })
- })
- })
-}
+          let putData = {...udaEntry, 'last-update-date': new Date().toISOString()};
+          unsPscSegmentDB.update({segment: udaEntry.name, description: udaEntry.description},{ $set: putData },{upsert: true}, function (updateErr, docs) {
+            if (updateErr) throw new Error(updateErr)
+          });
+        })
+      }
+      if(sheet.name === 'Family') {
+
+        udaEntries.forEach(udaEntry => {
+          let putData = {...udaEntry, 'last-update-date': new Date().toISOString()};
+          unsPscFamilyDB.update({family: udaEntry.name, description: udaEntry.description},{ $set: putData },{upsert: true}, function (updateErr, docs) {
+          if (updateErr) throw new Error(updateErr)
+          
+        });
+      })
+      }
+      if(sheet.name === 'Class') {
+
+        udaEntries.forEach(udaEntry => {
+          let putData = {...udaEntry, 'last-update-date': new Date().toISOString()};
+          unsPscClassDB.update({class: udaEntry.name, description: udaEntry.description},{ $set: putData },{upsert: true}, function (updateErr, docs) {
+          if (updateErr) throw new Error(updateErr)
+
+          });
+      })
+      }
+      if(sheet.name === 'Commodity') {
+
+        udaEntries.forEach(udaEntry => {
+          let putData = {...udaEntry, 'last-update-date': new Date().toISOString()};
+          unsPscCommodityDB.update({commodity: udaEntry.name, description: udaEntry.description},{ $set: putData },{upsert: true}, function (updateErr, docs) {
+          if (updateErr) throw new Error(updateErr)
+          
+        });
+      })
+     }
+    }
+    return 'Success';
+ }
 module.exports = router;

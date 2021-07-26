@@ -19,53 +19,35 @@ requeryUnspscDataObs = this.requeryUnspscData.asObservable();
     return this._http.get('assets/ftp-server-setup-config.json');
   }
 
-  getFtpServerData(pageInfo :any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/setup/getFtpServerDetails',{params: httpParams});
+  getFtpServerData() {
+    return this._http.get('/api/setup/getFtpServerDetails');
   }
 
   getCloudServerConfig() {
     return this._http.get('assets/cloud-server-config.json');
   }
 
-  getCloudServerData(pageInfo :any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/setup/getCloudServerDetails',{params: httpParams});
+  getCloudServerData() {
+    return this._http.get('/api/setup/getCloudServerDetails');
   }
   getCloudServerForItemConversion() {
   return this._http.get('/api/setup/getCloudServerForItemConversion');
   }
 
 
-  getUnspscSegmentData(pageInfo :any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/setup/getUnspscSegmentDetails',{params: httpParams});
+  getUnspscSegmentData() {
+    return this._http.get('/api/setup/getUnspscSegmentDetails');
   }
-  getUnspscFamilyData(pageInfo :any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/setup/getUnspscFamilyDetails',{params: httpParams});
+  getUnspscFamilyData() {
+    return this._http.get('/api/setup/getUnspscFamilyDetails');
   }
 
-  getUnspscClassData(pageInfo :any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/setup/getUnspscClassDetails',{params: httpParams });
+  getUnspscClassData() {
+    return this._http.get('/api/setup/getUnspscClassDetails');
   }
 
-  getUnspscCommodityData(pageInfo :any) {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('pageIndex', pageInfo.pageIndex);
-    httpParams = httpParams.append('pageSize', pageInfo.pageSize);
-    return this._http.get('/api/setup/getUnspscCommodityDetails',{params: httpParams });
+  getUnspscCommodityData() {
+    return this._http.get('/api/setup/getUnspscCommodityDetails');
   }
 
   requeryFTPServerDetails() {

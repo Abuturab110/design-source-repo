@@ -36,16 +36,16 @@ constructor(private _formBuilder: FormBuilder,private dialog: MatDialog,
     });
 }
 
-publishToCloud() {
-  if(this.selectedRowData!=null  )
-  {
-  this.showPublishToCloudSpinner = true;
-  this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
-  this.itemConversionService.requeryItemConvDetails();
-  this.showPublishToCloudSpinner = false;
-  })
-}
-}
+// publishToCloud() {
+//   if(this.selectedRowData!=null  )
+//   {
+//   this.showPublishToCloudSpinner = true;
+//   this.itemConversionService.publishToCloud(this.selectedRowData).subscribe(res => {
+//   this.itemConversionService.requeryItemConvDetails();
+//   this.showPublishToCloudSpinner = false;
+//   })
+// }
+// }
 
 itemClassConfirmUpload() {
   this.itemConfirmUpload = true;

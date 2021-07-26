@@ -1,12 +1,49 @@
-<div class=" dialog-close-button">
-    
+<div class="heading">
+    <h3>{{header}}</h3>
      <button mat-button class="close-button close-icon" [mat-dialog-close]="true">
           <mat-icon>close</mat-icon>
       </button>
+  </div>
+  <div mat-dialog-content class="steps-wrapper">
+    <!-- <app-dso-stepper  (closeChanged)="close()" [selectedRowData] = "publishData"></app-dso-stepper>  -->
+    <div class="item-class-step" *ngIf="step === 1">
+      <div> Item Segment: <a (click)="downloadFile($event)">{{publishData['item-segment']}}</a></div>
+      <div>Item Family: <a (click)="downloadFile($event)">{{publishData['item-family']}}</a></div>
+      <div>Item Class: <a (click)="downloadFile($event)">{{publishData['item-class']}}</a></div>
     </div>
-  <div mat-dialog-content>
+    <div class="uda-step" *ngIf="step === 2">
+      <div>UDA Setup: <a (click)="downloadFile($event)">{{publishData['uda-conv']}}</a></div>
+    </div>
+    <div class="item-catalog-step"  *ngIf="step === 3">
+      <div>Item Catalog: <a (click)="downloadFile($event)">{{publishData['item-catalog']}}</a></div>
+    </div>
+    <div class="item-conversion"  *ngIf="step === 4">
+      <div>Item: <a (click)="downloadFile($event)">{{publishData['fbdi']}}</a></div>
+    </div>
+  </div>
 
-    <app-dso-stepper  (closeChanged)="close()" [selectedRowData] = "publishData"></app-dso-stepper> 
+  <div mat-dialog-actions class="action-section">
+      <div *ngIf="step === 1">
+        <button mat-raised-button (click)="isItemClassUploadConfirmed = true" [disabled]="isItemClassUploadConfirmed">Confirm Upload</button>
+        <button mat-raised-button (click)="step = 2; header='UDA Conversion Files'"[disabled]="!isItemClassUploadConfirmed">Next</button>
+      </div>
+      <div *ngIf="step === 2">
+        <button mat-button (click)="step = 1; header = 'Item Class Conversion Files'">Back</button>
+        <button mat-raised-button (click)="isUDAUploadConfirmed = true" [disabled]="isUDAUploadConfirmed">Confirm Upload</button>
+        <button mat-raised-button (click)="step = 3; header='Item Catalog Conversion Files'" [disabled]="!isUDAUploadConfirmed">Next</button>
+      </div>
+      <div *ngIf="step === 3">
+        <button mat-button (click)="step = 2; header='UDA Conversion Files'">Back</button>
+        <button  mat-raised-button (click)="isItemCatalogUploadConfirmed = true" [disabled] ="isItemCatalogUploadConfirmed">Confirm Upload</button>
+        <mat-spinner *ngIf="showCatalogPublishSpinner" diameter="20" style="margin: 0px 0px 0px 10px"></mat-spinner>
+        <button mat-raised-button (click)="publishCatalog()">Publish Catalog</button>
+        <button mat-raised-button (click)="step = 4; header='Item Conversion'" [disabled] ="!isItemCatalogUploadConfirmed">Next</button>
+      </div>
+      <div *ngIf="step === 4">
+        <button mat-button (click)="step = 3; header='Item Catalog Conversion Files'">Back</button>
+        <mat-spinner *ngIf="showItemPublishSpinner" diameter="20" style="margin: 0px 0px 0px 10px"></mat-spinner>
+        <button mat-raised-button (click)="publishToCloud()"> Publish Items</button>
+      </div>
   </div>
 
   

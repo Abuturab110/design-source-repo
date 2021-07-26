@@ -1,23 +1,25 @@
 <mat-card style="margin: 20px;">
     <mat-card-content>
-<div class="form-region fbdi-margin">
-<mat-form-field class="form-field" >
-<mat-label>Select Environment</mat-label>
-    <mat-select [(ngModel)]="selectedEnvironment">
-            <mat-option *ngFor="let environment of (environments | async)" [value]="environment.ftpName">{{environment.ftpName}}</mat-option>
-    </mat-select>
-</mat-form-field>
-<mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
-<button mat-raised-button (click)="refreshFiles()">Refresh Files</button>
-<mat-spinner *ngIf="showFBDISpinner" diameter="20"></mat-spinner>
-<button mat-raised-button (click)="generateFBDI()">Generate FBDI</button>
-</div>
-<div  [ngClass]="{'files-scroll': showFileList}" > 
-   <mat-selection-list [multiple]="false" [(ngModel)]="selectedFile" > 
-        <mat-list-option *ngFor="let file of (files | async)" [value]="file.name">
-            {{file.name}}
-        </mat-list-option>
-    </mat-selection-list> 
+    <div class="column-division">
+        <div class="form-region fbdi-margin">
+        <mat-form-field class="form-field" >
+        <mat-label>FTP Server</mat-label>
+            <mat-select [(ngModel)]="selectedEnvironment">
+                    <mat-option *ngFor="let environment of (environments | async)" [value]="environment.ftpName">{{environment.ftpName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-spinner *ngIf="showSpinner" diameter="20"></mat-spinner>
+        <button mat-raised-button (click)="refreshFiles()">Refresh Files</button>
+        <mat-spinner *ngIf="showFBDISpinner" diameter="20"></mat-spinner>
+        <button mat-raised-button (click)="generateFBDI()" [disabled] ="!selectedFile">Generate FBDI</button>
+        </div>
+        <div  [ngClass]="{'files-scroll': showFileList}" > 
+        <mat-selection-list [multiple]="false" [(ngModel)]="selectedFile"> 
+                <mat-list-option *ngFor="let file of (files | async)" [value]="file.name">
+                    {{file.name}}
+                </mat-list-option>
+        </mat-selection-list> 
+        </div>
     </div>
 </mat-card-content>
 </mat-card>
@@ -29,24 +31,23 @@
                 <h1 class="fbdi-margin">FBDI Details</h1>
                 <div class="cloud-setup-dropdown">
                      <mat-form-field class="form-field">
-                        <mat-label>Cloud Setup</mat-label> 
-                         <mat-select [(ngModel)]="selectedRowData" >
+                        <mat-label>SaaS Instance</mat-label> 
+                         <mat-select [(ngModel)]="selectedInstance" >
                              <mat-option *ngFor="let cloudData of (cloudSetupData | async)"   [value]="cloudData">{{cloudData.cloudInstanceName}} </mat-option>
                          </mat-select> 
                      </mat-form-field>
                 </div>
                 <mat-spinner *ngIf="showPublishToCloudSpinner" diameter="20" style="margin: 5px 0px 0px 15px"></mat-spinner>
-                <!-- <button mat-raised-button (click)="publishToCloud()">Publish to Cloud</button> -->
-                <button mat-raised-button (click)="openDialog()">Publish to Cloud</button>
+                 <button mat-raised-button (click)="openDialog()" [disabled]="getIsDisabled()">Publish to Cloud</button>
             </div>
+            <div class="selectable-table">
             <app-dso-dynamic-table 
              [resultSet]="resultSet | async"
              [config]="config | async"
              [title]="''"
-             (selectedRowData)="setRowData($event)"
-             (pageChangeEvent)="pageChanged($event)"
-             [pageSize] = pageInfo.pageSize>
+             (selectedRowData)="setRowData($event)">
             </app-dso-dynamic-table>
+            </div>
         </mat-card-content>
 
     </mat-card>

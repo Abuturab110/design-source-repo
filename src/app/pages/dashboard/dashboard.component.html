@@ -13,9 +13,7 @@
             <app-dso-dynamic-table
             [resultSet]="(resultSet | async)"
             [config]="config | async"
-            [title]="''"
-            (pageChangeEvent)="pageChanged($event)"
-            [pageSize] = pageInfo.pageSize>
+            [title]="''">
             </app-dso-dynamic-table>
         </mat-card-content>   
     </mat-card>

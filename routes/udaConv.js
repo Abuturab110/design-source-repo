@@ -50,19 +50,11 @@ router.post('/postUdaConvDetails', function (req, res, next) {
 });
 
 router.get('/getUdaConvDetails', function (req, res, next) {
-  udaConversionDB.find({}).sort({ unspsc: 1}).skip().limit().exec(function (err, docs) {
-    let totalCount = 0;
-    if (err) return next(err);
-    docs.forEach(doc => {
-      totalCount++;
-    })
-    udaConversionDB.find({}).skip((req.query.pageIndex*req.query.pageSize)).limit(req.query.pageSize).exec(function (err, docs) {
+    udaConversionDB.find({}, function (err, docs) {
       if (err) return next(err);
-      docs.push({Total:totalCount });
       res.send(docs);
   });
  });
-}); 
 
  router.get('/getUdaSetupHome', function (req, res, next) {
     itemUdaHomeDB.find({ }, function (err, docs) {

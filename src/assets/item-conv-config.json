@@ -43,7 +43,7 @@
                     }   
                   ],
             "extra-config": {
-                    "table-select": false,
+                    "table-select": true,
                     "row-edit": false,
                     "row-add": false,
                     "row-delete": false

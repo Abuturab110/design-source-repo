@@ -16,6 +16,12 @@
     margin-right: 20px;
 }
 
+.column-division {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 button, .mat-raised-button {
     background-color:#112d4e;
     color: #f9f7f7;
@@ -66,8 +72,8 @@ margin-left:18px;
 }
 
 .files-scroll{
-    width: 95%;
-    height: 250px;
+    width: 45%;
+    height: 110px;
     overflow: auto;
     margin: 10px 0px 0px 0px;
     border: 1px solid #ccc;
@@ -78,6 +84,7 @@ margin-left:18px;
 ::ng-deep .mat-list-single-selected-option, .mat-list-single-selected-option:hover, .mat-list-single-selected-option:focus {
     color: white!important;
     background-color: #112e4f;
+    border-radius: 5px;
 }
 
 

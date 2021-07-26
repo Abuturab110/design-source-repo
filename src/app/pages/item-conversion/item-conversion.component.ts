@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
-import { catchError, tap, timeout } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { ItemConversionService } from '../../services/item-conversion.service';
 import {switchMap, debounceTime} from 'rxjs/operators';
 
@@ -27,11 +27,12 @@ export class ItemConversionComponent implements OnInit {
   showFBDISpinner = false;
   showPublishToCloudSpinner = false;
   selectedFile;
-  selectedRowData;
+  selectedRowData = {};
+  selectedInstance;
   cloudSetupData;
   errorMessage;
   showFileList = false;
-  pageInfo = { "pageIndex": 0,"pageSize": 5 } ;
+  isDisabled = false;
   constructor(private dashboardService: DashboardService, private setupService: SetupService,
               private itemConversionService: ItemConversionService,private _snackBar: MatSnackBar,public dialog: MatDialog) { }
 
@@ -46,10 +47,13 @@ export class ItemConversionComponent implements OnInit {
 
     if(this.selectedEnvironment) {
       this.showSpinner = true;
-      this.files=this.itemConversionService.getFiles(this.selectedEnvironment).pipe(timeout(99999),
-      tap(() => {this.showSpinner = false; this.showFileList = true}),
+      this.files=this.itemConversionService.getFiles(this.selectedEnvironment)
+      .pipe(tap(() => {
+        this.showSpinner = false; 
+        this.showFileList = true;
+      }),
       catchError((error):any =>  {
-        this.showFileList = false; 
+        // this.showFileList = false; 
         this.showSpinner = false; 
         this._snackBar.open('Timed out while connect with ftp server',null, {
           duration: 4000
@@ -68,7 +72,7 @@ export class ItemConversionComponent implements OnInit {
   }
 
   setRowData(event) {
-    //this.selectedRowData = event;
+    this.selectedRowData = event;
   }
 
   // publishToCloud() {
@@ -80,11 +84,15 @@ export class ItemConversionComponent implements OnInit {
   //   })
   // }
 
+  getIsDisabled() {
+    return !this.selectedInstance || Object.values(this.selectedRowData).length === 0
+  }
+
   openDialog() {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      dialogConfig.data = this.selectedRowData
+      dialogConfig.data = {selectedRow: this.selectedRowData, selectedInstance: this.selectedInstance};
       const dialogRef = this.dialog.open(DsoCustomDialogStepperComponent,dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
        });
@@ -93,15 +101,8 @@ export class ItemConversionComponent implements OnInit {
   getItemConvResultSet(){
       this.resultSet = this.itemConversionService.requeryItemConvDataObs.pipe(
       debounceTime(200),
-      switchMap(res => this.itemConversionService.getItemConvResultSet(this.pageInfo))
+      switchMap(res => this.itemConversionService.getItemConvResultSet())
       );
 }
 
-  pageChanged(event){
-    this.pageInfo.pageIndex = event.pageIndex;
-    this.pageInfo.pageSize = event.pageSize;
-    this.getItemConvResultSet();
-  }
-
-
- }
+}

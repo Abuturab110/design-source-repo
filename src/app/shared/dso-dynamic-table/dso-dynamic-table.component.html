@@ -38,7 +38,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+    <tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;" [class]="{'example-detail-row': (isTableSelectable && selectedRow['_id'] === row['_id'])}"
     (click)="setRowValue(row)" ></tr>
     
     <tr class="mat-row" *matNoDataRow>
@@ -48,10 +48,9 @@
 
   <mat-paginator #paginator
       *ngIf="dataSource.filteredData.length > 0" 
-      [length]= "pageCount"
+      [length]="dataSource.filteredData.length"
       [pageIndex]="0"
-      [pageSize]="pageSize"
-      (page)="pageChanged($event)"
+      [pageSize]="5"
       [pageSizeOptions]="[5, 10, 25, 50]">
   </mat-paginator>
 

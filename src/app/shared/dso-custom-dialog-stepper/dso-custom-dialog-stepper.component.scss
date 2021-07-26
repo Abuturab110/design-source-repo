@@ -1,10 +1,29 @@
+:host {
+  display: block;
+  width: 600px;
+}
 
-.dialog-close-button{
-    float: center;
-    right: -40px;
-    top: -36px;
-    margin-left: 600px;
-    padding-right: 0px;
+.action-section > div {
+  display: flex;
+  align-items: center;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+  .mat-button {
+    color: #112d4e;
+}
+
+.mat-raised-button {
+    background-color:#112d4e;
+    color: #f9f7f7;
   }
 
-    
+  .mat-dialog-actions {
+      justify-content: flex-end;
+      margin-right: 5px;
+  }
