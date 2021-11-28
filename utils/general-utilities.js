@@ -115,13 +115,16 @@ const fetchUdaPerUnspsc = (unspsc) => {
     })
 }
 
-const getCsvForm = (dataToBeWritten) => {
+const getCsvForm = (dataToBeWritten, writeHeaders = false) => {
     return new Promise((resolve, reject) => {
         jsonexport(dataToBeWritten, function(err, csv) {
             if (err) reject(err)
+            let newCsvData = csv
+            if (!writeHeaders) {
             let csvLines = csv.split('\n');
             csvLines.splice(0,1);
-            let newCsvData = csvLines.join('\n');
+            newCsvData = csvLines.join('\n');
+            }
             resolve(newCsvData)
             })
     })

@@ -2,9 +2,9 @@
 <MigrationProcessCSVMetadataVO>
   <MigrationProcessCSVMetadataVORow>
     <ProcessId>-999</ProcessId>
-    <ProcessName>Manage Item Segment_2021712_173241</ProcessName>
-    <ProcessDescription>Manage Item Segment_2021712_173241</ProcessDescription>
-    <ProcessDate>2021-07-12T12:02:48.921Z</ProcessDate>
+    <ProcessName>Manage Item Segment_20211129_1151</ProcessName>
+    <ProcessDescription>Manage Item Segment_20211129_1151</ProcessDescription>
+    <ProcessDate>2021-11-28T19:31:59.396Z</ProcessDate>
     <ObjectShortName>EGO_MANAGE_ITEM_CLASSES</ObjectShortName>
     <ObjectType>TASK</ObjectType>
     <CreatedByFlow>TASK_CSV</CreatedByFlow>
@@ -126,5 +126,6 @@
       </MigrationProcessMigrationObjectCSVMetadataVORow>
     </MigrationProcessMigrationObjectCSVMetadata>
     <MigrationProcessTaskCSVMetadata null="true"/>
+	<MigrationProcessServiceVersionCSVMetadata null="true"/>
   </MigrationProcessCSVMetadataVORow>
 </MigrationProcessCSVMetadataVO>
